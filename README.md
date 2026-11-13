@@ -9,4 +9,8 @@ originál je na https://pi-alpha.org/. Stránky mají `noindex`, vyhledávače j
 - Mobilní vrstva (`shared/mobile.css`) se přidává až při buildu, `site/` ji neobsahuje.
   Na počítači zůstává vzhled stejný jako originál.
 
+Známá omezení dema: soubory, které skládá JavaScript (např. grafy SVG na `/cz/Volby2025/`), a
+dynamické části (diskuse, `/Hash`, mapy `/Ecmwf`) v demu nefungují. V ostré migraci je řeší
+plán v repu Sunny.
+
 Build: `scripts/build_site.sh _site` (proměnné repa `DOMAIN`, `MOBILE`, `PREVIEW`).

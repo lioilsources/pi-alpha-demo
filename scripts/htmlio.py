@@ -101,3 +101,5 @@ URL_ATTR = re.compile(
     r"""(?P<pre>(?<![\w-])(?P<attr>href|src|poster|data-src|background)\s*=\s*)(?P<q>["'])?(?P<url>(?(q)[^"'>]*|[^\s>"']+))(?(q)(?P=q))""",
     re.IGNORECASE,
 )
+# url(...) in inline style attributes and <style> blocks; `post` keeps the closing part
+CSS_URL = re.compile(r"""(?P<pre>url\(\s*)(?P<q>["']?)(?P<url>[^)"'\s]+)(?P=q)(?P<post>\s*\))""", re.IGNORECASE)

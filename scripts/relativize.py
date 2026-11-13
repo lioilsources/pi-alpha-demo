@@ -19,7 +19,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from htmlio import URL_ATTR, iter_html, read_html, write_html  # noqa: E402
+from htmlio import CSS_URL as HTML_CSS_URL, URL_ATTR, iter_html, read_html, write_html  # noqa: E402
 
 SRCSET = re.compile(r"""(?P<pre>(?<![\w-])srcset\s*=\s*)(?P<q>["'])(?P<val>[^"']*)(?P=q)""", re.IGNORECASE)
 CSS_URL = re.compile(r"""url\(\s*(?P<q>["']?)(?P<url>/[^/)"'][^)"']*|/)(?P=q)\s*\)""")
@@ -67,8 +67,15 @@ def fix_html(text: str, page_rel: str, noindex: bool) -> tuple[str, int]:
             parts.append(" ".join(bits))
         return f'{m.group("pre")}{m.group("q")}{", ".join(parts)}{m.group("q")}'
 
+    def css(m):
+        nonlocal n
+        new = rel(m.group("url"), page_rel)
+        n += new != m.group("url")
+        return f'{m.group("pre")}{m.group("q")}{new}{m.group("q")}{m.group("post")}'
+
     text = URL_ATTR.sub(attr, text)
     text = SRCSET.sub(srcset, text)
+    text = HTML_CSS_URL.sub(css, text)
     if noindex and 'name="robots"' not in text.lower():
         m = HEAD.search(text)
         text = text[:m.end()] + NOINDEX + text[m.end():] if m else NOINDEX + text

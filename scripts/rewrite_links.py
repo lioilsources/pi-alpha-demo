@@ -17,7 +17,7 @@ from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 sys.path.insert(0, str(Path(__file__).parent))
-from htmlio import URL_ATTR, iter_html, read_html, write_html  # noqa: E402
+from htmlio import CSS_URL, URL_ATTR, iter_html, read_html, write_html  # noqa: E402
 
 
 def resolve(url: str, page_rel: str, domains: set[str]) -> tuple[str, str] | None:
@@ -71,10 +71,11 @@ def main() -> int:
                     missing[path] = missing.get(path, 0) + 1
                 return m.group(0)
             count += 1
-            q = m.group("q") or '"'
-            return f'{m.group("pre")}{q}{new}{"#" + frag if frag else ""}{q}'
+            post = m.groupdict().get("post")
+            q = m.group("q") or ("" if post is not None else '"')
+            return f'{m.group("pre")}{q}{new}{"#" + frag if frag else ""}{q}{post or ""}'
 
-        new_text = URL_ATTR.sub(sub, text)
+        new_text = CSS_URL.sub(sub, URL_ATTR.sub(sub, text))
         if count:
             files += 1
             links += count
