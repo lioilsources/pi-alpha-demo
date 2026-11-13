@@ -27,6 +27,7 @@ jobs:
           ASSETS_URL: ${{ vars.ASSETS_URL }}
           MOBILE: ${{ vars.MOBILE }}
           PREVIEW: ${{ vars.PREVIEW }}
+          PWA: ${{ vars.PWA }}
         run: scripts/build_site.sh _site
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

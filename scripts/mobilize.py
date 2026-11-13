@@ -3,6 +3,7 @@
 
 What it does to each HTML page:
   - <meta name="viewport"> (when missing),
+  - with --pwa-config: manifest link, theme-color, apple-touch-icon, shared/pwa.js (SW registration),
   - <link rel="stylesheet" href=…/mobile.css> and <link rel="preconnect"> to the assets domain,
   - <img>: loading="lazy" (except the first image on the page — LCP), decoding="async",
            width/height from the local file or the variants manifest (when both are missing),
@@ -20,6 +21,7 @@ from __future__ import annotations
 
 import argparse
 import fnmatch
+import html
 import json
 import posixpath
 import re
@@ -40,7 +42,7 @@ SIZE_EXT = {".pdf", ".zip", ".7z", ".rar", ".gz", ".mp4", ".webm", ".mov", ".avi
 TABLE = re.compile(r"<table\b[^>]*>", re.IGNORECASE)
 HEAD_END = re.compile(r"</head\s*>", re.IGNORECASE)
 HEAD_START = re.compile(r"<head\b[^>]*>", re.IGNORECASE)
-MARK_TAG = re.compile(r"[ \t]*<(?:meta|link)\b[^>]*\bdata-mob\b[^>]*>\n?", re.IGNORECASE)
+MARK_TAG = re.compile(r"[ \t]*<(?:meta|link|script)\b[^>]*\bdata-mob\b[^>]*>(?:</script>)?\n?", re.IGNORECASE)
 SIZES = "(max-width: 768px) 100vw, 800px"
 
 
@@ -106,8 +108,10 @@ class Mobilizer:
         self.a = a
         self.variants = json.loads(a.variants.read_text()) if a.variants and a.variants.exists() else {}
         self.sizes = load_sizes(a.file_sizes)
+        cfg = getattr(a, "pwa_config", None)
+        self.pwa = json.loads(cfg.read_text()) if cfg and cfg.exists() else None
         self.stats = {"pages": 0, "viewport": 0, "css": 0, "img": 0, "srcset": 0, "dims": 0, "video": 0, "stack": 0,
-                      "size": 0}
+                      "size": 0, "pwa": 0}
 
     def local_rel(self, url: str, page_rel: str) -> str | None:
         # URL on the assets base (absolute https://assets.… or root-relative /_assets) → manifest key
@@ -174,6 +178,14 @@ class Mobilizer:
         if self.a.css not in text:
             head_add.append(f'<link rel="stylesheet" href="{self.a.css}" data-mob>')
             self.stats["css"] += 1
+        if self.pwa and 'rel="manifest"' not in text:
+            head_add += [
+                '<link rel="manifest" href="/manifest.webmanifest" data-mob>',
+                f'<meta name="theme-color" content="{html.escape(self.pwa.get("theme_color", "#ffffff"))}" data-mob>',
+                '<link rel="apple-touch-icon" href="/shared/icons/icon-192.png" data-mob>',
+                '<script src="/shared/pwa.js" defer data-mob></script>',
+            ]
+            self.stats["pwa"] += 1
         if head_add:
             block = "\n".join(head_add) + "\n"
             if HEAD_END.search(text):
@@ -230,6 +242,7 @@ def main() -> int:
     ap.add_argument("--blacklist", action="append", default=[], help="glob of images without srcset (maps, charts)")
     ap.add_argument("--blacklist-file", type=Path, help="file with --blacklist globs, one per line (missing = none)")
     ap.add_argument("--exclude", action="append", default=[], help="glob of pages that must not be changed")
+    ap.add_argument("--pwa-config", type=Path, help="data/pwa.json: add manifest, theme-color, icon and pwa.js")
     g = ap.add_mutually_exclusive_group()
     g.add_argument("--apply", action="store_true")
     g.add_argument("--undo", action="store_true")
