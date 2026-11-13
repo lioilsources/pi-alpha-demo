@@ -1,0 +1,1303 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+<link rel="icon" type="image/png" sizes="32x32" href="EVb_32ico.png">
+<title>Pi Alpha</title>
+<style>
+.text,body { font-family: Arial; }
+.code,.date { font-family: Monospace, Courier New; color: navy; }
+.pascmt { font-family: Monospace, Courier New; color: gray; font-style: italic; }
+body,.topHeader { background-color: #e1ebf2; }
+h1,.h1 { text-align: center; font-family: Times New Roman, Arial; font-size: 200%; font-weight: bold; margin-left: 48%; }
+.abl { text-decoration: none; color: #501860; }
+.ablg { text-decoration: none; color: #686080; }
+.abl:hover,.ablg:hover { text-decoration: underline; border-bottom-style: none; }
+.gray { color: gray; }
+.gray2 { color: #505050; }
+tr,td { vertical-align: top; }
+small { font-size: 75%; }
+.date { color: gray; }
+blockquote { margin-right: 0px; }
+.topHeader { position: fixed;top:1.3em; height: 2.5em; width: 100%; border-bottom: 1px solid gray; }
+.topSpacer { clear: both; height: 2.5em; }
+.h1 { display: inline-block; position: fixed; }
+.rFloat { float:right; }
+.lFloat { float:left; }
+.topHeader .rFloat { margin-right: 1em; } /* space for scrollbar */
+.btn { padding: 1px 4px; margin: 1px 3px; background-color:ButtonFace; border-left:1px solid ButtonHighlight; border-top:1px solid ButtonHighlight;border-right:1px solid ButtonShadow; border-bottom:1px solid ButtonShadow;text-decoration:none; color:ButtonText; }
+.jsok .opt { display: none; }
+ul,li { margin-bottom:0; margin-top:0 }
+</style>
+<style>
+.article{max-width:960px;margin:auto}
+.topBar{position:fixed;left:0px;right:0px;top:0px;z-index:10101}
+.belowTop{display:block;opacity:0;min-height:1em}
+.topBar,.belowTop{height:1.2em;font-size:4mm;height:5mm}
+.outset{border:1px outset #e1ebf2}
+.topBar{background:#afcce1}
+a.aMnu{text-decoration:none;padding:0px 2px}
+a.aMnu:hover{background:#7ca0ba;border-bottom:1px solid #2591de}
+.rFloat{float:right}
+
+</style>
+</head>
+<body class=nojs><!-- Header -->
+<div class="topBar outset">
+<a href="/" class=aMnu>&pi;&alpha;&#xbd;</a>
+<a href="https://bible.pi-alpha.org/" target=_blank title="Bible viewer" class=aMnu><b>B</b></a>
+<a href="#" onclick="return ScrollTop()" class="aMnu rFloat">^</a>
+</div>
+<div class=belowTop></div>
+<div style="clear:both"></div>
+<script>
+[].slice.call(document.getElementsByClassName('topBar')).forEach(function(T){
+  [].slice.call(T.getElementsByTagName('a')).forEach(function(A){
+    //var u;if(u=A.getAttribute('href'))if(u.substr(0,1)!='#')
+    if(!A.getAttribute('target'))A.setAttribute('target','_self')
+  })
+})
+function ScrollTop(){window.scroll(0,0);return!1}
+</script>
+<!-- /Header -->
+
+<script>
+// the page works well without java-script...
+// with java-script available, some sections are expanded on-demand...
+document.body.setAttribute('class','jsok');
+</script>
+<a name="top"></a>
+
+<div class=topHeader>
+  <script>
+  // Contact form works only with javascript enabled:
+  document.writeln('<span class=rFloat><a href="#" class=btn style="margin-top: 4px;" onclick="return OpenFeedbackForm();">Contact</a>&nbsp;</span>');
+  // Mirrors:
+  function Mi(U,s){return ' <a href="http'+(s||'')+'://'+U+'" target=_blank>'+U+'</a> '}
+  document.writeln('<span class=lFloat>&nbsp; Mirrors: '+Mi('pi'+'alpha'+'.cz')+Mi('pi-'+'alpha'+'.org','s')+'</span>');
+  </script>
+  <span class=rFloat><span class=gray>(<a href="#top" class=abl>top</a>)</span></span>
+  <span class=rFloat><span class=gray>(<a href="#nt" class=abl>new</a>)</span></span>
+  <span class=h1>&#x03c0;&#x03b1;&#xbd;</span>
+  
+  <span class="rFloat gray">(<a href="/Editor" class=abl target=_blank>Editor</a>)</span>
+
+</div>
+<div class=topSpacer></div>
+
+<small lang="en"><span id="EnHint">(English text in right column...)</span>
+<span style="float:right">
+<script>
+document.write('<a href=# class=btn onclick="OnlyCol(0)">Jen česky</a>');
+document.write('<a href=# class=btn onclick="OnlyCol(2)">English only</a>');
+document.write('<a href=# class=btn onclick="OnlyCol(-1)" id="AllCol" style="display:none">Complet</a>');
+</script>
+</span>
+</small><br style="clear:both"><br>
+
+<!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+
+<table id=mainTable border=0 width="100%" style='background-image: url("EVB560_trans.png"); background-repeat: repeat-y; background-position: center top; background-origin: content-box;'>
+<tr>
+  <td width="45%" lang="cs">
+    <img src="Czech_round.png" width=32 height=32 title="Czech flag">
+    Stránka je provizorní...
+  </td>
+  <td width="10%">&nbsp;</td>
+  <td width="45%" lang="en">
+    This page is provisional...
+  </td>
+</tr>
+
+<tr><td colspan=3><br></td></tr>
+
+<tr>
+  <td width="45%" lang="cs">
+  Uveřejnil jsem <a href="https://bible.pi-alpha.org/">komparativní překlad Bible</a>,
+  proložených 6-7 různých verzí - originál hebrejsky nebo řecky, KJV anglicky,
+  LXX <span class=gray>(septuaginta)</span> řecky, Vulgáta latinsky,
+  KB <span class=gray>(Kralická Bible)</span> a ČEP <span class=gray>(Český ekumenický překlad)</span>,
+  pro nový zákon překlad ČSP-NS, pro starý zákon můj překlad &pi;&alpha; ...
+  <span class="date">(2019-07-06)</span>
+  <br>&nbsp;
+  </td>
+  <td width="10%"></td>
+  <td width="45%" lang="en">
+  <a href="https://bible.pi-alpha.org/">Comparative Bible translation</a>,
+  hebrew or greek original, KJV english with dictionary tags,
+  LXX <span class=gray>(septuagint greek)</span>, Vulgata latin,
+  and three or four Czech versions ...
+  <span class="date">(2019-07-06)</span>
+  <br>
+  
+  <table border=0><tr>
+   <td style="padding:4px"><a href="https://heliograf.org/"><img src="heliograf_logo_256px_blue.jpg" width=128 height=128 style="border:none"><br>Heliograf.org</a>
+   <td style="padding:4px"><a href="http://sun.smilingtree.cz/"><img src="AIA20230207_1346_PmHeq_256px.jpg" width=128 height=128 style="border:none"><br>sun.smilingtree.cz</a>
+   <td style="padding:4px"><a href="Climate/PerspMaps/"><img src="Climate/PerspMaps/dem30ARC_SRTM30__Persp_Europe_20_45_Small.jpg" width=128 height=128 style="border:none"><br>Perspective <!--projection--> maps</a><br>
+  </tr></table>
+  </td>
+</tr>
+
+<tr><td colspan=3><hr width="100%" height=3></td></tr>
+  <td width="45%" lang="cs" id=News>
+    <b style="color:green">Co je nového ?</b>
+    <br>&nbsp;
+    
+    <ul>
+      <li><a href="WW3">Třetí světová válka</a> <span class=date>(2026-03-26)</span>
+      <li><a href="Zionist_Shabat_Zachor">Purimová válka Židů proti Iránu</a> <span class=date>(2026-03-16)</span>
+      <li><a href="Trump_Venezuela_Piracy">Venezuelská patálie</a> <span class=date>(2026-01-08)</span>
+      <li><a href="Zelja_Jermak_pizdec">Zelja a Jermak - „pizděc“ přichází</a> <span class=date>(2025-11-21 .. 22, 29)</span>
+      <li><a href="Vzpominka_na_Dominika_Duku">Vzpomínka na kardinála Dominika Duku</a> <span class=date>(2025-11-11)</span>
+      <li><a href="cz/Volby2025/">Volby 2025 - mapy a statistiky</a> <span class=date>(2025-10-09)</span>
+      <li><a href="Spotreba_CO2">Spotřeba CO2 v přírodě roste</a> <span class=date>(2025-07-13)</span>
+      <li><a href="CO2-a-hladiny-mori">CO2 je blahodárný plyn života</a> <span class=date>(2025-06-29)</span>
+      <li><a href="Iz_Pascha_2025">Velikonoce 2025 v Moskvě</a> <span class=date>(2025-04-20)</span> - překlad z Izvestija
+      <li><a href="Eskalace-2024-11-27">Eskalace 2024-11-27</a> <span class=date>(2024-11-27)</span><br>
+      <li><a href="Eskalace-2024-11-20">Eskalace 2024-11-20</a> <span class=date>(2024-11-20)</span><br>
+          <a href="Eskalace-2024-11-17">Eskalace 2024-11-17</a> <span class=date>(2024-11-17)</span>
+      <li><a href="Trump-45-2">Trump vyhrává druhé období</a> <span class=date>(2024-11-10)</span>
+      <li><a href="Povodne_Rusofob">Povodně 2024 jako Karma Rusofobů</a> <span class=date>(2024-09-14)</span>
+      <li><a href="Mir">Mír!</a> <span class=date>(2024-06-01)</span>
+      <li><a href="Troji_System">Trojí Systém</a> <span class=date>(2024-01-08)</span>
+      <li><a href="Silvestr2023">Silvestr 2023 na Slunci</a> <span class=date>(2024-01-02)</span>
+      <li><a href="Sc26-zacal">SC26 za&#x10D;al ob&#x159;adn&#x11B;</a> <span class=date>(2023-08-18)</span>
+      <li><a href="Countdown1_cz">Odpo&#x10D;&#xED;t&#xE1;v&#xE1;n&#xED; pokra&#x10D;uje...</a> <span class=date>(2023-07-01, aktualizace 2023-07-28)</span>
+      <li><a href="Stop_Ateism_cz">Stop Ateism</a> <span class=date>(2023-07-16)</span>
+      <li><a href="Ukrajinske_otazky">Ukrajinsk&#xE9; ot&#xE1;zky</a> <span class=date>(2023-07-04)</span>
+      <!-- <li><a href="Countdown2_cz">Co Hospodin odpo&#x10D;&#xED;t&#xE1;v&#xE1;</a> <span class=date>(2023-06-13)</span> -->
+      <li><a href="Maria_Lvova_Belova">Maria Lvov&#xE1;-B&#x11B;lov&#xE1;</a> <span class=date>(2023-04-09)</span>
+      <li><a href="Nova_Festival">Izrael vraždil své vlastní na hudebním festivalu Nova</a> <span class=date>(2023-11-29)</span>
+      <li><a href="Eu_Fascist">Fa&#x161;ismus Evropsk&#xE9;ho Svazu</a> <span class=date>(2022-12-21)</span>
+      <li><a href="v-ct-lzou">V &#x10C;T l&#x17E;ou</a> <span class=date>(2022-11-19 .. 20)</span>
+      <li><a href="Shmitah">&#x160;mitah</a> (&#x10D;esky) <span class=date>(2022-09-10 .. 28)</span>
+          <br>(Vysvětlení nejen současné Energetické Krize a Teroristického útoku na Nord Stream...)
+      <li><a href="/ZI">Zlo Imperialistů</a> je do Nebes volající <span class=date>(2022-08-24)</span>
+      <li> <a href="UkrajinskaValka">O Ukrajinsk&#xE9; v&#xE1;lce</a> <span class=date>(2022-03-04)</span><br>
+      <li><a href="/Russell_Bentley_Donbass">Russell Bentley on Donbass</a> - český překlad interview s Texasanem na straně Donbasu...
+      <li><a href="/NovyJerusalem">Nov&#xFD; Jeruzal&#xE9;m</a> <span class=date>(2022-02-22)</span><br>
+    </ul>
+    <br>&nbsp;
+  </td>
+  <td width="10%"></td>
+  <td width="45%" lang="en">
+    <b style="color:green">What's new ?</b>
+    <br>&nbsp;
+    
+    <ul>
+      <li> <a href="Ester_Fools">Ester fools</a> warning against attack on Iran <span class=date>(2025-04-02)</span>
+      <li> <a href="452">Trump 45 wins "2" - second term...</a> <span class=date>(2024-11-09)</span>
+      <li> <a href="NewYear2024">New Year 2024 on the Sun</a> <span class=date>(2023-01-04, updated 2023-01-13)</span>
+      <li> <a href="Sc26-started">SC26 Started Ceremonially</a> <span class=date>(2023-08-15)</span><br>
+      With <a href="Sc26/Video/">Video</a> appendix... <span class=date>(2023-08-27)</span>
+      <li> <a href="Stop_Atheism">Stop Ateism</a> <span class=date>(2023-07-16)</span>
+      <li> <a href="Countdown1_en">Countdown Continues</a> <span class=date>(2023-07-01, updated 2023-07-17, 2023-08-03)</span>
+      <!-- <li> <a href="Countdown2">Divine Countdown</a> <span class=date>(2023-06-13)</span> -->
+      <li> <a href="Nature_Loves_CO2">Nature Loves CO2</a> <span class=date>(2023-05-01)</span>
+      <li><a href="Eff-Joe">Eff Joe Harris</a> <span class=date>(2022-10-20)</span>
+      <li><a href="Smiley">Musk Twitter Smiley</a> <span class=date>(2022-11-04)</span>
+      <li><a href="Shmitah_en">Shmitah</a> <span class=date>(2022-09-10 .. 29)</span>
+         <br>(Explaining not only present Energy Crisis and Terrorist attacks on Nord Stream...)
+      <li><a href="UkraineWar">About Ukraine War</a> <span class=date>(2022-03-06)</span>
+      <li><a href="/NewJerusalem">New Jerusalem</a> <span class=gray>(<a href="/NewJerusalem.pdf" class=ablg>PDF</a>)</span> <span class=date>(2022-02-23)</span>
+    </ul>
+    
+  </td>
+</tr>
+
+<tr><td colspan=3><hr width="100%" height=3></td></tr>
+
+<tr>
+  <td width="45%" lang="cs">
+    <b>Aktualizované vydání</b> knihy <b><a href="Dalsi_List_ver12a_180928.pdf">Další List</a></b>
+    dne 28.9.2018 <small style="color:gray;">(u příležitosti svátku Svatého Václava)</small>,
+    případně baleno ve formátu <a href="Dalsi_List_ver12a.zip" class=abl>ZIP</a>
+    <small style="color:gray;">(spolu s elektronickým podpisem)</small>...<br>
+    (Pro odkaz na jednotlivé <a href="DalsiList/?001" class=abl>stránky</a> lze použít URL
+    ve formátu <a href="/DL491">https://pi-alpha.org/DL491</a> ...)
+    <small style="color:gray;">(Rozdíl od předchozí verze je v překladu knihy Josue, a drobné doplnění vysvětlení v úvodu.)</small><br>
+    <br>
+    
+    <script>
+    document.writeln('<a href="#" class=btn onclick="ShowSec(&#x27;DL1&#x27;,this);return false">Podrobnosti</a><br><br>');
+    </script>
+    
+    <div class="opt DL1">
+      <span class=gray>
+      Původní vydání z 9.9.2018 21:00 SELČ,
+      knihy <a href="Dalsi_List_ver11c_180906.pdf" class=ablg>Další list (starší verze)</a>,
+      u příležitosti <a href="https://href.li/?https://en.wikipedia.org/wiki/Rosh_Hashanah#Religious_significance" class="abl" target=_blank>soudného dne</a>
+      případně baleno ve formátu <a href="Dalsi_List_ver11c.zip" class=ablg>ZIP</a>
+      <small style="color:gray;">(spolu s elektronickým podpisem)</small>...<br>
+      <small><small style="color:gray;">(Proč právě datum 9.9.2018? Neboť zároveň s tím vydávám
+      <a href="#sht">dole</a>
+      důkaz mimo jiné i plánování 9/11</small></small><br>
+      </span>
+      
+      &nbsp;
+      <br>
+      Kniha se skládá z krátkého úvodu a ze tří částí:
+      <ul>
+        <li><b>Biblická jména</b> - skutečný překlad starší části starého zákona.<br>
+        Vzhledem k tomu, že Bible nepopisuje mrtvou historii, ale živé archetypy,
+        pro porozumění je nutné <u>přeložit i jména</u> a ne je pouze trans-literovat ...<br>
+        Po dosazení správných jmen je jasné, o čem tato kniha skutečně je, že popisuje
+        živé archetypy a návod na cestu do země zaslíbené, do Království Božího (Isráel, doslova "Bude vládnout Bůh"),
+        které není nějaká pustina v Levantu, ale stav, do kterého jednou dojdeme všude...<br>
+        I texty, které vypadají jako titulky od filmu, dlouhé seznamy jmen osob nebo hranic země zaslíbené,
+        jsou ve skutečnosti celé dlouhé skryté texty...<br>
+        <br>
+        <small style="color:gray;">Proč to dosud nikdo takto nepřeložil?<br>
+        <ul>
+          <li>Na několika místech ve starých rukopisech byl text vytvarován do nápisu "<u>Mlč</u>!" přes celou stránku.
+          <li>První řeka, vytékající z Ráje, má jméno "<u>Ústa tichá</u>", ona obkružující zemi "<u>Zůstat naživu</u>" a tam je to zlato.
+          <li>Ježíš na místě, kde také odkazuje na významy jmen, děkuje Bohu, že to zjevil pouze
+          <u><i>nemluvňátkům</i></u> (od slova "nemluvit"), 
+          jak správně překládá Kralická Bible, ale v pozdějším překladu z nepochopení
+          někdo nahradil za maličké děti, kde se souvislost poněkud ztrácí...
+          <li>Rabíni v <u>Talmud</u>u <small><small style="color:gray;">(<a href="https://href.li/?https://diskuter.wordpress.com/2018/01/26/talmud-zdroj-nenavisti-zakladny-prehlad-a-recenzie-4-knih/" class="ablg" target=_blank>té máti smilstva a ohavnosti země</a>)</small></small>
+          <i>prý</i> zakázali vysvětlovat pohanům jména... <small style="color:gray;">(nevím jistě)</small>
+          <li>Když třeba dělali nový Jeruzalémský překlad bible, nejprve ho nikdo nechtěl sponzorovat,
+          ale potom přeci jen, ale dostali přikázáno, že se nesmí odklánět od <u>Dogmat</u>...
+        </ul>
+        &nbsp;<br>
+        Proč jsem si dovolil to takto přeložit?<br>
+        <ul>
+          <li>Myslím, že jsem k tomu byl povolán... <small style="color:gray;">(Pochybujte.)</small>
+          <li>Pokyn (nápad) k překladu jmen jsem dostal
+          v den velké kvadratury <small style="color:gray;">(postavení planet do kříže)</small>,
+          první po 800 letech.
+          <small>(Předtím byla v době sv. Františka, předtím v době Scholastiků...)</small><br>
+          <small><small style="color:gray;">(Což mohu doložit <a href="P2370935.JPG" class="ablg">fotografií</a>
+          zápisku z toho dne, ovšem je psán elfím písmem...)</small></small>
+          <li>Hebrejsky jsem se začal učit, abych dekódoval nějakou tajnou zprávu v Bibli,
+          již kdysi v době, kdy se objevily první reklamy na GSM mobily, ty kobylky s tváří, bodající lidi...<br>
+          <small><small style="color:gray;">(Což doložit nemůžu, pochybujte...)</small></small>
+          <li>K vynechání určité části překladu mě přiměla opakovaná bouře, co "říkalo" těchto "7" hromů nepíšu...<br>
+          <small>(Teoreticky bych ty bouře mohl prokázat z meteorologických snímků, ale jen, pokud
+          sem ke mně domů přijdete osobně... Nehodlám vyzrazovat své bydliště, ani ukázáním na mapě...
+          Nechoďte sem! Zdejší <i>hobiti</i> by si nezasloužili trestat, za nic nemůžou...)</small>
+          <li>Spojené dohromady to je, protože nejprve jsem vyřešil tu vědeckou část,
+          klíč ke Zjevení Janovu, k tomu části textů z fóra,
+          které mě přimělo řešit topologii vesmíru,
+          a teprve poté ta biblická jména, aby to (důkaz existence Boha)
+          Církve nedostaly proti Vědcům zadarmo...
+          <li> Myslím, že můj překlad je lepší, než byste si to přeložili vy,
+          třeba proto, že <span lang="he">&#x05e8;&#x05d1; &#x05d8;&#x05d1;&#x05d7;&#x05d9;&#x05dd;</span>
+          je v mém překladu jen zkrácené <span lang="he">&#x05e8;&#x05d1; &#x05d8;&#x05d5;&#x05d1; &#x05d7;&#x05d9;&#x05d9;&#x05dd;</span>
+          s příslušnou vysvětlující poznámkou,
+          a další takové drobnosti...
+        </ul>
+        </small>
+        &nbsp;<br>
+        Zjednodušené verze překladů <small style="color:gray;">(bez variant slov v závorkách)</small>
+        vydám někdy později, nebo je jednou najdete...<br>
+        <small style="color:gray;">(Omlouvám se, že jsem až pozdě při korekturách zjistil, že jsem vynechal
+        prvních 6 kapitol knihy Josue a následujících 6 jen ve stručnosti... I další by šlo doplňovat... Snad to doplním později...?)</small><br>
+        <small style="color:gray;">(Poznámka 2018-09-28 - měl jsem čas a příležitost ten překlad začátku Josue doplnit...
+        Nelíbil se mi původně, částečně ani nyní, zřejmě proto jsem ho původně vynechal...)</small>
+      </ul>
+    </div>
+  </td>
+  <td width="10%"></td>
+  <td width="45%" lang="en">
+    See below <a href="#sci">scientific part</a>, <a href="#sht_en">tarot</a> (Luciferian plan for 9/11 and more),
+    and some <a href="#rem">remarks</a> (about vaccination etc)...<br>
+    <hr width=100% height=3/>
+    <br>
+    The Book "<b>Another leaf</b>" published here is in Czech language.<br>
+    It would be translated to English someday later...<br>
+    <br>
+    
+    <script>
+    document.writeln('<a href="#sci" class=btn onclick="ShowSec(&#x27;DL1&#x27;,this);">Details</a><br><br>');
+    </script>
+    <div class="opt DL1">
+    <small>(When translating Bible from the hebrew original, please consult my czech translation,
+    since meanings of some names I found are sometimes better,
+    than those in Strong's dictionary or traditional ones...<br>
+    And also: do not let it be translated again by j*ws...?)</small>
+    <br>&nbsp;
+    <br>
+    </div>
+  </td>
+</tr>
+
+<tr><td colspan=3>
+  <a name="sci"></a><br><br> <!-- link is here to adjust for topHeader... -->
+</td></tr>
+
+<tr>
+  <td width="45%" lang="cs">
+   <div class="opt DL1">
+    <ul>
+      <li><b>Vědecká část</b> - která je exaktním vědeckým důkazem existence Boha nebo Andělů nebo
+      nějaké mimo-kosmické civilizace, která chtěla, abychom ji takto nazývali.
+      Ten <i>Jeden Kámen</i> (Ein Stein), který stavitelé (vědci) zavrhli,
+      a přesto je kamenem úhelným, spojujícím Vědu a Víru.<br>
+      Tato část se dělí rovněž na tři části:<br>
+      <ul>
+        <li><u>Topologie vesmíru</u> jako čtyř-rozměrné hypersféry, kde náš vesmír je jejím 3D povrchem.<br>
+        Takto to navrhnul <a href="https://href.li/?https://en.wikipedia.org/wiki/Einstein%27s_universe#The_Einstein_universe" class=abl target=_blank>Einstein</a>.
+        Pozdější doplnění Temné Energie rozpínající vesmír, ke kterému jej přiměli tehdejší vědci,
+        nazval "<a href="https://href.li/?https://duckduckgo.com/?q=Einstein+biggest+blunder" class=abl target=_blank>Biggest Blunder</a>" <small>(rýmuje se s "Big Bang" počátečními písmeny)</small>...<br>
+        Později australský vědec <a href="CC2011_-_arxiv_1009.0953.pdf" class=abl>David Crawford</a> vyřešil Friedmanovy rovnice položením konstanty <b>&#x039B;</b> (lambda, temná energie, rozpínání) rovnou 0,
+        správně vysvětlil rudý posuv i microwave background,
+        pouze vysvětlení stability tohoto řešení nebylo zcela správné...
+        <small style="color:gray;">(V době Einsteina ještě nebyla <i>quantum mechanics</i> na takové úrovni, aby správně vysvětlila rudý posuv světla
+        rozpadem fotonu při cestě zakřiveným prostorem...)</small><br>
+        Já jsem pouze doplnil třešničku na dortu ukázáním, proč je toto řešení stabilní, a to díky <i>Spojitosti</i> prostoru...
+        <small style="color:gray;">(dostal jsem to jako radu ve snu...)</small><br>
+        Vesmír s touto topologií nemohl vzniknout velkým třeskem z jednoho bodu,
+        protože důležitá vlastnost, způsobující stabilitu tohoto řešení,
+        je spojitost a velký rozměr, vylučující postupné slévání zahuštěných míst...
+        Na počátku byl vesmír bez formy a temný, plný chladného homogenního vodíku,
+        a <i>akustickou vlnou</i> byla nastartována zahuštění, která později vytvořila galaxie a hvězdy...
+        <br>
+        &nbsp;<br>
+        Vědci celé století <i>věřili</i> <small style="color:gray;">(absurdnímu)</small> bludu
+        zvanému "Velký Třesk", zatímco se posmívali Věřícím...<br>
+        <small style="color:gray;">(Vím, že budete nesouhlasit, ale Einstein a Crawford dosvědčují, že mám pravdu...
+        Mít hmotu celého vesmíru v sub-Planck rozměrném bodu
+        a expandující rychlostí větší než rychlost světla,
+        je absurdní nesmysl! WMAP má ve všech spektrálních pásmech vypálenou (neprůhlednou) galaxii,
+        a přesto na jejich mapě tzv. "pozadí" je v tom místě nezměněná hustota detailů?)</small>
+        <br>&nbsp;
+        
+        <li>Vysvětlení <u>gravitace</u> jako záporné odstředivé síly díky pohybu v zakřiveném čase imaginární rychlostí <span class="code">ic</span>.<br>
+        <small style="color:gray;">(Nejsem si příliš jistý správností, změření ohybu světla při zatmění Slunce není dost přesné pro potvrzení přesnosti,
+        a kalibrace optického zkreslení fotografií mi zatím byla odmítnuta...)</small><br>
+        Jako vědci zavrhli Newtonovo řešení jako mystickou "<i>action at distance</i>",
+        i já zde zavrhuji ještě mystičtější mluvící prostor: "<i>space tells matter, how to move</i>"...<br>
+        <small style="color:gray;">(Ostatně i vědci v NASA/JPL nepoužívají rovnice gravitace z obecné teorie relativity,
+        ale používají <i><a href="https://ipnpr.jpl.nasa.gov/progress_report/42-196/196C.pdf" class="ablg" target=_blank>Parametrized Post-Newtonian</a></i> rovnice, kde ovšem leckteré parametry jsou =1
+        a jsou tam jen pro vizuální zkomplikování,
+        leckteré další členy té složité rovnice jsou téměř zanedbatelně malé...
+        V podstatě jen parametrizují odchylky v zakřivení prostoro-času...
+        Také gravitační vlny jsou jen cestující vlnky zakřivení prostoro-času...)</small>
+        <br>
+        <br>
+        <small style="color:gray;">(Gravitaci jako odstředivou sílu jako důsledek zakřivení prostoru díky hmotě
+        a tvar vesmíru jako hyper-kouli s boulemi v zahuštěných místech
+        jsem pochopil ještě v útlém dětství při čtení Gamova, přibližně v domě, kdy "spadla"
+        hvězda Pelyněk - Chernobyl...)</small>
+        <br>&nbsp;
+        
+        <li>Davidova <u>Betlémská hvězda</u> jakožto astrologický fenomén,
+        podle kterého lze jednak určit datum narození Ježíše Krista,
+        ale především lze podle ní <i>dokázat</i>, že text byl inspirován Anděly <span class=gray>(nebo UFO?)</span>,
+        protože vyžaduje i planety Uranus, Neptun a Pluto, které prokazatelně nemohli v antice znát...<br>
+        <small style="color:gray;">(Tedy to, že věděli o té Betlémské hvězdě roku 3BC (roku -2),
+        je důležitý důkaz existence nějakých vyšších bytostí...)</small><br>
+      </ul>
+      
+      &nbsp;
+      <li><b>Další</b> mé texty a úvahy, nejen k současně probíhajícímu a téměř končícímu Armageddonu
+      v Sýrii a na Ukrajině...
+      <small class=gray>(Aram Giddeon doslova znamená "Zničení Sýrie"... Tradiční výklad "Har Megiddo" jsou jen bezvýznamné trosky nedaleko Gazy...)</small>
+      <br>
+      &nbsp;<br>
+      
+      Proč připojuji k biblické analýze a překladu i vlastní text?
+      Dostal jsem v tom dva talenty <span class=gray>(hřivny, Mt25:15-30 - jeden v Bibli a jeden od Einsteina?)</span>
+      a nechci být ten služebník, který je zakopal v zemi,
+      snažím se být služebník, který k nim přidá vlastní...<br>
+      <small style="color:gray;">(Ovšem otázka by měla být naopak: proč připojuji Biblický překlad k vlastním textům?)</small><br>
+      
+      &nbsp;<br>
+      Historie mi tu napnula leckteré Praky na Goliáše...<br>
+      &nbsp;<br>
+      Texty jsou od roku 2014 do letoška 2018,
+      některé jsou zřejmě mylné <span class=gray>(třeba obhajoba nepodmíněného příjmu)</span>,
+      leckde se opakuji a některé jsou rozvláčné, některé zase příliš stručné...<br>
+      <small style="color:gray;">(Není třeba to číst celé v kuse jako beletrii...)</small><br>
+      
+    </ul>
+    
+    <br>
+    <script>
+    document.writeln('<a href="#" class=btn onclick="ShowSec(&#x27;DL2&#x27;,this);return false">Technická poznámka</a><br>');
+    </script>
+    <div class="opt DL2">
+      <p style="margin-left: 10px"><small style="color:gray;"><span class=opt>Technická poznámka:</span>
+      PDF v původním vydání z 9.9.2018 s MD5 0d15367353941904e6cb5e09073c6c31 bylo
+      <a href="Dalsi_List_ver11c_180906.p7s" class="ablg">podepsáno</a>
+      s <a href="Dalsi_List_ver11c_180906.tsr" class="ablg">time-stamp</a>
+      <a href="Cert_Semi2018A.cer" class="ablg">certifikátem dc:d7:13:e3:bc:45:76:ed:32:6d:b7:a2:e3:e0:36:6a:0b:76:86:6a</a> ,
+      který již nebude příště použit.<br>
+      Další certifikát pro podepsání odkazu na platformy,
+      kde bych psal, bude
+      <a href="Cert_Semi2018B.cer" class="ablg">certifikát a1:b6:64:ea:7d:a0:5d:97:b1:6c:32:e4:16:6b:0b:4b:86:1c:8c:bd</a> ,
+      obojí z <a href="Cert_SemiCA2015.cer" class="ablg">CA 26:67:e9:ea:51:0c:0f:9e:04:ca:f3:53:10:a6:bb:82:65:f1:4a:66</a> ...
+      <br>
+      <br>
+      PDF ve vydání z 28.9.2018 s MD5 afaf871e5b36bc5beedee03c3fe6ae23 bylo
+      <a href="Dalsi_List_ver12a_180928.p7s" class="ablg">podepsáno</a>
+      s <a href="Dalsi_List_ver12a_180928.tsr" class="ablg">time-stamp</a>
+      <a href="Cert_Semi2018B.cer" class="ablg">certifikátem a1:b6:64:ea:7d:a0:5d:97:b1:6c:32:e4:16:6b:0b:4b:86:1c:8c:bd</a> ...
+      <br>
+      <br>
+      <!--
+      <a href="TimeStamp_190207a_3767bf313a002e..2e1abe6eb6.txt" class=ablg>TimeStamp 2019-02-07</a>
+      <a href="TimeStamp_190207a_3767bf313a002e..2e1abe6eb6.p7s" class=ablg>podespáno</a>
+      s <a href="TimeStamp_190207a_3767bf313a002e..2e1abe6eb6.tsr" class=ablg>time-stamp</a> ...
+      <br>
+      -->
+      <a href="TimeStamp_190211a_80dac7f930..41ebfbfb2da0b4.txt" class=ablg>TimeStamp 2019-02-11</a>
+      <a href="TimeStamp_190211a_80dac7f930..41ebfbfb2da0b4.p7s" class=ablg>podepsáno</a>
+      s <a href="TimeStamp_190211a_80dac7f930..41ebfbfb2da0b4.tsr" class=ablg>time-stamp</a> ...
+      <br>
+      Proč takové <i>paranoidní</i> zabezpečení? Protože očekávám různé podvrhy...<br>
+      </small></p>
+    </div>
+    <br>&nbsp;
+   </div>
+  </td>
+  <td width="10%"></td>
+  <td width="45%" lang="en">
+   <div class="opt DL1">
+   <ul><li>
+    <!-- <a name="sci" comment="link moved above..."></a> -->
+    English version of <b>scientific part</b>:<br>
+    <ul>
+      <li><a href="Topology_en_v09e_ver200718.pdf">Topology of the curved space-time universe</a> <br>
+      This part describes topology of universe as a 3D surface of 4D hyper-sphere,
+      as <a href="https://href.li/?https://en.wikipedia.org/wiki/Einstein%27s_universe#The_Einstein_universe" class=abl target=_blank>Einstein</a>
+      originaly proposed.
+      Later adding of Dark Energy and universe expansion he called his
+      "<a href="https://href.li/?https://duckduckgo.com/?q=Einstein+biggest+blunder" class=abl target=_blank>Biggest Blunder</a>"
+      <small style="color:gray;">(which rhymes with "Big Bang" by starting letters...)</small>,
+      and not only his...<br>
+      Later the australian scientist <a href="CC2011_-_arxiv_1009.0953.pdf" class=abl>David Crawford</a>
+      solved Friedman's equations by setting 
+      <b>&#x039B;</b> (lambda, dark energy, expansion) equal 0,
+      he correctly explained red-shift and microwave background,
+      just his explanation of stability of this solution was not correct...
+      <small>(In Einstein's era, quantum mechanics was not at the level
+      to correctly explain red-shift of light by desintegration of photon due to travel over
+      curved spacetime...)</small><br>
+      I just added small nit by showing, why is this solution stable,
+      which is due to <i>continuity</i> of space...<br>
+      Universe with this topology could not originate by a big bang from a single point,
+      because important property, causing stability of this solution,
+      is both continuity and large dimension, precluding gradual fusing into dense places...
+      In the beginning, the universe was without form and void, dark, full of cold homogenous hydrogen,
+      and by an <i>accoustic wave</i> <small>(from without)</small> started the thickening and condensing into denser places, which later evolved into galaxies and stars...
+      <br>
+      &nbsp;<br>
+      Scientists during whole century <i>trusted</i> the <small style="color:gray;">(absurd)</small>
+      delusion of "Big Bang", while deriding believers <small style="color:gray;">(and Ecclesias)</small>...<br>
+      <small style="color:gray;">(I know you will disagree, but Einstein and Crawford acknowledge, that I'm right...
+      Having mass of whole Universe contained in sub-Planck scale single point,
+      and expanding faster than the speed of light,
+      is an absurd nonsense! On WMAP, on all spectral bands, there is burnt opaque galaxy,
+      and even with that, there is unchanged density of details on their map?)</small>
+      <br>&nbsp;<br>
+      <li>It also contains explanation of <u>gravity</u>, as a negative centrifugal pseudo-force
+      due to movement in curved time by imaginary speed <span class="code">ic</span>.<br>
+      As the scientists rejected Newton's solution as mystical "<i>action at distance</i>",
+      I hereby also reject even more mystical speaking space: "<i>space tells matter, how to move</i>"...<br>
+      <small style="color:gray;">(Even NASA/JPL scientists do not use equations of gravity from general relativity,
+      they use <i><a href="https://ipnpr.jpl.nasa.gov/progress_report/42-196/196C.pdf" class="ablg" target=_blank>Parametrized Post-Newtonian</a></i> equations, where some parameters are =1
+      and are there just to visualy complicate that,
+      some other terms of that complicated equation are infinitesimally small...
+      Basically, they just parametrize deviations in space-time curvature...
+      Also gravity waves are just ripples of space-time curvature...)</small>
+      <br>&nbsp;
+      
+      <li>David <a href="DavidStars_en_ver03g_180907.pdf">Bethlehem star</a> as an astrological phenomenon,
+      which can be used on the one hand for dating birth of Jesus Christ,
+      but on the other hand mainly it can <i>prove</i>, that the text was inspired by Angels (or UFO),
+      because it requires also planets Uranus, Neptune and Pluto, which they demonstrably
+      could not know in antiquity times...<br>
+      <small style="color:gray;">(So, that they knew of the Bethlehem star at year 3BC (year -2),
+      is an important proof of existence of some higher beings...)</small>
+      
+    </ul>
+   </ul>
+   </div>
+  </td>
+</tr>
+
+<tr><td colspan=3><hr width="100%" height=3></td></tr>
+
+<tr>
+  <td width="45%" lang="cs">
+    <u>Obrázek</u> na titulní straně knihy Další list a zde v pozadí, se jmenuje "<u>Klenba Dráhy Země</u>",
+    a je to trajektorie těžiště Země a Venuše, jedna tečka za den...<br>
+    Dvojtá rezonance planet Země a Venuše <small style="color:gray;">(13:8 na oběh, 12:8 na spin)</small>,
+    která stabilizuje oběžnou dobu Země a tím i vzdálenost od Slunce,
+    je jedna z ukázek <a href="https://href.li/?https://www.omforum.cz/forum.php?t=231&str=5#17130" target=_blank><u>Inteligentního designu</u></a> sluneční soustavy...<br>
+    Dále: Oběh Měsíce je synchronizován se Sluneční rotací, takže Země při oběhu osciluje dovnitř a ven
+    v rytmu rotace Slunce, což dost <i>možná</i> pomáhá dobíjet magnetosféru Země,
+    která již <i>prý</i> měla být dávno vyhaslá, jako na Venuši a Marsu??
+    <small style="color:gray;">(Nevím, jen domněnka...)</small><br>
+  </td>
+  <td width="10%"></td>
+  <td width="45%" lang="en">
+    <u>Picture</u> on title page of my book and here on background is named "<u>Arch of Earth's Track</u>",
+    and it is a trajectory of Earth-Venus barycenter, one point a day...<br>
+    Double resonance of planets Earth and Venus <small style="color:gray;">(13:8 orbit, 12:8 spin)</small>,
+    which stabilizes orbital period of Earth and by it also the distance from Sun,
+    is one of examples of <u>Intelligent design</u> of solar system...<br>
+    Further: Moon's orbit is synchronised with Solar spin, so that Earth during orbit oscillates in and out
+    in the rythm of Solar spin, which <i>probably</i> helps to recharge Earth's magnetosphere,
+    which should have long since been faden away, as on Venus and Mars??
+    <small style="color:gray;">(I don't know, just a conjecture...)</small><br>
+  </td>
+</tr>
+
+<tr><td colspan=3><hr width="100%" height=3>
+<a name="sht"></a>
+<a name="sht_en"></a>
+<br>
+</td></tr>
+
+
+<tr>
+  <td width="45%" lang="cs">
+    <b><a href="tarot_v1_cz-en.html">Tarot</a></b> - Luciferiánský <small style="color:gray;">(ži<wbr>do-ze<wbr>dnářský)</small> plán pohrom...
+    <br>
+    <br>
+    <hr width=100% height=3/>
+    <img width=87 height=116 style="float:right;border:none;" src="Papyrus_115_8bt.png"/>
+    Text <a href="VaP_201908.html">Víra a Pochybnosti</a>, obsahující vysvětlení čísla šelmy v <a href="https://bible.pi-alpha.org/b?Zj13:18" class=abl target=_blank>Zj&nbsp;13:18</a>,
+    a vysvětlení "koňů" s vocasem s hlavou <a href="https://bible.pi-alpha.org/b?Zj9:19" class=abl target=_blank>Zj&nbsp;9:19</a>,
+    a jak jsem tyhle dvě informace podtrhl výročími Hiroshima a Nagasaki,
+    protože to pořád nechtěl nikdo slyšet... <span class=date>(published 2019-08-21)</span> <br>
+    Záznam z /pol/ <a href="Pol_222010651_190806.html#222024038" class=abl>&gt;&gt;222024038</a> <span class=date>(2019-08-06)</span>
+    <br>
+    <a href="Pol_222405283_190809.html#222407879" class=abl>&gt;&gt;222407879</a> <span class=date>(2019-08-09)</span>
+    <a href="Pol_222424418_190809.html#222426364" class=abl>&gt;&gt;222426364</a> <span class=date>(2019-08-09)</span>
+    <br>
+    TGR: <a href="Pol_211498500_190429.html#211513417" class=abl>&gt;&gt;211513417</a> <span class=date>(2019-04-29)</span>
+    <br>
+    <br>
+    Kratší vysvětlení <!--původního--> <a href="Diskuse_Zj1318_v3.html">čísla šelmy v Zj13:18</a> (<a href="Diskuse_Zj1318_v2.html" class=abl>v2</a> <span class=date>190807</span>, <a href="Diskuse_Zj1318_v2_190806.pdf" class=abl>PDF</a><!--, <a href="Diskuse_Zj1318_v2_190806a.html">190806a</a> -->) <span class="date">(2019-08-06)</span>
+    <br>
+    Krátký článek <a href="Clanek_1318-919_190821.html">Číslo Šelmy</a> pro Média <span class=date>(2019-08-21)</span>
+    <br>
+    K tomu paralelní diskuse <a href="Diskuse_GayPride_13537.html">proti Gay Pride</a> a Istanbulské úmluvě <span class=date>(2019-07-30 .. <a href="Diskuse_GayPride_13537.html#13865" class=ablg>2019-09-02</a>, .. 2019-10-08)</span>
+    <br>
+    a k festivalu <a href="Diskuse_United_13690.html">United</a> <span class=date>(2019-08-11 .. 2019-09-19)</span>
+    <br>
+    Diskuse k <a href="Diskuse_Zj62.html">Zj6:2</a>... <span class=date>(2020-06-02 .. 2020-06-09)</span>
+    <br>
+    <br>
+    Diskuse k <a href="Diskuse_Zj1316.html"><b>Zj13:16</b></a> <span class=gray>(v&#x61;x Znamení Šelmy)</span> <span class=date>(2020-05-14 .. 2020-06-07)</span>
+    <br>
+  </td>
+  <td width="10%"></td>
+  <td width="45%" lang="en">
+    <b><a href="tarot.html">Tarot</a></b> - Luciferian <small style="color:gray;">(fre<wbr>ema<wbr>sonic)</small> plan of scourges...<br>
+    <small style="color:gray;">(This is among else a <b>proof</b> of 911 planning conspiracy... Not a "<i>theory</i>"...)</small><br>
+    <a href="tarot.html"><img src="__NWORK__.jpg" width=185 style="border:none;"/>&nbsp;
+    <img src="STD15_h120px.jpg" width=38 style="border:none;"/>
+    </a>
+    
+    First 
+    <a href="Pol_185149336_180909_-_911_conspiracy.html">public discussion</a>
+    (<a href="https://archive.4plebs.org/pol/thread/185149336" target=_blank><!--public discussion-->online archive</a>)...
+    <br>
+    <br>
+    Real origin of <i>that</i> <a href="nu10ps107.html">six million</a> number... (<span class="date">2019-01-27</span>,
+    <a href="nu10ps107.pdf" class=ablg><b>PDF</b></a>)<br>
+    
+    <!-- //New191103 -->
+    <br>
+    ---------<br>
+    What I wanted to boldly underscore by publishing it on an anniversary of Hiroshima is, that
+    a correct number in <a href="https://bible.pi-alpha.org/b?Rev13:18" class=ablg target=_blank>Rev&nbsp;13:18</a>
+    is <a href="https://en.wikipedia.org/wiki/Scientific_notation#E-notation" class=abl target=_blank><u>6e6</u></a>
+    and it is a "count of people" and not a "number of man", with an explanation,
+    how did that error of six hundred threescore and six, which even a dolt knows now,
+    has got there instead, but those, who have understanding, comprehend current reality...<br>
+    And then by a Nagasaki anniversary I've boldly underscored an explanation,
+    that <a href="https://bible.pi-alpha.org/b?Rev9:19" class=ablg target=_blank>Rev&nbsp;9:19</a> refers to a <u>genetic poison</u>
+    and anyone should understand that...<br>
+    <br>
+    But many have stylized their deeds and plans into that cursed number,
+    foremost the diabolical "ID" programs...
+  </td>
+</tr>
+
+<tr><td colspan=3><hr width="100%" height=3></td></tr>
+
+<tr>
+  <td width="45%" lang="cs">
+    Rozhovory na zatím dvou fórech o tomto díle, zde zkompletované včetně příspěvků vyřazených moderací:<br>
+    Žádné jiné fórum pro rozhovor s křesťany jsem nenašel, všichni buď dělají něco užitečnějšího
+    než diskutovat na internetu, nebo jsou zalezlí v uzavřených skupinách
+    v&nbsp;Paláci Zlých Oligarchů jménem Facebook...
+    Ale alespoň někde se ještě dá svobodně psát a&nbsp;diskutovat i&nbsp;mimo toto...<br>
+    <ul>
+      <li> Rozhovor jako <a href="Evangnet_Talk1809.html">Oznámení na Evangnetu</a>
+           <img src="logo_Evangnet.gif" style="float:right" title="(Logo, doufám že zde nevadí, a pokud vadí, upozorněte mě, prosím, abych ho tu neuváděl)"/>
+           (<a href="https://www.evangnet.cz/diskuze/vlakno/forum/cce/inzerce/11326" target=_blank>online</a>),
+           velmi pohodlné fórum,
+           ani jsem ale netušil, že patří především Českobratrské církvi evangelické, což by mi snad nevadilo,
+           jsem dost ekumenický křesťan... Nicméně z těch, kdo šli okolo a&nbsp;měli čas na odpovídání
+           ve fóru, se spíš (většinou) zajímali o&nbsp;homosexualitu a&nbsp;lgbt (spíš odmítavě, občas naopak omlouvajíc to),
+           zřejmě tam toto téma rezonuje kvůli protestům jejich věřících k&nbsp;postojům té církve,
+           ostatně dole poznámky o&nbsp;LGBT a&nbsp;feminismu jsou jako podklad k&nbsp;argumentaci tam...
+           <br>
+           <a href="Diskuse_J844.html">Diskuse k Biblickému verši J8:44</a> - jestli je Ďábel spíš "vražedlník" nebo "otrokář"... 
+             <span class="date">(2019-02-16, 2019-02-17 .. 2019-02-19)</span>, 
+             (<a href="Diskuse_J844_190219.pdf" class=abl>PDF</a>,<a href="Diskuse_J844_190220.html" class=abl>190220</a>)
+           <br>
+           <a href="Diskuse_L169.pdf">Diskuse k verši Lk16:9</a> - o vtělení Syna Ďábla, o Noahidismu a genocidě 5G
+             <span class="date">(2019-05-08 .. 2019-05-11)</span>,
+             (<a href="Diskuse_L169_Marked.pdf">barevně zvýrazněno</a> + <a href="Diskuse_L169_Marked.png">PNG</a>)
+           <br>&nbsp;
+      <li> <a href="BlueBear_Pirates_logo.png"><!--<img src="BlueBear_Pirates_logo110.png" style="float:right; border:none;" title="(Logo, doufám že zde nevadí, a pokud vadí, upozorněte mě, prosím, abych ho tu neuváděl)"/>-->...</a>
+           Ve fóru Pirátské strany <span class="date small">(2018-12 .. 2019-01)</span> jsem se původně přišel omluvit za své minulé <i>faux-pas</i>,
+           přinést námět nebo připomínku do diskuse,
+           ale i&nbsp;kvůli propagaci této knihy, protože tam je důležité upozornění,
+           protože jsem z&nbsp;dalších závažných okolností usoudil, že není čas otálet a&nbsp;čekat,
+           jak se to vyvine samo,
+           ale napsal jsem v podstatě <b>další knihu</b> dynamicky online,
+           má ovšem jinou formu - je to více-rozměrný text se stromovou strukturou, s průběhem v&nbsp;čase
+           a&nbsp;přehnanou hloubkou smyslu (rozdílem mezi závažným a&nbsp;banálním vedle sebe)...
+           (tedy je to 4D-text)...<br>
+           (Byli velmi tolerantní a&nbsp;pohostinní, ale i&nbsp;tam míra trpělivosti (téměř) přetekla, naštěstí až skoro u konce...)<br>
+           <!--Prozatímní verze:<br>-->
+           <a href="Uvahy_a_komentare__P.A.Semi__Forum_1812-1901.pdf" orig_href="Uvahy_a_komentare__P.A.Semi__Forum_Piratske_strany_1812-1901.pdf">Úvahy a komentáře - P.A.Semi - Fórum Pirátské Strany</a> <span class=date>2018-12 .. 2019-01</span> <span class=gray>(PDF, 246 stran)</span>
+           (Předchozí verze v <a href="Uvahy_a_komentare__P.A.Semi__Forum_Piratske_strany_1812-1901.html" class=abl>HTML</a> ale bez korektur...)<br>
+           (je složená ze tří threadů v&nbsp;tom fóru, ale hlavní část je
+           <a href="https://forum.pirati.cz/viewtopic.php?f=795&t=45261" class=abl target=_blank>Úvahy a&nbsp;komentáře</a> <span class=gray>(online)</span>
+           a&nbsp;jen návrh 
+           <a href="https://forum.pirati.cz/viewtopic.php?f=534&t=45181&p=597142" class=abl target=_blank>Průběžná Zastupitelská Demokracie</a> <span class=gray>(tzv. "Zrychlený Populos")</span>
+           ...<br>
+           Nezačíná tím důležitým, ani ne nějakým rozmyšleným úvodem, začíná to postupně...<br>
+           (Poznámka: Nejsem člen Pirátů <!--<span class="gray">(řekněme spíš někde napůl mezi Piráty a SPD)</span>, a ti za mě nenesou žádnou odpovědnost...-->)
+           <br><span class=gray>(Je to dávno, v posledních letech jsou Piráti velmi nechutní neo-bolševičtí lháři...)</span>
+      <!-- //x190424:
+      <li> Je k tomu i <a href="Musing_and_Comments_P.A.Semi_1812-1901_Eng_Abstract.pdf">English abstract</a>,
+           vznikl jako delší email, ale je kratší, než ten text z fóra. <span class="date">(2019-01-09 .. 2019-02-02)</span>
+      -->
+    </ul>
+  </td>
+  <td width="10%"></td>
+  <td width="45%" lang="en">
+    <ul>
+      <!-- //x190424:
+      <li> <a href="Musing_and_Comments_P.A.Semi_1812-1901_Eng_Abstract.pdf">English abstract</a>
+           is available for first and second books in one short file (38 pages)... <span class="date">(2019-01-09 .. 2019-02-02)</span>
+      -->
+    </ul>
+    
+    <span class="date" style="float:right">2019-12-22</span>
+    <br>
+    <a href="WPoHC_200103f4.pdf" rel=nofollow><img src="1537197653406_bhdp_320.jpg" width=160 style="float:right; border:none;"/></a>
+    Text <a href="WPoHC_200103f4.pdf" target=_blank class=abl>Wider perspective of the H-t Cult</a>
+    <span class=gray>(<a href="WPoHC_200103f4.p7s" rel=nofollow class=ablg>signed</a>,
+     <a href="WPoHC_200103f4.zip" rel=nofollow class=ablg>ZIP</a>,
+     <!-- WPoHC_200102f2.zip + WPoHC_200102f2.p7s -->
+     <!-- WPoHC_200103f3.zip + WPoHC_200103f3.p7s + WPoHC_200103f3.pdf -->
+     <!-- WPoHC_200103f4.pdf + WPoHC_200103f4.pdf.p7s + WPoHC_200103f4.pdf.tsr timestamp 2020-01-05 20:35:08 UTC, file from 2020-01-03 22:29:26 CEST (UTC+2) -->
+     ...)</span>
+    <!-- is&nbsp;probably not in&nbsp;hurry yet --> ...<br>
+    
+    <br><br>
+    Off-topic:
+    <blockquote>
+    <!-- //New191029 -->
+    <br>
+    ------------
+    <br>
+    <span class="date" style="float:right">2019-10-29</span>
+    Literally no one cares...<br>
+    Brexit <span class="small gray">(<a href="https://bible.pi-alpha.org/b?Rev12" class=ablg target=_blank>Rev12</a>?)</span> has been delayed, nothing surreal happens, maybe it's not a right time,
+    or there is enough time until something happens...<br>
+    I've got enough else to do meanwhile, and don't care either... 
+    <span class=gray>(Well it's enough time, probably, and what's important has been done already, probably, not sure...)</span><br>
+    Young activists have turned insane into wrong direction of a climatic lie
+    and can't be used for anything good atm, and this way they don't deserve help either...<br>
+    <!--
+    Should have angels wanted me to do something better, 
+    they should've help me somehow at least by a listener soon enough...<br>
+    -->
+    <!-- //New191101 -->
+    <br>
+    <!-- //x230409:
+    <span class="date" style="float:right">2019-11-01</span>
+    After all, something did happen at expected time, although not as expected...<br>
+    The DragoN'S head has been severed, just wait a while until it bubbles out...<br>
+    It is so simple I almost did not notice while it happened,
+    I just don't understand why we did not do it sooner...<br>
+    
+    <!-- //New191103 --> <!-- //x230409:
+    <br>
+    <span class="date" style="float:right">2019-11-03</span>
+    This time it will be a software gadget instead...<br>
+    And since the first version released on All Saints Day was not simple enough to use
+    and since it had some yet unknown bug and needs more testing,
+    next release is planned on next saturday <span class=gray>(<a href="https://bible.pi-alpha.org/b?Mk3" class=ablg target=_blank>Mk3</a>)</span>,
+    since that's preciselly a thing that fits on that saturday...<br>
+    
+    <!-- //New191109..10 //Update201109 -->
+    <br>
+    <hr width=256 height=3/>
+    <span class=date style="float:right">2019-11-09..10, 2020-11-09</span>
+    I released the <a href="DnsForward.zip">DnsForward</a> utility update
+    <!-- which is a&nbsp;Virtual&nbsp;Kristall&nbsp;Nacht tool -->...<br>
+    <img src="146-1970-083-42_brown_oval_v5.png" width=200 style="float:right"></img>
+    It just allows to block advertisements and other privacy leaks...<br>
+    <br>
+    Do not break any real shop-windows this time,
+    just get rid of their virtual shop-windows on your own screen,
+    which are unrequested advertisements and other annoyances...<br>
+    In newer Firefox it may be necessary to switch off DNS over HTTPS for this to work...
+    <span class=gray>(It depends, if you trust more or are afraid of your own ISP than the Big Brother central DNS server spying?)</span>
+    <br>
+    The <a href="DiscussPlugin">Discuss Plugin</a> was released 2021-11-09 ...
+    </blockquote>
+  </td>
+</tr>
+
+<tr><td colspan=3><hr width="100%" height=3></td></tr>
+
+<tr>
+  <td width="45%" lang="cs">
+    Jen poznámka na okraj <a href="svoboda_slova.html">o svobodě slova</a>... <span class="date">(2018-09-09)</span><br>
+    Další podstatná poznámka <a href="svoboda_slova_2.html">o svobodě slova</a>... <span class="date">(2018-09-15 .. 2019-01-13)</span><br>
+    Poznámky <a href="LGBT/index.html">o LGBT a feminismu</a>, více obrazem než slovem... <span class="date">(2018-09-15)</span><br>
+    <a href="ockovani.html"><img src="vaxbaby2.png" width=128 style="border:none;float:right"/></a>
+    Poznámky o <a href="ockovani.html">očkování</a>... <span class="date">(2018-09, česky 2019-03-26)</span><br>
+    Pojednání o <a href="HateSpeech_v_Krestanske_Kulture.pdf">HateSpeech</a> v Křesťanské Kultuře... (<a href="HateSpeech_v_Krestanske_Kulture.png" class=abl>PNG</a>) <span class="date">(2019-02-07)</span><br>
+    <a href="Covington/">Covington Catholics a hysterie mediálních fanatiků</a> (<b><a href="Covington_Catholics.pdf">PDF</a></b>, <!-- <a href="Covington_Catholics_190206_2114.pdf" class=abl>190206</a>, <a href="Covington_Catholics_at_Lincoln_Memorial_190211i8d.pdf" class=abl>190211</a>, --> <a href="Covington_Catholics_at_Lincoln_Memorial_190216n4.pdf" class=abl>190216</a>, <a href="Covington_Catholics_at_Lincoln_Memorial.png" class=abl>PNG</a>) <span class="date">(2019-01-31 .. 2019-02-16, upd. 2019-06-10)</span><br>
+    <br>
+    
+  </td>
+  <td width="10%"></td>
+  <td width="45%" lang="en">
+    <a name="rem"></a>
+    Remarks about <a href="vaccines.html">vaccination</a>... <span class="date">(2018-09-13 .. <a href="vaccines_181013.html" class=ablg>2018-10-13</a>, 2019-03-26)</span><br>
+    Remarks about <a href="LGBT-F/index.html">LGBT and feminism</a>, just some examples... <span class="date">(2018-10-09)</span><br>
+    Remarks about <a href="Climate/">Climate</a> - deserts cause warming <span class="date">(2019-04-06)</span><br>
+    <a href="Covington_Catholics.pdf"><img src="Covington_Sandman_vs_Shaman.jpg" width=256 style="border:none;float:right;"></a>
+    <br><br>
+    <a href="Covington/">Covington Catholics and hysteria of media fanatics</a> (<a href="Covington_Catholics.pdf">PDF</a>,<a href="Covington_Catholics_at_Lincoln_Memorial.png" class=abl>PNG</a>) <span class="date">(2019-01-31 .. 2019-02-11)</span><br>
+    <br>
+    Current 8kun thread authorization:
+    <a href="https://8kun.top/pnd/res/168763.html" class=abl target=_blank>pnd/168763</a> id c6ed49
+    (<span class=date>2020-11-01</span>)<br>
+    <a href="https://8kun.top/christian/res/851369.html" class=abl target=_blank>christian/851369</a> <!-- id 35702e -->
+    trip-code 6dvfceD3ew (<span class=date>2020-12-25</span>)
+    <a href="8k_201225_851369" class=abl>Archived</a> ...
+    <br>
+    <br>
+    I've occasionally published articles at <a href="https://www.rumormillnews.com/" class=abl target=_blank>RMN</a>,
+    but it's over, as they refrain to publish even mundane articles by me...<br>
+    <!--
+    Maybe if I've recognized their treasonous collaboration on
+    "<a href="https://www.informationliberation.com/?id=62008">Operation Trust</a>"
+    to betray American people with blunders, <a href="https://www.rumormillnews.com/cgi-bin/forum.cgi?read=212174" target=_blanks>falsehoods</a> and outright lies
+    instead of fairly informing them, besides other reasonable articles they cherry-pick,
+    and if I've tried to find another more fair venue to publish Trump 2020 article series,
+    the Abaddon problem could have been solved timely...<br>
+    -->
+    It requires very high discernment and caution to read RMN...<br>
+    <!--
+    My <a href="https://www.rumormillnews.com/" class=abl target=_blank>RMN</a> posts:
+      <a href="https://www.rumormillnews.com/cgi-bin/forum.cgi?read=157067" class=abl target=_blank>157067</a> <span class=gray>(The Sun votes for Trump)</span>,
+      <a href="https://www.rumormillnews.com/cgi-bin/forum.cgi?read=158200" class=abl target=_blank>158200</a> <span class=gray>(WarpSpeed and Zionists - as redacted by RMN...)</span>,
+      <a href="https://www.rumormillnews.com/cgi-bin/forum.cgi?read=164351" target=_blank>164351</a> and <a href="https://www.rumormillnews.com/cgi-bin/forum.cgi?read=164488" target=_blank>164488</a> <span class=gray>(about A.v.R. Misdirections)</span>,
+      <a href="https://www.rumormillnews.com/cgi-bin/forum.cgi?read=164643" target=_blank>164643</a> <span class=gray>(US Theft and A Baddon)</span>,
+      <a href="https://www.rumormillnews.com/cgi-bin/forum.cgi?read=164871" target=_blank>164871</a> <span class=gray>(debunking CYM hoax)</span>,
+      <a href="https://www.rumormillnews.com/cgi-bin/forum.cgi?read=165379" target=_blank>165379</a> and <a href="https://www.rumormillnews.com/cgi-bin/forum.cgi?read=165285" target=_blank>165285</a> <span class=gray>(Warning about "USA Cold Hell" on Sun)</span>,
+      <a href="https://www.rumormillnews.com/cgi-bin/forum.cgi?read=172103" target=_blank>172103</a> <span class=gray>(about Covid-21)</span>,
+      <a href="https://www.rumormillnews.com/cgi-bin/forum.cgi?read=173031" target=_blank>173031</a> <span class=gray>(about SM-102)</span>,
+      <a href="https://www.rumormillnews.com/cgi-bin/forum.cgi?read=173562" target=_blank>173562</a> <span class=gray>(about taxes)</span>,
+      <a href="https://www.rumormillnews.com/cgi-bin/forum.cgi?read=173636" target=_blank>173636</a> <span class=gray>(to M.Flynn)</span>,
+      ... <span class=gray>(and maybe others)</span><br>
+    -->
+    <br id=nt>
+    <a href="Gab" class=abl><img src="128px-Gab.png" width=64px style="border:none"/> Gab posts merged</a>...<br>
+    <span class=gray>(Version <a href="Gab_Merged_201223c.html" class=ablg>201223c</a>
+     <a href="Gab_Merged_201223c.p7" class=ablg>signed</a>
+     and <a href="Gab_Merged_201223c.tsr" class=ablg>time-stamped</a> <span class=date>2020-12-25 12:45 UTC</span>...)</span>
+    <br>
+    <br>
+    Remark about <a href="Remark_Equality">blunder of Equality</a><br>
+  </td>
+</tr>
+
+<tr><td colspan=3><hr width="100%" height=3></td></tr>
+
+<tr><td colspan=3>
+  <table border=0 style="width: 80%; margin: auto"><tr>
+    
+    <td width=33%><a href="Sun/"><img src="Sun/20140104_1555_Mix_ico640.jpg" style="border:none; width: 128px"/></a><br>
+      <a href="Sun/"><b>S</b>un</a> videos and maps...<br>
+      <span class=date>(2019-01-29)</span>
+    </td>
+    
+    <td width=33%><a href="Mari/">
+    <img src="mari-ornament_8bt.png" style="border:none; width: 128px"/>
+    </a><br>
+      <a href="Mari/"><b>M</b>arij El</a> folklore videos...<br>
+      <span class=date>(2019-01-29)</span>
+    </td>
+    
+    <td width=33%><a href="AT/"><img src="AT/Akademie_Tabor_-_logo_146x120_t.png" style="border:none; width: 128px"/></a><br>
+      <a href="AT/"><b>A</b>kademie Tabor</a> - here just some music and an image...<br>
+      <span class=date>(2019-01-29)</span>
+    </td>
+  
+  </tr><tr>
+    
+    <script>
+    function Alink(u,t,d){if(document.readyState=='loading')document.write('<a href="'+u+'" target=_blank>'+t+'</a> <span class=date>('+(d||'')+')</span>')}
+    </script>
+    
+    <td width=33% rowspan=2><a href="Sun/SC25/">
+    <!-- <img src="Sun/crop_20191224_160000_4096_HMIIF.jpg" style="border:none; width: 128px;"> -->
+    <img src="Sun/SC25/Thr_24Elders_and_Infant_v200626e.jpg" style="border:none; width: 128px;"/>
+    </a><br>
+      <a href="Sun/SC25/">Solar Cycle 25 Started on Remarkable Times</a><br>
+      <span class=gray>(The Judgement Day text, SC25...)</span><br>
+      <span class=date>(2020-02-02 .. 2020-06-24)</span><br>
+     <ul>
+      <li> <a href="/Trump_2020">The SUN votes for Trump</a><br>
+      God's inscriptions on the Sun relating to American Voter Fraud,<br>
+      Book of Revelation and C&#x43e;v&#x456;d v&#x430;&#x445;&#x445;ines...<br>
+      <span class=date>(2020-10-27 .. 2021-05-27)</span>
+      <li> About <a href="Vax6">Vax</a> being Devil's Bond 666 <span class=gray>(<a href="Vax6.pdf" class=ablg>PDF</a>)</span>,
+           <span class=gray>(<a href="Vax6-cz">český překlad</a> a <a href="Vax6-cz.pdf" class=ablg>PDF</a>)</span>
+           <span class=date>(2021-09-28)</span>
+      <li> <a href="/NovyJerusalem">Nov&#xFD; Jeruzal&#xE9;m</a> <span class=date>(2022-02-22)</span>,<br>
+      <a href="/NewJerusalem">New Jerusalem</a> <span class=gray>(<a href="/NewJerusalem.pdf" class=ablg>PDF</a>)</span> <span class=date>(2022-02-23)</span>
+      <li> <script>Alink('Talmud_plan','Talmudický plán','2022-02-25..27');</script>
+      <li> <a href="UkrajinskaValka">O Ukrajinsk&#xE9; v&#xE1;lce</a> <span class=date>(2022-03-04)</span><br>
+           <a href="UkraineWar">About Ukraine War</a> <span class=date>(2022-03-06)</span>
+      <li> <a href="Rekapitulace_Operace_Z"><img src="20220515_205805_2048_0193_HEq_HCw_R45_trans128.png" style="border:none"><br>Rekapitulace p&#x159;&#xED;&#x10D;in Operace Z</a> <span class=date>(2022-05-25)</span>
+      <li><a href="/ZI">Zlo Imperialistů</a> je do Nebes volající <span class=date>(2022-08-24)</span>
+      <li> <a href="Shmitah">&#x160;mitah</a> (&#x10D;esky) <span class=date>(2022-09-10 .. 28)</span>
+      <li><a href="v-ct-lzou">V &#x10C;T l&#x17E;ou</a> <span class=gray>(<a href="v-ct-lzou.pdf" class=ablg>PDF</a>)</span> <span class=date>(2022-11-19 .. 20)</span>
+      <li><a href="Eu_Fascist">Fa&#x161;ismus Evropsk&#xE9;ho Svazu</a> <span class=date>(2022-12-21)</span>
+      <li><a href="Maria_Lvova_Belova">Maria Lvov&#xE1;-B&#x11B;lov&#xE1;</a> <span class=date>(2023-04-09)</span>
+      <li><a href="Countdown2_cz">Co Hospodin odpo&#x10D;&#xED;t&#xE1;v&#xE1;</a> <span class=date>(2023-06-13)</span>
+      <span class=gray>(<a href="Countdown_cz_v230616a.pdf" class=ablg>PDF</a>)</span>
+      <li><a href="Countdown1_cz">Odpo&#x10D;&#xED;t&#xE1;v&#xE1;n&#xED; pokra&#x10D;uje...</a> <span class=date>(2023-07-01, 2023-07-17, 2023-07-28)</span>
+      <span class=gray>(<a href="Countdown1_cz_v230701a.pdf" class=ablg>PDF</a>)</span>
+      <li><a href="Ukrajinske_otazky">Ukrajinsk&#xE9; ot&#xE1;zky</a> <span class=date>(2023-07-04)</span>
+      <li><a href="Stop_Ateism_cz">Stop Ateism</a> <span class=date>(2023-07-16)</span>
+      <li><a href="Sc26-zacal">SC26 za&#x10D;al ob&#x159;adn&#x11B;</a> <span class=date>(2023-08-18)</span>
+      <br>Přepracovaná verze 
+      <a href="Zahajeni_SC26">Zahájení Slunečního cyklu SC26</a> 
+      <span class=gray>(<a href="https://web.archive.org/web/20230928193350/https://www.astro-forum.cz/viewtopic.php?t=33763" target=_blank class=ablg>archiv</a>)</span>
+      <span class=date>(2023-09-28)</span>
+      byla krátce na astro-forum.cz na svátek Sv. Václava,
+      <span style="display:none"> <a href="http://hvbo.cz/" target=_blank><img src="MMys_Clpx224415.jpg" width=102 height=142 style="float:right"></a> </span>
+      ale byla tam velmi rychle smazána <span style="display:none">pyšným <!--bigotním--> ateistou s&nbsp;patentem na "Astronomii",
+      ani nevím, jestli ze závisti, z&nbsp;nenávisti, ze zvyku nebo na objednávku</span>...
+      v Archivu ovšem zůstala...
+      <span style="display:none">Myslivec moc nemyslel...
+      Psal něco o&nbsp;reklamě na pialpha.cz, tak ji tu <span class=gray>(aspoň prozatím)</span> má:<br>
+      Děkuji všem cca 50 čtenářům, kteří to tam stihli za ty skoro 3 hodiny shlédnout, a&nbsp;vy ostatní uvažujte,
+      proč vás má nějaký Cenzor zaslepovat? Svíci nestaví pod kýbl, aby ostatní neklopýtali ve tmě...
+      Kdo má uši slyš, ať vám je nějaký Cenzorský Šmejd nezacpává!
+      <span class=gray>(myšleno zcela obecně, leckde si to potřebují uvědomit)</span>...
+      </span>
+      <li><a href="Nova_Festival">Izrael vraždil své vlastní na hudebním festivalu Nova</a> <span class=date>(2023-11-29)</span>
+      <li><a href="Silvestr2023">Silvestr 2023 na Slunci</a> <span class=date>(2024-01-02)</span>
+      <li><a href="Masha_Gessen">Masha Gessen</a> <span class=gray>(překlad z RT)</span> <span class=date>(2024-01-04)</span>
+      <li><a href="Troji_System">Trojí Systém</a> <span class=date>(2024-01-08)</span>
+      <li><a href="Mir">Mír!</a> <span class=date>(2024-06-01)</span>
+      <span class=gray>(<a href="Mir.pdf" class=ablg>PDF</a>)</span>
+      <li><a href="Za_mir_v_Gaze">Studenti v Praze za mír v Gaze</a> <span class=date>(2024-06-10)</span>
+      <li><a href="Povodne_Rusofob">Povodně 2024 jako Karma Rusofobů</a> <span class=date>(2024-09-14)</span>
+      <span class=gray>(<a href="Povodne_Rusofob.pdf" class=ablg>PDF</a>)</span>
+      <li><a href="Iz_Pascha_2025">Velikonoce 2025 v Moskvě</a> <span class=date>(2025-04-20)</span> - překlad z Izvestija
+      <span class=gray>(<a href="Iz_Pascha_2025.pdf" class=ablg>PDF</a>)</span>
+      <li><a href="CO2-a-hladiny-mori">CO2 je blahodárný plyn života</a> <span class=date>(2025-06-29)</span>
+      <li><a href="Spotreba_CO2">Spotřeba CO2 v přírodě roste</a> <span class=date>(2025-07-13)</span>
+      <li><a href="cz/Volby2025/">Volby 2025 - mapy a statistiky</a> <span class=date>(2025-10-09)</span>
+      <li><a href="Vzpominka_na_Dominika_Duku">Vzpomínka na kardinála Dominika Duku</a> <span class=date>(2025-11-11)</span>
+        <br>A prozatímní <a href="https://pi-alpha.org/Duka/Blog/">archiv blogu Dominika Duky</a> <span class=date>(2025-11-13..14)</span>
+      <li><a href="Halikuv_Zvon_z_Tanku">Halíkův zvon z tanků</a> <span class=date>(2025-11-17)</span>
+      <li><a href="Zelja_Jermak_pizdec">Zelja a Jermak - „pizděc“ přichází</a> <span class=date>(2025-11-21 .. 22, 29)</span>
+      <li><a href="Trump_Venezuela_Piracy">Venezuelská patálie</a> <span class=date>(2026-01-08)</span>
+      <li><a href="Zionist_Shabat_Zachor">Purimová válka Židů proti Iránu</a> <span class=date>(2026-03-16)</span>
+      <li><a href="WW3">Třetí světová válka</a> <span class=date>(2026-03-26)</span>
+     </ul>
+    </td>
+    
+    <td width=33%><a href="SandBox_2020.html"><img src="DSCN5547_v2_SandBox_small.jpg" style="border: none; width: 128px;"></a><br>
+      <a href="SandBox_2020.html">Sandbox pro jednoho zvláštního...</a>
+      <br>
+      (Text <a href="https://forum.pirati.cz/viewtopic.php?f=795&t=50710" class=abl target=_blank>ve fóru u Pirátů</a>...)<br>
+      <span class=date>(2020-01-14..19, 2020-02-06)</span>
+      <br>
+      <ul style="padding-left:0;">
+        <li> <a href="Kauza_Mariansky_Sloup_v200626b.html#p680909">Kauza Mariánského sloupu na Staroměstském náměstí</a>
+        <span class=date>(2020-02-17..2020-06-26)</span>
+        <li> Diskuse <a href="OckThread#p678367">Návrh na zrušení povinného očkování</a>
+        a&nbsp;poznámky o Co&#x76;ID...
+        <span class=date>(2020-02..2020-11)</span>
+      </ul>
+    </td>
+    
+    <td style="vertical-align:bottom">
+      <span style="float:right">
+      <a href="Log2012s"><img src="Log2012_Stadium_trn_small.jpg" style="border:none;height:96px"/></a><br>
+      </span>
+    </td>
+  </tr><tr>
+    <!-- <td></td> -->
+    <td>
+        Z toho výběr <a href="Loh2012">P&#x6c;an&#x64;emic Co&#x76;ID-&#x31;&#x39; ji&#x17E; od 2012</a>
+        <span class=date>(2020-10-06..08)</span>
+        <br>
+        Stručný článek o <a href="Loh2012s">LOH 2012</a>... <span class=date>(2022-03-02)</span><br>
+        &nbsp;
+     <ul style="padding-left:0;">
+      <li>
+        <a href="MzDesinfo">Vyvracení Lží a Dezinformací o Covid</a>
+        <span class=date>(2021-01-30..02-04)</span>
+      </li>
+     </ul>
+    </td>
+    <td width=33%>
+      <ul style="float:right">
+      <li><a href="Log2012">P&#x6c;an&#x64;emic Co&#x76;ID-&#x31;&#x39; since 2012</a>
+      <br>
+      Short version about <a href="Log2012s">London Olympic Games 2012</a>... <span class=date>(2022-03-06)</span><br>
+      <br>
+      <li><a href="CovidVaxGen">Co&#x76;id V&#x61;x G&#x65;noc&#x69;de P&#x6c;anned</a>
+      <span class=gray>(<a href="CovidVaxGen.pdf" class=ablg>PDF</a>)</span>
+      <span class=date>(2020-06-05)</span><br>
+      <a href="CovidVaxGen_cz">česky</a> <span class=date>(2020-06-19)</span><br>
+      <li> <script>Alink('Talmud_plan_en','Talmud plan','2022-02-25..27');</script>
+      <li><a href="Recap_Operation_Z">Operation Z causes Recap</a> <span class=date>(2022-05-25, 2022-06-10)</span>
+      <li><a href="Shmitah_en">Shmitah</a> <span class=date>(2022-09-10 .. 29)</span>
+      <br> <a href="Shmitah_ru">&#1064;&#1084;&#1080;&#1090;&#1072;&#1093;</a> (&#1087;&#1086; &#1088;&#1091;&#1089;&#1089;&#1082;&#1080;) <span class=date>(2022-10-01)</span>
+      <li> <a href="Eff-Joe">Eff Joe Harris</a> <span class=date>(2022-10-20)</span>
+      <li> <a href="Smiley">Musk Twitter Smiley</a> <span class=date>(2022-11-04)</span>
+      <li> <a href="Eu_Fascist_en">Fascism of European Union</a> <span class=date>(2022-12-29 preliminary)</span>
+      <li> <a href="Nature_Loves_CO2">Nature Loves CO2</a> <span class=date>(2023-05-01)</span>
+      <li> <a href="Countdown2">Divine Countdown</a> <span class=date>(2023-06-13)</span>
+      <span class=gray>(<a href="Countdown_v230617a.pdf" class=ablg>PDF</a>)</span>
+      <li> <a href="Countdown1_en">Countdown Continues</a> <span class=date>(2023-07-01, 2023-07-17, 2023-08-03)</span>
+      <span class=gray>(<a href="Countdown1_en_v230701a.pdf" class=ablg>PDF</a>)</span>
+      <li> <a href="Stop_Atheism">Stop Ateism</a> <span class=date>(2023-07-16)</span>
+      <li> <a href="Ukraine_Questions">Ukraine Questions</a> <span class=date>(2023-07-19)</span>
+      <li> <a href="Sc26-started">SC26 Started Ceremonially</a> <span class=date>(2023-08-15)</span>
+        <span class=gray>(<a href="Sc26-started.pdf" class=ablg>PDF</a>)</span>
+      <li> <a href="NewYear2024">New Year 2024 on the Sun</a> <span class=date>(2023-01-04, updated 2023-01-13)</span>
+        <span class=gray>(<a href="Silvester2023.pdf" class=ablg>PDF</a>)</span>
+      <li> <a href="452">Trump 45 wins "2" - second term...</a> <span class=date>(2024-11-09)</span>
+      <li> <a href="Ester_Fools">Ester fools</a> warning against attack on Iran <span class=date>(2025-04-02)</span>
+      </ul>
+    </td>
+  </tr><tr>
+    <td colspan=3><hr>
+  </tr><tr>
+   <td lang="cs">Z dalších zdrojů:<br>
+    <ul>
+     <li><a href="tmp/Plandemie.pdf">Důkaz, že pandemie byla plánována...</a> <span class=gray>(pdf)</span><br>
+         <span class=gray>(Došlo mi několikrát emailem, český překlad dokumentu StopWorldControl ...)</span>
+     <li><a href="/Russell_Bentley_Donbass">Russell Bentley on Donbass</a> - český překlad interview s Texasanem na straně Donbasu...
+     <li><a href="/Zidovska_valka_proti_Rusku">Jak židovská je válka proti Rusku?</a> <span class=date>(2022-08-14)</span>
+     <li><a href="/CSU">Statistika mortality ČSÚ</a> <span class=gray>(aktualizováno průběžně)</span>
+     <li><a href="IPGII/">IPGII</a> - video a anal&#xFD;za <span class=date>(2023-07-23)</span>
+    </ul>
+   </td><td>
+   </td><td lang="en">
+    From other sources:<br>
+    <ul>
+     <li><a href="https://www.stopworldcontrol.com/proof/" target=_blank>Proof that the pandemic was planned</a> with a purpose
+     <li><a href="https://www.activistpost.com/2021/06/paving-the-way-for-the-ronascam.html" target=_blank>Paving The Way For The Ronascam - Activist Post</a>
+     <li><a href="Covid_Continents_220912_Owid3_Inline.html">Covid in Countries</a> - statistic from World-o-meters... <span class=gray>(updated occasionally)</span>
+     <li><a href="OECD">OECD excess mortality</a> - charts from 33 countries...
+     <li><a href="Uttar_Pradesh_Ivermectin">Effect of Ivermectin Use onto Covid Epidemic in India</a>
+     <li><a href="tmp/COVID-19-The-Spartacus-Letter-1.pdf">The Spartacus Letter</a> - an expert-level description of Covid...
+    </ul>
+  </tr></table>
+</td></tr>
+
+<tr>
+  <td width="45%" lang="cs">
+  </td>
+  <td width="10%"></td>
+  <td width="45%" lang="en">
+  </td>
+</tr>
+
+<tr><td colspan=3><hr width="100%" height=3/><br><br></td></tr>
+
+<tr>
+  <td width="45%" lang="cs">
+    Milost našeho Pána Ježíše Krista ať je s vámi se všemi.
+    <br>
+    <br>
+    <br>
+  </td>
+  <td width="10%"></td>
+  <td width="45%" lang="en">
+    The grace of our Lord Jesus Christ be with you all.
+  </td>
+</tr>
+
+<tr><td colspan=3><hr width="100%" height=3/><br><br></td>
+
+<tr>
+  <td width="45%" lang="cs">
+  Kontakt: <img src="em.png" style="height: 1.5em;"/>
+  <script>
+  document.write('<a href="#" class=btn onclick="return OpenFeedbackForm()">Form</a>');
+  </script>
+  </td>
+  <td width="10%"></td>
+  <td width="45%" lang="en">
+  </td>
+</tr>
+
+</table>
+
+<hr width="100%" height=3/>
+<hr width="100%" height=3/>
+<script>
+document.writeln('<a href="#" class=btn onclick="ShowSec(&#x27;Tech&#x27;,this,!0);return false">Technické poznámky a odkazy</a>');
+</script>
+<div class="opt Tech">
+  <span lang="en">
+  Other useful: <br/>
+  <br/>
+  I use this PDF viewer:
+  <ul>
+    <li> <a href="https://href.li/?https://www.tracker-software.com/product/pdf-xchange-viewer" target=_blank>PDF-XChange Viewer</a>
+    <small style="color:gray;">(I have some earlier version and just hope the current one is as good as that which I use...)</small>
+  </ul>
+  <br/>
+  Fonts <small style="color:gray;">(I just hope they are free?)</small>:<br/>
+  <ul>
+    <li> <a href="SBL_Hbrw.ttf">SBL Hebrew</a>
+    <li> <a href="SBL_Grk.ttf">SBL Greek</a>
+  </ul>
+  &nbsp;<br/>
+  
+  Strong's <span title="Internet Public Domain">IPD</span> hebrew and greek dictionary:<br/>
+  <ul>
+    <li><a href="Dict_Str_IPD_HE.pdf">Dict_Str_IPD_HE.pdf</a>
+    <li><a href="Dict_Str_IPD_HE.html">Dict_Str_IPD_HE.html</a>
+    <li><a href="Dict_Str_IPD_GR.html">Dict_Str_IPD_GR.html</a>
+    <li>Online: <a href="https://href.li/?https://biblehub.com/strongs.htm" target=_blank>https://biblehub.com/strongs.htm</a>
+    <li>Online (with advanced searching): <a href="https://bible.pi-alpha.org/dict?" target=_blank>bible.pi-alpha.org/dict</a>
+  </ul>
+  
+  &nbsp;<br/>
+  Certificates:<br/>
+  <ul>
+    <li> <a href="Cert_SemiCA2015.cer">Cert_SemiCA2015.cer</a> fingerprint 26:67:e9:ea:51:0c:0f:9e:04:ca:f3:53:10:a6:bb:82:65:f1:4a:66 <br/>
+    <li> <a href="Cert_Semi2018A.cer">Cert_Semi2018A.cer</a> fingerprint dc:d7:13:e3:bc:45:76:ed:32:6d:b7:a2:e3:e0:36:6a:0b:76:86:6a <br/>
+    <li> <a href="Cert_Semi2018B.cer">Cert_Semi2018B.cer</a> fingerprint a1:b6:64:ea:7d:a0:5d:97:b1:6c:32:e4:16:6b:0b:4b:86:1c:8c:bd <br/>
+  </ul>
+  &nbsp;<br/>
+  <a href="Cer.zip">Cer.zip</a> utility tool...
+  md5 c2062d028879082ad52690b20b69baca
+  signed <a href="Cer.zip.p7s">Cer.zip.p7s</a> <!--, with short <a href="Cer_doc.html">manual</a> -->
+  with certificate <a href="Cert_Semi2018B.cer">Cert_Semi2018B.cer</a>
+  <br/>
+  <small style="color:gray;">(Beware, that it may contain bugs, and that not all, what it shows by <span class="code">cer.exe -h</span> , is actually implemented...)</small>
+  <br/>
+  Verify signature by command:<br/>
+  <span class="code">cer.exe -verify Cert_Semi2018B.cer -content Cer.zip -in Cer.zip.p7s</span>
+  <br/>
+  Output should read:<br/>
+  <pre class="code">
+  Verify OK for "Cer.zip.p7s"
+    data in "Cer.zip"
+    signed by "/C=CZ/ST=Czech Republic/O=Semi/OU=Doc writing/CN=P.A.Semi 2018-09B"
+  </pre>
+  </span>
+  <br/>
+  <br/>
+  <ul>
+    <li>Verify <a href="/Hash" target=_blank>hash</a> of specified file... Original signed files can be retrieved with urls like https://pi-alpha.org/Editor.html?raw<br/>
+    <li><a href="/Editor" target=_blank>Editor</a> HTML Editor tool
+    <li><a href="/PassDoc?raw" target=_blank>PassDoc</a> - Password encryption tool
+    <li><a href="/kbhelp" target=_blank>kbhelp</a> - Keyboard helper tool
+  </ul>
+  <br/>
+</div>
+
+<!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+
+
+<script>
+var FeedbackForm, DimBg;
+function OpenFeedbackForm() {
+  // Contact/Feedback Form...
+  if(!window.XMLHttpRequest || !window.JSON) { alert('Incompatible web-browser...'); return false; }
+  //
+  var E='semi'+char(0x40)+'pialpha.cz';
+  //
+  if (FeedbackForm) { FeedbackForm.Name.focus(); return false; }
+  DimBg=Ce('span').St('position:fixed;left:0px;top:0px;width:100%;height:100%;background-color:black;opacity:0.333;');
+  //
+  var Fr=Ce('fieldset');
+  //
+  Cl=Ce('a',Fr).At('href','#').At('class','btn').St('float:right;margin-top:-1.5em;margin-right:1em;font-weight:bold').Tx('x').onclick=CloseFeedbackForm;
+  //
+  var Fo=Ce('form',Fr);
+  //
+  FeedbackForm=Fo;
+  Fo.action='none';
+  Ce('legend',Fr).Ih('Feedback').St('background-color:#e1ebf2');
+  Fr.St('position:fixed; width:40%; right:2em; top:4em; padding-bottom: 3px; background-color:#e1ebf2');
+  //
+  var T=Ce('span',Fo).St('float:right');
+      function char(n) { return String.fromCharCode(n); }
+  T.Ih('You can send me e'+char(0x6d)+'ail at:<br><a href="'+char(0x6d)+'ailto:'+E+'">'+E+'</a><br>'+'<span class=gray>(But it seems probably blocked somewhere?)</span>');
+  //
+      function Row(N) {
+        var D=Ce('div',Fo), S=Ce('span',D), I=Ce('input',D);
+        S.Tx(N+':').St('width:7em;margin-right:1em');
+        I.type='text'; I.size=40; I.name=N;
+        return I;
+      }
+  var I1=Row('Name');
+  Row('Email');
+  //
+      function TextBox(N) {
+        var D=Ce('div',Fo), S=Ce('span',D), I=Ce('textarea',D);
+        S.Tx(N+':').St('display:block');
+        I.cols=80; I.rows=25; I.name=N;
+        //if((''+location.href).indexOf('.org')+1)I.value='Tato funkce nyni nefunguje...\nThis currently does not work...';
+        return I;
+      }
+  TextBox('Text');
+  //
+      function Btn(T,C) {
+        var B=Ce('input',Fo);
+        B.type='button'; B.value=T; B.onclick=C;
+        return B.St('float:right; margin-left:4px');
+      }
+  Ce('div',Fo).St('min-height:4px; clear:both');
+  Btn('Cancel',CloseFeedbackForm);
+  Btn('Send',SendFeedback);
+  Ce('span',Fo).St('display:inline-block;min-height:4px; clear:both');
+  //
+  document.body.appendChild(DimBg);
+  document.body.appendChild(Fr);
+  I1.focus();
+  
+  return false;
+}
+function SendFeedback() {
+  var Fo=FeedbackForm;
+  if(!Fo)return;
+  try {
+    var Item={Name: Fo.Name.value, Email: Fo.Email.value, Text: Fo.Text.value};
+    var Data=JSON.stringify(Item);
+    var X=new XMLHttpRequest();
+    X.onreadystatechange=function() {
+        if (this.readyState==4) {
+          X.onreadystatechange=null;
+          //X=null;
+          var Resp=this.responseText;
+          if (this.status==200) {
+            Fo.Name.value='';
+            Fo.Email.value='';
+            Fo.Text.value='';
+            //
+            var E=Fo.firstChild,Nx;
+            while(E) { Nx=E.nextSibling; Fo.removeChild(E); E=Nx; }
+            //
+            var D=Ce('pre',Fo).Tx(Resp).St('font-weight:bold');
+            setTimeout(function(){ Fo=null; CloseFeedbackForm(); },3000);
+          } else {
+            alert(Resp||('Send failed for unknown reason: '+this.status));
+          }
+        }
+      };
+    X.open('post','/Feedback?',true);
+    X.setRequestHeader('Content-Type','text/plain');
+    X.send(Data);
+  } catch(E) {
+    alert('Send failed:\n'+E.message);
+  }
+}
+function CloseFeedbackForm() {
+  var B=DimBg;
+  if (B) { DimBg=null; B.parentNode.removeChild(B); }
+  var Fo=FeedbackForm;
+  if(!Fo) return false;
+  FeedbackForm=null;
+  var F=Fo.parentNode;
+  F.parentNode.removeChild(F);
+  return false;
+}
+function Ce(t,P) {
+  var E=document.createElement(t);
+  //
+  E.At=function(n,v){ this.setAttribute(n,v); return this; };
+  E.Tx=function(t){ this.textContent=t; return this; };
+  E.Ih=function(h){ this.innerHTML=h; return this; };
+  E.St=function(S){ var O=this.getAttribute('style'); this.setAttribute('style',S+(O?(';'+O):'')); return this; };
+  //
+  if(P) P.appendChild(E);
+  return E;
+}
+function bid(id) {
+  return document.getElementById(id) || { style: {} };
+}
+</script>
+
+<script>
+// Switch off czech or english part, idx 0,2,-1 :
+function OnlyCol(idx) {
+  var T=document.getElementById('mainTable');
+  if(!T) return false;
+  var L1=T.getElementsByTagName('tr'),C1=L1.length,i,tr,L2,C2,j,td,L2b,
+      d0=(idx<=0),d1=(idx<0),d2=(idx!=0),
+      Wi=[(!d2)?100:45,d1?10:0,(!d0)?100:45],
+      Disp=[d0?'table-cell':'none',d1?'table-cell':'none',d2?'table-cell':'none'];
+  for(i=0;i<C1;i++) {
+    tr=L1[i];
+    if (ParentTable(tr)!=T) continue;
+    L2=tr.getElementsByTagName('td');
+    C2=L2.length;
+    // only direct descendant <td> in this <tr>, not in sub-tables:
+    L2b=[];
+    for(j=0;j<C2;j++) { td=L2[j]; if(td.parentNode==tr) L2b.push(td); }
+    L2=L2b; C2=L2.length;
+    //
+    if (C2==3) {
+      for(j=0;j<C2;j++) {
+        td=L2[j];
+        td.width=Wi[j]+'%';
+        td.style.display=Disp[j];
+      }
+    }
+  }
+  bid('EnHint').style.display=(idx<0)?'inline':'none';
+  bid('AllCol').style.display=(idx>=0)?'inline':'none';
+}
+    function ParentTable(E) {
+      while (E && E.tagName.toUpperCase()!='TABLE') E=E.parentNode;
+      return E;
+    }
+
+// Show optional sections:
+function ShowSec(cls,A,bnS) {
+  var D=(A&&A.disp)?'none':'block';
+  A&&(A.disp=!A.disp);
+  var L=document.getElementsByClassName(cls),C=L.length,i,E;
+  for(i=0;i<C;i++) {
+    E=L[i];
+    E.style.display=D;
+    if(bnS&&(D!='none')){bnS=!1;window.scroll(0,E.offsetTop-70)}
+  }
+}
+
+// external links in new tab
+[].slice.call(document.getElementsByTagName('a')).forEach(function(A){((A.getAttribute('href')||'').substr(0,4)=='http')&&!A.getAttribute('target')&&A.setAttribute('target','_blank')});
+</script>
+
+
+<!-- Footer -->
+<!-- /Footer -->
+</body>
+</html>

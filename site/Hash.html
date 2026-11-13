@@ -1,0 +1,80 @@
+<html>
+<head>
+<link rel="icon" type="image/png" sizes="32x32" href="/EVb_32ico.png">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Md5 Hash - Pi Alpha</title>
+<style>
+h1{text-align:center}
+fieldset{border-radius:5px}legend{border-radius:3px}
+.l80{display:inline-block;width:8em}
+</style>
+<script src="dynui.js"></script>
+<style>
+.article{max-width:960px;margin:auto}
+.topBar{position:fixed;left:0px;right:0px;top:0px;z-index:10101}
+.belowTop{display:block;opacity:0;min-height:1em}
+.topBar,.belowTop{height:1.2em;font-size:4mm;height:5mm}
+.outset{border:1px outset #e1ebf2}
+.topBar{background:#afcce1}
+a.aMnu{text-decoration:none;padding:0px 2px}
+a.aMnu:hover{background:#7ca0ba;border-bottom:1px solid #2591de}
+.rFloat{float:right}
+body{background:#f3f7f9}@media print{body{background:none}.topBar,.belowTop{display:none}}
+</style>
+</head>
+<body><!-- Header -->
+<div class="topBar outset">
+<a href="/" class=aMnu>&pi;&alpha;&#xbd;</a>
+<a href="https://bible.pi-alpha.org/" target=_blank title="Bible viewer" class=aMnu><b>B</b></a>
+<a href="#" onclick="return ScrollTop()" class="aMnu rFloat">^</a>
+</div>
+<div class=belowTop></div>
+<div style="clear:both"></div>
+<script>
+[].slice.call(document.getElementsByClassName('topBar')).forEach(function(T){
+  [].slice.call(T.getElementsByTagName('a')).forEach(function(A){
+    //var u;if(u=A.getAttribute('href'))if(u.substr(0,1)!='#')
+    if(!A.getAttribute('target'))A.setAttribute('target','_self')
+  })
+})
+function ScrollTop(){window.scroll(0,0);return!1}
+</script>
+<!-- /Header -->
+<div class=article>
+<h1>Pi Alpha</h1>
+
+<form action="Hash" method=get onsubmit="return FormSubmit(this,event)">
+<fieldset>
+ <legend>MD5 Hash</legend>
+ <span class=l80>File:</span> <input type=text name=File placeholder="/index.html" required autofocus size=40><br>
+ <span class=l80></span> <input type=submit value="Display"><br>
+ 
+ <hr width=480 align=left>
+ <pre id=dResult></pre>
+ 
+</fieldset>
+</form>
+
+<script>
+function FormSubmit(Fo,e){
+  function Show(t){Tx(bid('dResult'),t)}
+  Cancel(e);
+  if(e=Fo.File.value){
+    AjaxGet(Fo.action+"?File="+Fo.File.value,{},function(resp,X){
+      if(typeof resp!='string')resp=null;
+      Show(resp||X.response||X.status||'No response?');
+    });
+  }else{
+    Show("File missing");
+    Fo.File.focus();
+  }
+  return!1
+}
+</script>
+
+</div>
+<!-- Footer -->
+<!-- /Footer -->
+</body>
+</html>

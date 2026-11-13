@@ -1,0 +1,97 @@
+<html>
+<head>
+<link rel="icon" type="image/png" sizes="32x32" href="/EVb_32ico.png">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Perspective maps - Pi Alpha</title>
+<style>
+.text,body { font-family: Arial; }
+.code { font-family: Monospace, Courier New; color: navy; }
+.pascmt { font-family: Monospace, Courier New; color: gray; font-style: italic; }
+body { background-color: #e1ebf2; }
+h1 { text-align: center; font-family: Times New Roman, Arial; }
+.abl { text-decoration: none; /* text-decoration: underline dotted gray; /* nefunguje... */ color: #501860; }
+.ablg { text-decoration: none; /* text-decoration: underline dotted gray; /* nefunguje... */ color: #686080; }
+
+.abl:hover,.ablg:hover { text-decoration: underline; }
+tr,td { vertical-align: top; }
+small { font-size: 75%; }
+.gray {color:gray}
+img { border:none; }
+</style>
+<style>
+.article{max-width:960px;margin:auto}
+.topBar{position:fixed;left:0px;right:0px;top:0px;z-index:10101}
+.belowTop{display:block;opacity:0;min-height:1em}
+.topBar,.belowTop{height:1.2em;font-size:4mm;height:5mm}
+.outset{border:1px outset #e1ebf2}
+.topBar{background:#afcce1}
+a.aMnu{text-decoration:none;padding:0px 2px}
+a.aMnu:hover{background:#7ca0ba;border-bottom:1px solid #2591de}
+.rFloat{float:right}
+
+</style>
+</head>
+<body><!-- Header -->
+<div class="topBar outset">
+<a href="/" class=aMnu>&pi;&alpha;&#xbd;</a>
+<a href="https://bible.pi-alpha.org/" target=_blank title="Bible viewer" class=aMnu><b>B</b></a>
+<a href="#" onclick="return ScrollTop()" class="aMnu rFloat">^</a>
+</div>
+<div class=belowTop></div>
+<div style="clear:both"></div>
+<script>
+[].slice.call(document.getElementsByClassName('topBar')).forEach(function(T){
+  [].slice.call(T.getElementsByTagName('a')).forEach(function(A){
+    //var u;if(u=A.getAttribute('href'))if(u.substr(0,1)!='#')
+    if(!A.getAttribute('target'))A.setAttribute('target','_self')
+  })
+})
+function ScrollTop(){window.scroll(0,0);return!1}
+</script>
+<!-- /Header -->
+<div class=article>
+
+<h1><a href="https://pi-alpha.org/" class="abl" style="float:right;">&#x03c0;&#x03b1;&#xbd;</a></h1>
+
+<h1>Perspective projection height maps</h1>
+
+<div style="float:right;">(<a href="PerspMaps.zip">ZIP</a>)</div>
+
+MODIS DEM30 Maps color-coded surface height and SRTM30 ocean depth with shading,
+city countours from Night images by NASA...<br/>
+Source data downloaded from 
+<a href="ftp://landsc1.nascom.nasa.gov/outgoing/c5_dem/geo/">NASA</a>,
+from
+<a href="http://www.edenextdata.com/?q=content/modis-1km-digital-elevation-model-and-landwater-mask-v5">MODIS / EDENext portal</a>,
+image processing by P.A.Semi 2015...<br/>
+<br/>
+Images are quite large... <span class="gray">(Even larger versions are available on request...)</span><br/>
+<br/>
+<a href="dem30ARC_SRTM30__Persp_Africa_0_0.jpg"><img src="dem30ARC_SRTM30__Persp_Africa_0_0_Small.jpg"/></a>
+<a href="dem30ARC_SRTM30__Persp_Africa_20_0.jpg"><img src="dem30ARC_SRTM30__Persp_Africa_20_0_Small.jpg"/></a>
+<a href="dem30ARC_SRTM30__Persp_Asia_80_40.jpg"><img src="dem30ARC_SRTM30__Persp_Asia_80_40_Small.jpg"/></a>
+<a href="dem30ARC_SRTM30__Persp_Australia_135_-10.jpg"><img src="dem30ARC_SRTM30__Persp_Australia_135_-10_Small.jpg"/></a>
+<a href="dem30ARC_SRTM30__Persp_Europe_20_45.jpg"><img src="dem30ARC_SRTM30__Persp_Europe_20_45_Small.jpg"/></a>
+<a href="dem30ARC_SRTM30__Persp_Europe_20_50.jpg"><img src="dem30ARC_SRTM30__Persp_Europe_20_50_Small.jpg"/></a>
+<a href="dem30ARC_SRTM30__Persp_India_75_20.jpg"><img src="dem30ARC_SRTM30__Persp_India_75_20_Small.jpg"/></a>
+<a href="dem30ARC_SRTM30__Persp_NorthAmerica_-100_45.jpg"><img src="dem30ARC_SRTM30__Persp_NorthAmerica_-100_45_Small.jpg"/></a>
+<a href="dem30ARC_SRTM30__Persp_NPole_0_90.jpg"><img src="dem30ARC_SRTM30__Persp_NPole_0_90_Small.jpg"/></a>
+<a href="dem30ARC_SRTM30__Persp_Pacific_-160_0.jpg"><img src="dem30ARC_SRTM30__Persp_Pacific_-160_0_Small.jpg"/></a>
+<a href="dem30ARC_SRTM30__Persp_SouthAmerica_-60_-10.jpg"><img src="dem30ARC_SRTM30__Persp_SouthAmerica_-60_-10_Small.jpg"/></a>
+<a href="dem30ARC_SRTM30__Persp_SPole_180_-90.jpg"><img src="dem30ARC_SRTM30__Persp_SPole_180_-90_Small.jpg"/></a>
+<a href="dem30ARC_SRTM30__Persp_SPole_180_-90_Antarctica.jpg"><img src="dem30ARC_SRTM30__Persp_SPole_180_-90_Antarctica_Small.jpg"/></a>
+<a href="dem30ARC_SRTM30__Persp_SPole_180_-90__bad.jpg"><img src="dem30ARC_SRTM30__Persp_SPole_180_-90__bad_Small.jpg"/></a>
+<br/>
+Rectangular version:
+<a href="dem30ARC_SRTM30_alt_bath_v2_1_Small.jpg"><img src="dem30ARC_SRTM30_alt_bath_v2_1_25pct_Small.jpg"/></a>
+(<a href="dem30ARC_SRTM30_alt_bath_v2_1_25pct.jpg">large</a>)
+
+<br/>
+
+
+</div>
+<!-- Footer -->
+<!-- /Footer -->
+</body>
+</html>

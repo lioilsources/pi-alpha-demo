@@ -1,0 +1,507 @@
+<html>
+<head>
+<link rel="icon" type="image/png" sizes="32x32" href="/EVb_32ico.png">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Volby 2025 - součty a statistiky</title>
+<style>th,td{text-align:left}</style>
+<style>
+.article{max-width:960px;margin:auto}
+.topBar{position:fixed;left:0px;right:0px;top:0px;z-index:10101}
+.belowTop{display:block;opacity:0;min-height:1em}
+.topBar,.belowTop{height:1.2em;font-size:4mm;height:5mm}
+.outset{border:1px outset #e1ebf2}
+.topBar{background:#afcce1}
+a.aMnu{text-decoration:none;padding:0px 2px}
+a.aMnu:hover{background:#7ca0ba;border-bottom:1px solid #2591de}
+.rFloat{float:right}
+body{background:#f3f7f9}@media print{body{background:none}.topBar,.belowTop{display:none}}
+</style>
+</head>
+<body><!-- Header -->
+<div class="topBar outset">
+<a href="/" class=aMnu>&pi;&alpha;&#xbd;</a>
+<a href="https://bible.pi-alpha.org/" target=_blank title="Bible viewer" class=aMnu><b>B</b></a>
+<a href="#" onclick="return ScrollTop()" class="aMnu rFloat">^</a>
+</div>
+<div class=belowTop></div>
+<div style="clear:both"></div>
+<script>
+[].slice.call(document.getElementsByClassName('topBar')).forEach(function(T){
+  [].slice.call(T.getElementsByTagName('a')).forEach(function(A){
+    //var u;if(u=A.getAttribute('href'))if(u.substr(0,1)!='#')
+    if(!A.getAttribute('target'))A.setAttribute('target','_self')
+  })
+})
+function ScrollTop(){window.scroll(0,0);return!1}
+</script>
+<!-- /Header -->
+
+
+<br id=top>
+
+<script>
+function dw(h){(document.readyState=='loading')&&document.writeln(h)}
+function dwLink(t,u,d){d&&(typeof d!='string')&&(d=/\/([^\/]+)$/.exec(u))&&(d=d[1]);dw('<a href="'+u+'"'+(d?' download='+d:'')+'>'+t+'</a>')}
+</script>
+
+<h1>Volby 2025 - součty a statistiky</h1>
+
+<fieldset style="float:right;border:1px solid gray;margin:1em;border-radius:5px"><legend>Obsah</legend>
+ <ul style="padding-left:12px;margin:0px">
+  <li> <a href="#top">Volby 2025 - součty a statistiky</a>
+  <li> <a href="#Koment">Komentář</a>
+  <li> <a href="#Porovnani">Porovnání 2025 a 2021</a>
+  <li> <a href="#Strany">Strany</a>
+  <li> <a href="#Mapy">Mapy</a>
+  <li> <a href="#Poslanci">Poslanci</a>
+  <li> <a href="#end">Kontakt</a>
+ </ul>
+</fieldset>
+
+Data jsou stahována z <a href="https://www.volby.cz/opendata/ps2025/ps2025_opendata.htm" target=_blank>opendata</a>
+na webu ČSÚ <a href="https://www.volby.cz/opendata/opendata.htm" target=_blank>volby.cz/opendata/opendata.htm</a> ...<br>
+
+<ul>
+ <li> Zpracovaná data ke stažení
+   <script>dwLink('Okrsky3.zip','Okrsky3.zip')</script><noscript>Okrsky3.zip</noscript>
+   (5Mb) - jen JSON výstupy pro generování map a další zpracování, volby ps2025 a složka 2021 obsahuje stejný formát pro ps2021 ...<br>
+ <span style="color:gray">(Pokud vám tento formát JSON bez uvozovek kolem názvů hodnot nevyhovuje, viz <a href="__Readme_JSON.txt" target=_blank>__Readme_JSON.txt</a> s postupem "nápravy"...)</span>
+ 
+ <li> Zpracovaná data ke stažení
+   <script>dwLink('Volby2025_data.zip','https://pi-alpha.org/cz/Volby2025/Volby2025_data.zip')</script><noscript>Volby2025_data.zip</noscript>
+   (80Mb) - data, program, mapy, postupy...
+</ul>
+
+<h2 id=Koment>Výsledky voleb 2025 a 2021</h2>
+
+Volby v říjnu 2021 byly na vrcholu Covidové represe, takže Babišovo hnutí ANO tehdy nebylo příliš populární...<br>
+Nikdo ovšem nečekal vlnu lží a hysterické rusofobní nenávisti, kterou spustila pěti-koalice SPOLU <span style="color:gray">(SPOLU=ODS,KDU,TOP09 a k tomu STAN a Piráti dokud nebyli vyhozeni)</span> po vyhrocení
+8 let trvající občanské války na Ukrajině, kdy se Rusko konečně zastalo terorizovaného obyvatelstva Donbasu...<br>
+Volby v říjnu 2025 byly na prahu téměř 3. světové války <span style="color:gray">(zatím ještě oficiálně není...)</span>
+po neúnavných provokacích ze strany NATO a všichni inteligentní a poctiví občané
+již chápali, že podpora nacistické Ukrajiny není ani spravedlivá, ani čestná,
+jenže kvůli masivní propagandě vládních politiků a médií v čele s ČT
+voliči zejména v Praze trvali na vyzbrojování Ukrajiny a podporování ukrajinských migrantů a na provokování Ruska,
+navíc zabralo strašení "komunisty" pro torpédování pro-mírové strany Stačilo...<br>
+Také kauzy jako Dozimetr, Bitcoin, hrozba emisních povolenek z EU, zpackané stavební řízení Pirátů vedly k velké nepopularitě
+vládnoucí koalice 2021-2025, ale jejich očekávané smetení ve volbách nebylo dostatečné...<br>
+
+<h3 id=Porovnani>Porovnání 2025 a 2021</h3>
+
+Mandáty:<br>
+<span style="color:gray">(Sčítáno z psrk.xml s použitím cns.xml, cpp.xml, psrkl.xml)</span><br>
+<br>&nbsp;
+<table border=0>
+  <tr><th style="width:15em">Strana</th><th style="width:8em">2025</th><th style="width:8em">2021</th><td>Poznámka</td></tr>
+  <tr><td>ANO</td><td><b>80</b></td><td>72</td><td></td></tr>
+  <tr><td>SPD</td><td><b>15</b></td><td>20</td><td>Rozpad strany PRO těsně před volbami 2025 poškodil SPD</td></tr>
+  <tr><td>Motoristé <span style="color:gray">(AUTO)</span></td><td><b>13</b></td><td>-</td><td>(nová strana - protest proti omezením z EU)</td></tr>
+  <tr><td colspan=4><hr></td></tr>
+  <tr><td>ODS (SPOLU)</td><td>27</td><td><b>34</b></td><td></td></tr>
+  <tr><td>KDU (SPOLU)</td><td>16</td><td><b>23</b></td><td></td></tr>
+  <tr><td>TOP09 (SPOLU)</td><td>9</td><td><b>14</b></td><td></td></tr>
+  <tr><td>STAN</td><td>22</td><td><b>33</b></td><td>V roce 2021 Piráti+STAN celkem 37 mandátů</td></tr>
+  <tr><td>Piráti</td><td>18</td><td>4</td></tr>
+  <tr><td colspan=4><hr></td></tr>
+  <tr><td>Nová koalice</td><td>108</td><td></td><td>ANO+SPD+Motoristé</td></tr>
+  <tr><td>Stará koalice</td><td></td><td>108 <span style="color:gray">(104)</span></td><td>SPOLU+STAN+Piráti <span style="color:gray">(SPOLU+STAN)</span></td></tr>
+<!--
+  <tr><td></td><td></td><td></td><td></td></tr>
+-->
+</table>
+<br id=Strany>&nbsp;<br>
+
+Procenta a počty hlasů:<br>
+<span style="color:gray">(Sčítáno z <script>dwLink('vysledky.xml','https://www.volby.cz/appdata/ps2025/odata/vysledky.xml')</script><noscript>vysledky.xml</noscript>) 2025 a z <script>dwLink('vysledky.xml','https://www.volby.cz/pls/ps2021/vysledky')</script><noscript>vysledky.xml</noscript> 2021</span><br>
+<br>&nbsp;
+
+<table border=0>
+  <tr><th style="width:15em">Strana</th><th style="width:8em">2025</th><th style="width:8em">2021</th><td>Poznámka</td></tr>
+  <tr><td>Volební účast:</td><td>68.95 <span style="color:gray">(5621717)</span></td> <td>65.43 <span style="color:gray">(5375090)</span></td><td></td></tr>
+  <tr><td colspan=4><hr></td></tr>
+  <tr><th>ANO</th><td>34.51 <span style="color:gray">(1940507)</span></td> <td>27.13 <span style="color:gray">(1458140)</span></td><td>ANO 2011 - Andrej Babiš</td></tr>
+  <tr><th>SPD</th><td>7.78 <span style="color:gray">(437611)</span></td> <td>9.56 <span style="color:gray">(513910)</td><td></td></tr>
+  <tr><th>SPOLU</th><td>23.36 <span style="color:gray">(1313346)</span></td> <td>27.79 <span style="color:gray">(1493905)</td><td>SPOLU (ODS, KDU-ČSL, TOP 09)</td></tr>
+  <tr><th>STAN</th><td>11.23 <span style="color:gray">(631512)</span></td> <td rowspan=2>15.62 <span style="color:gray">(839776)</span></td><td>STAROSTOVÉ A NEZÁVISLÍ - Mafiáni, v roce 2021 Piráti a Starostové</td></tr>
+  <tr><th>Piráti</th><td>8.97 <span style="color:gray">(504537)</span></td> <!--<td> <span style="color:gray">()</span></td>--><td>Česká pirátská strana</td></tr>
+  <tr><th>Motoristé <span style="color:gray">(AUTO)</span></th><td>6.77 <span style="color:gray">(380601)</span></td> <td></td><td><span style="color:gray">(Nová strana)</span></td></tr>
+<!--
+  <tr><th></th><td> <span style="color:gray">()</span></td> <td><span style="color:gray">()</span></td><td></td></tr>
+-->
+  
+  <tr><td colspan=4><hr><br>Těsně propadli:</td></tr>
+  <tr><td>Stačilo!</td><td>4.30 <span style="color:gray">(242031)</span></td> <td></td><td>KSČM a ČSSD (SocDem), Vidlák Sterzik a Kateřina Konečná</td></tr>
+  <tr><td>ČSSD</td><td></td>  <td>4.66 <span style="color:gray">(250397)</span></td> <td>Česká str.sociálně demokrat.</td></tr>
+  <tr><td>KSČM</td><td></td>  <td>3.61 <span style="color:gray">(193817)</span></td> <td>Komunistická str.Čech a Moravy</td></tr>
+  <tr><td>Trikolora Svobodní Soukromníci</td><td></td>  <td>2.76 <span style="color:gray">(148463)</span></td> <td>V roce 2025 součást SPD</td></tr>
+  
+  <tr><td colspan=4><hr><br>Marginální strany, škůdci a vtipálci:</td></tr>
+  
+  <tr><td>VOLNÝ blok</td><td></td>  <td>1.33 <span style="color:gray">(71587)</span></td> <td>(Odloučení z SPD v roce 2021)</td></tr>
+  <tr><td>Přísaha</td><td>1.07 <span style="color:gray">(60503)</span></td> <td>4.68 <span style="color:gray">(251562)</span></td><td>Robert Šlachta</td></tr>
+  <tr><td>Generace</td><td>0.44 <span style="color:gray">(25176)</span></td> <td> <span style="color:gray">(?)</span></td><td></td></tr>
+  <tr><td>Otevřeme ČR normálnímu životu</td><td></td>  <td>0.41 <span style="color:gray">(21804)</span></td> <td></td></tr>
+  <tr><td>Moravané</td><td></td>  <td>0.27 <span style="color:gray">(14285)</span></td> <td></td></tr>
+  <tr><td>ČR1</td><td>0.22 <span style="color:gray">(12455)</span></td> <td></td><td>Česká republika na 1. místě! - Vrábel a Sládek</td></tr>
+  <tr><td>Švýcaři</td><td>0.21 <span style="color:gray">(12097)</span></td> <td>0.31 <span style="color:gray">(16823)</td><td>ŠVÝCARSKÁ DEMOKRACIE</td></tr>
+  <tr><td>Aliance pro budoucnost</td><td></td>  <td>0.21 <span style="color:gray">(11531)</span></td> <td></td></tr>
+  <tr><td>ČSSD (fake)</td><td>0.18 <span style="color:gray">(10263)</span></td> <td> <span style="color:gray">(?)</span></td><td>ČSSD – Česká suverenita sociální demokracie (Paroubek)</td></tr>
+  <tr><td>Hnutí Prameny</td><td></td>  <td>0.16 <span style="color:gray">(8599)</span></td> <td></td></tr>
+  <tr><td>Voluntia</td><td>0.13 <span style="color:gray">(7375)</span></td> <td></td><td></td></tr>
+  <tr><td>Koruna Česká</td><td>0.13 <span style="color:gray">(7313)</span></td> <td>0.16 <span style="color:gray">(8635)</span></td><td>Koruna Česká (monarch.str.Čech, Moravy a Slezska)</td></tr>
+  <tr><td>VÝZVA 2025</td><td>0.11 <span style="color:gray">(6338)</span></td> <td></td><td></td></tr>
+  <tr><td>ANS</td><td></td>  <td>0.10 <span style="color:gray">(5167)</span></td> <td>ALIANCE NÁRODNÍCH SIL</td></tr>
+  <tr><td>Jasan</td><td>0.08 <span style="color:gray">(4937)</span></td> <td></td><td>Jasný Signál Nezávislých</td></tr>
+  <tr><td>Rebelové</td><td>0.07 <span style="color:gray">(4185)</span></td> <td></td><td></td></tr>
+  <tr><td>Morav.Zem.</td><td>0.06 <span style="color:gray">(3842)</span></td> <td>0.03 <span style="color:gray">(1648)</span></td><td>Moravské zemské hnutí</td></tr>
+  <tr><td>HOP</td><td>0.06 <span style="color:gray">(3718)</span></td> <td></td><td>Hnutí občanů a podnikatelů</td></tr>
+  <tr><td>SENIOŘI 21</td><td></td>  <td>0.07 <span style="color:gray">(3698)</span></td> <td></td></tr>
+  <tr><td>Volt Česko</td><td>0.06 <span style="color:gray">(3639)</span></td> <td></td><td><span style="color:gray">(asi souvisí s Piráty?)</span></td></tr>
+  <tr><td>Levice</td><td>0.05 <span style="color:gray">(3318)</span></td> <td>0.01 <span style="color:gray">(639)</span></td><td></td></tr>
+  <tr><td>SMS</td><td>0.05 <span style="color:gray">(2881)</span></td> <td></td><td>SMS – Stát Má Sloužit</td></tr>
+  <tr><td>Hnutí Kruh</td><td>0.03 <span style="color:gray">(2209)</span></td> <td></td><td></td></tr>
+  <tr><td>Balbín</td><td>0.01 <span style="color:gray">(612)</span></td> <td></td><td>Balbínova poetická strana</td></tr>
+  <tr><td>Cibulka</td><td>0.00 <span style="color:gray">(429)</span></td> <td>0.01 <span style="color:gray">(586)</span></td><td>Volte Pravý Blok www.cibulka.net - magor Cibulka</td></tr>
+  <tr><td>Urza.cz</td><td>0.00 <span style="color:gray">(282)</span></td> <td>0.13 <span style="color:gray">(6775)</td><td>Urza.cz: Nechceme vaše hlasy - test inteligence voličů?</td></tr>
+</table>
+
+<br>&nbsp;
+<hr>
+<br id=Mapy>&nbsp;<br>
+
+<h2>Mapy</h2>
+<span style="color:gray">(Sčítáno z okrskových dat pst4p.zip/pst4p.xml, a psrkl.json psrk_ext.json pst4.json psvolkr.json pscoco.json do Krouzky.json a Okrsky3.json)</span><br>
+
+<br>&nbsp;<br>
+
+Zobrazit mapy ve formátu:
+<input type=button value="SVG" id=btSvg onclick="return SwitchMaps('SVG',null)"> nebo
+<input type=button value="PNG" id=btPng onclick="return SwitchMaps('PNG',null)">
+v dělení
+<input type=button value="ORP" id=btOrp onclick="return SwitchMaps(null,'ORP')"> nebo
+<input type=button value="Okres" id=btOkr onclick="return SwitchMaps(null,'OKR')">
+<br>
+<br>
+Mapy stran a volební účasti jsou pokud-možno roztažené - černá maximální, bílá minimální - v rámci dané strany...<br>
+SVG mapy při ukázání myší na daný region zobrazí v nápovědě název regionu a procenta...<br>
+
+<br>&nbsp;<br>
+
+<style>span.mapSp{display:inline-block;width:670px;height:430px}</style>
+
+<div id=mapSpace>
+ <noscript>(Zobrazení map vyžaduje Javascript, kvůli robotům...)</noscript>
+ <script>function dwMap(base){dw('<span class="mapSp" data-base="'+base+'">('+base+')</span>')}
+ dw('<table border=0><tr><th>2025</th><th>2021</th></tr>');
+ dw('<tr><td colspan=2>Volební účast:</tr><tr><td>');dwMap('Ucast_2025');dw('</td><td>');dwMap('Ucast_2021');dw('</td></tr><tr><td colspan=2>Strany:</tr>');
+ ['ANO','SPD',['AUTO',null],'SPOLU',['STAN','Pirati+S'],['Pirati',null],'Prisaha',['Stacilo',null]].forEach(function(Str){var s25=Str,s21=Str;if(Array.isArray(Str))s25=Str[0],s21=Str[1];dw('<tr><td>');s25&&dwMap('Strana_'+s25+'_2025_rel');dw('</td><td>');s21&&dwMap('Strana_'+s21+'_2021_rel');dw('</td></tr>')});
+  dw('</table>Porovnání 2025 - 2021 - zelená přírůstek, červená úbytek - v absolutních počtech hlasů:<br><span style="color:gray">(Konstantní škála +20000 zelená, -20000 červená)</span><br>');
+ ['ANO','SPD','SPOLU',['Pirati+S','STAN'],'Prisaha'].forEach(function(Str){var s25=Str,s21=Str;if(Array.isArray(Str))s25=Str[0],s21=Str[1];dwMap('Strana_'+s25+'_'+s21+'_2025-2021');dw('<br>')});
+ ['StranaGrp_KSCM,CSSD_Stacilo_2025-2021','StranaGrp_Pirati+S_Pirati,STAN_2025-2021'].forEach(function(B){dwMap(B);dw('<br>')});
+ </script>
+</div>
+
+<script>
+function SwitchMaps(ftyp,atyp){
+ var S=Lst();
+ ftyp=ftyp||S.getItem('mapType')||'SVG';
+ atyp=atyp||S.getItem('mapReg')||'ORP';
+ try{S.setItem('mapType',ftyp);S.setItem('mapReg',atyp)}catch(e){}
+ [].map.call(document.getElementsByClassName('mapSp'),function(S){
+  var file=S.getAttribute('data-base');
+  if(!file)return;
+  file=atyp+'_'+file;
+  S.innerHTML=(ftyp=='PNG')?'<img src="'+file+'.png" width=670 height=430>':'<object data="'+file+'.svg" type="image/svg+xml" width="670" height="430">('+file+'.svg)</object>'
+ });
+ [['btSvg',ftyp=='SVG'],['btPng',ftyp=='PNG'],['btOrp',atyp=='ORP'],['btOkr',atyp=='OKR']].forEach(function(A){(document.getElementById(A[0])||{style:{}}).style.fontWeight=A[1]?'bold':'normal'});
+ return!1
+}
+!function(){SwitchMaps(Lst().getItem('mapType')||'SVG')}();
+function Lst(){return localStorage||{getItem:function(){},setItem:function(){}}}
+</script>
+
+<!--
+<span style="color:gray">()</span>
+-->
+
+<br>&nbsp;
+<hr>
+<br id=Poslanci>&nbsp;<br>
+
+<h2>Poslanci</h2>
+
+<script>dw('Třídit tabulku podle: <input type=button id=btpo1 value="původního pořadí" onclick="return poSortTable(1)" style="font-weight:bold"> <input type=button id=btpo2 value="abecedy" onclick="return poSortTable(2)"> <input type=button id=btpo3 value="preferencí" onclick="poSortTable(3)"> , <input type=checkbox checked id=cbPoStrany onchange="return poSortTable()"> <label for=cbPoStrany>po stranách</label> .<br><br>')</script>
+
+<table id=poTable border=0>
+
+<!--
+Command to generate table:
+
+eval.exe -v In=vysledky_251005_0329.json "LCmd(); var X:=Json.ParseFile(In,utf8), Ou:=RSt(); var Nk:=Nna(), Ns:=Nna(), Pons:=Nna(), Zam:=Nna(); X.KRAJ.forEach(#f(K){ Nk[K.CisKraj]:=K.NazKraj }); Json.ParseFile('cns.json',utf8).forEach(#f(S){Ns[S.NStrana*1]:=S.ZKRATKAN8}); Json.ParseFile('psrk_ext.json',utf8).forEach(#f(K){ var Ke; Pons[Ke:=Cat(K.VolKraj,'_',K.KStrana,'_',K.PorCislo)]:=K.ZKRATKAN8; Zam[Ke]:=K.POVOLANI+', '+K.BYDLISTEN; }); X.Cr.Strana.forEach(#f(St){ if(St.Poslanec){ L(Ou,'<tr class=stRow><td colspan=3><b>%s</b></td></tr>',St.NazStr); St.Poslanec.forEach(#f(Po){ var N:=Po.Prijmeni+' '+Po.Jmeno, Ke; if(Po.Titulpred) N:=Cat(N,', ',Po.Titulpred); if(Po.Titulza) N:=Cat(N,', ',Po.TitulZa); L(Ou,'<tr class=poRow><td class=poJm>%s</td> <td></td> <td class=poDet>(%s) <span style=%qcolor:gray%q class=poStat>(%d, %s, %d.)</span> <span style=%qcolor:gray%q class=poZam>(%s)</span></td></tr>', N,Pons[Ke:=Cat(Po.CisKraj,'_',St.Kstrana,'_',Po.PoradoveCislo)],Po.PrednostniHlasy,Nk[Po.CisKraj],Po.PoradoveCislo,Zam[Ke]); }); L(Ou,''); } }); Ou.Seek(0); ViewText(ToUtf(Ou.toString()))"
+
+-->
+
+<tr class=stRow><td colspan=3><b>ANO 2011</b></td></tr>
+<tr class=poRow><td class=poJm>Berkovcová Jana, Mgr.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(3912, Královéhradecký, 1.)</span> <span style="color:gray" class=poZam>(poslankyně PSP ČR, Nové Město nad Metují)</span></td></tr>
+<tr class=poRow><td class=poJm>Metnar Lubomír, Mgr.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(5430, Olomoucký, 1.)</span> <span style="color:gray" class=poZam>(poslanec PSP ČR, Frýdlant nad Ostravicí)</span></td></tr>
+<tr class=poRow><td class=poJm>Volfová Jitka, Ing.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(6040, Liberecký, 1.)</span> <span style="color:gray" class=poZam>(starostka města Česká Lípa, ekonomka, zastupitelka Libereckého kraje, Česká Lípa)</span></td></tr>
+<tr class=poRow><td class=poJm>Kolovratník Martin, Ing.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(6559, Pardubický, 1.)</span> <span style="color:gray" class=poZam>(poslanec Parlamentu ČR, zastupitel statutárního města Pardubice, dopravní inženýr, Pardubice)</span></td></tr>
+<tr class=poRow><td class=poJm>Havlíček Karel, doc. Ing., Ph.D., MBA</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(29147, Hl. m. Praha, 1.)</span> <span style="color:gray" class=poZam>(poslanec PSP ČR, Mníšek pod Brdy)</span></td></tr>
+<tr class=poRow><td class=poJm>Schwarz Bařtipánová Zuzana, Mgr.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(5871, Ústecký, 1.)</span> <span style="color:gray" class=poZam>(Starostka města Bílina, Bílina)</span></td></tr>
+<tr class=poRow><td class=poJm>Plaga Robert, Ing., Ph.D.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(14277, Středočeský, 1.)</span> <span style="color:gray" class=poZam>(vysokoškolský pedagog, Brno)</span></td></tr>
+<tr class=poRow><td class=poJm>Babiš Andrej, Ing.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(72119, Moravskoslezský, 1.)</span> <span style="color:gray" class=poZam>(ekonom, Průhonice)</span></td></tr>
+<tr class=poRow><td class=poJm>Schillerová Alena, JUDr., Ph.D.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(39468, Jihomoravský, 1.)</span> <span style="color:gray" class=poZam>(právnička, poslankyně PSP ČR, Brno)</span></td></tr>
+<tr class=poRow><td class=poJm>Mádlová Ivana, PhDr., Ph.D., MBA</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(4074, Plzeňský, 1.)</span> <span style="color:gray" class=poZam>(poslankyně PSP ČR, Plzeň)</span></td></tr>
+<tr class=poRow><td class=poJm>Vondráček Radek, Mgr.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(14987, Zlínský, 1.)</span> <span style="color:gray" class=poZam>(poslanec PSP ČR, advokát, Kroměříž)</span></td></tr>
+<tr class=poRow><td class=poJm>Oborná Monika, Ing.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(4716, Vysočina, 1.)</span> <span style="color:gray" class=poZam>(poslankyně PSP ČR, Březník)</span></td></tr>
+<tr class=poRow><td class=poJm>Oulehlová Renata</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(4493, Karlovarský, 1.)</span> <span style="color:gray" class=poZam>(poslankyně PSP ČR, místostarostka města Sokolov, Sokolov)</span></td></tr>
+<tr class=poRow><td class=poJm>Vojtěch Adam, Mgr. et Mgr., MHA</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(9564, Jihočeský, 1.)</span> <span style="color:gray" class=poZam>(právník, Včelná)</span></td></tr>
+<tr class=poRow><td class=poJm>Pražák David</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(3888, Liberecký, 2.)</span> <span style="color:gray" class=poZam>(poslanec PSP ČR, zemědělec, místostarosta města Semily, Semily)</span></td></tr>
+<tr class=poRow><td class=poJm>Richter Jan, Mgr.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(4068, Ústecký, 2.)</span> <span style="color:gray" class=poZam>(Poslanec PSP ČR, Chomutov)</span></td></tr>
+<tr class=poRow><td class=poJm>Váňa Josef</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(3054, Karlovarský, 2.)</span> <span style="color:gray" class=poZam>(poslanec PSP ČR, trenér dostihových koní, Chyše)</span></td></tr>
+<tr class=poRow><td class=poJm>Lang Hubert, Mgr. Bc.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(1784, Plzeňský, 2.)</span> <span style="color:gray" class=poZam>(poslanec PSP ČR, vychovatel, pedagog, Bílov)</span></td></tr>
+<tr class=poRow><td class=poJm>Kubíček Roman, Ing., Ph.D., MBA</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(2638, Jihočeský, 2.)</span> <span style="color:gray" class=poZam>(poslanec PSP ČR, České Budějovice)</span></td></tr>
+<tr class=poRow><td class=poJm>Helebrant Tomáš, PhDr., MBA</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(5048, Středočeský, 2.)</span> <span style="color:gray" class=poZam>(poslanec PSP ČR, Dobříš)</span></td></tr>
+<tr class=poRow><td class=poJm>Nacher Patrik, Ing.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(20458, Hl. m. Praha, 2.)</span> <span style="color:gray" class=poZam>(poslanec PSP ČR, Praha)</span></td></tr>
+<tr class=poRow><td class=poJm>Juchelka Aleš, Ing.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(33325, Moravskoslezský, 2.)</span> <span style="color:gray" class=poZam>(poslanec Parlamentu ČR, Ostrava)</span></td></tr>
+<tr class=poRow><td class=poJm>Novák Marek, Mgr., MBA</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(3619, Zlínský, 2.)</span> <span style="color:gray" class=poZam>(poslanec PSP ČR, předseda sportovního klubu, Zlín)</span></td></tr>
+<tr class=poRow><td class=poJm>Žbánek Miroslav, Mgr., MPA</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(7126, Olomoucký, 2.)</span> <span style="color:gray" class=poZam>(primátor statutárního města Olomouc, Olomouc)</span></td></tr>
+<tr class=poRow><td class=poJm>Trojan Václav, MVDr. Ing., Ph.D.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(6355, Jihomoravský, 2.)</span> <span style="color:gray" class=poZam>(vedoucí pěstírny léčebného konopí FNUSA, místostarosta MČ Brno-Židenice, Brno)</span></td></tr>
+<tr class=poRow><td class=poJm>Ryba Drahoslav, genpor. v. v. Ing.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(2863, Vysočina, 2.)</span> <span style="color:gray" class=poZam>(hasič, poslanec PSP ČR, Radostín nad Oslavou)</span></td></tr>
+<tr class=poRow><td class=poJm>Hanzlíková Jana, Mgr.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(3155, Pardubický, 2.)</span> <span style="color:gray" class=poZam>(poslankyně Parlamentu ČR, sociální pedagožka, Pardubice)</span></td></tr>
+<tr class=poRow><td class=poJm>Mašek Jiří, MUDr.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(4724, Královéhradecký, 2.)</span> <span style="color:gray" class=poZam>(poslanec PSP ČR, lékař, Hradec Králové)</span></td></tr>
+<tr class=poRow><td class=poJm>Kott Josef, Ing.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(2026, Vysočina, 3.)</span> <span style="color:gray" class=poZam>(poslanec PSP ČR, Olešná)</span></td></tr>
+<tr class=poRow><td class=poJm>Kupec Martin, JUDr., Ph.D.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(2854, Jihočeský, 3.)</span> <span style="color:gray" class=poZam>(právník a publicista, radní města Milevska, Milevsko)</span></td></tr>
+<tr class=poRow><td class=poJm>Murová Jana, Ing.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(7371, Moravskoslezský, 3.)</span> <span style="color:gray" class=poZam>(starostka Města Albrechtice, Město Albrechtice)</span></td></tr>
+<tr class=poRow><td class=poJm>Malá Taťána, Mgr. Ing.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(11403, Jihomoravský, 3.)</span> <span style="color:gray" class=poZam>(právnička, poslankyně PSP ČR, Lelekovice)</span></td></tr>
+<tr class=poRow><td class=poJm>Bouška Jiří, Ing.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(5183, Středočeský, 3.)</span> <span style="color:gray" class=poZam>(primátor statutárního města Mladá Boleslav, Mladá Boleslav)</span></td></tr>
+<tr class=poRow><td class=poJm>Králíček Robert</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(6325, Hl. m. Praha, 3.)</span> <span style="color:gray" class=poZam>(poslanec PSP ČR, Praha)</span></td></tr>
+<tr class=poRow><td class=poJm>Pastuchová Jana, Mgr.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(3952, Liberecký, 3.)</span> <span style="color:gray" class=poZam>(zdravotnický záchranář, poslankyně PSP ČR, Jablonec nad Nisou)</span></td></tr>
+<tr class=poRow><td class=poJm>Kasal David, MUDr., MHA</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(4316, Pardubický, 3.)</span> <span style="color:gray" class=poZam>(poslanec Parlamentu ČR, primář Dětského a novorozeneckého oddělení v Chrudimi, Chrudim)</span></td></tr>
+<tr class=poRow><td class=poJm>Vrána Petr, Ing.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(4268, Olomoucký, 3.)</span> <span style="color:gray" class=poZam>(primátor statutárního města Přerov, Přerov)</span></td></tr>
+<tr class=poRow><td class=poJm>Peštová Berenika, Ing., Ph.D.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(6222, Ústecký, 3.)</span> <span style="color:gray" class=poZam>(Poslankyně PSP ČR, Most)</span></td></tr>
+<tr class=poRow><td class=poJm>Sadovský Petr, PhDr., MBA</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(2172, Královéhradecký, 3.)</span> <span style="color:gray" class=poZam>(poslanec PSP ČR, Dobruška)</span></td></tr>
+<tr class=poRow><td class=poJm>Stržínek Robert, Mgr.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(5462, Zlínský, 3.)</span> <span style="color:gray" class=poZam>(poslanec PSP ČR, starosta města Valašské Meziříčí, Valašské Meziříčí)</span></td></tr>
+<tr class=poRow><td class=poJm>Záhoř Martin</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(2441, Plzeňský, 3.)</span> <span style="color:gray" class=poZam>(starosta města Stříbro, Stříbro)</span></td></tr>
+<tr class=poRow><td class=poJm>Adámková Věra, prof. MUDr., CSc.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(3690, Hl. m. Praha, 4.)</span> <span style="color:gray" class=poZam>(lékařka, Praha)</span></td></tr>
+<tr class=poRow><td class=poJm>Bureš František, Mgr.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(4516, Středočeský, 4.)</span> <span style="color:gray" class=poZam>(statutární náměstek města Kladna, Kladno)</span></td></tr>
+<tr class=poRow><td class=poJm>Tureček Karel, Ing.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(1741, Jihočeský, 4.)</span> <span style="color:gray" class=poZam>(poslanec PSP ČR, Chýnov)</span></td></tr>
+<tr class=poRow><td class=poJm>Růžička Pavel, Ing.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(2882, Ústecký, 4.)</span> <span style="color:gray" class=poZam>(Poslanec PSP ČR, Postoloprty)</span></td></tr>
+<tr class=poRow><td class=poJm>Doksanský Denis</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(2055, Královéhradecký, 4.)</span> <span style="color:gray" class=poZam>(ředitel Sion škol SŠ, ZŠ, MŠ a DDM, Hradec Králové)</span></td></tr>
+<tr class=poRow><td class=poJm>Klčová Jiřina</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(1871, Pardubický, 4.)</span> <span style="color:gray" class=poZam>(náměstkyně primátora statutárního města Pardubice, Pardubice)</span></td></tr>
+<tr class=poRow><td class=poJm>Vopěnka Otto, Ing.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(1282, Vysočina, 4.)</span> <span style="color:gray" class=poZam>(náměstek hejtmana Kraje Vysočina, Ledeč nad Sázavou)</span></td></tr>
+<tr class=poRow><td class=poJm>Pařil Patrik, Mgr.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(3712, Jihomoravský, 4.)</span> <span style="color:gray" class=poZam>(podnikatel, 1. místostarosta města Pohořelice, Pohořelice)</span></td></tr>
+<tr class=poRow><td class=poJm>Faltýnek Jaroslav, Ing.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(4583, Olomoucký, 4.)</span> <span style="color:gray" class=poZam>(poslanec PSP ČR, Prostějov)</span></td></tr>
+<tr class=poRow><td class=poJm>Hubíková Monika</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(2512, Zlínský, 4.)</span> <span style="color:gray" class=poZam>(místostarostka města Slavičín, Slavičín)</span></td></tr>
+<tr class=poRow><td class=poJm>Hendrych Igor, PhDr., Ph.D.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(5462, Moravskoslezský, 4.)</span> <span style="color:gray" class=poZam>(poslanec Parlamentu ČR, vysokoškolský pedagog, Opava)</span></td></tr>
+<tr class=poRow><td class=poJm>Rázga Barbora, Mgr., LL.M.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(1236, Hl. m. Praha, 5.)</span> <span style="color:gray" class=poZam>(zastupitelka hl. m. Prahy, podnikatelka, Praha)</span></td></tr>
+<tr class=poRow><td class=poJm>Kowanda Petr, Bc.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(3575, Středočeský, 5.)</span> <span style="color:gray" class=poZam>(místostarosta města Mělníka, Mělník)</span></td></tr>
+<tr class=poRow><td class=poJm>Strýček Jiří, Ing.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(1745, Moravskoslezský, 5.)</span> <span style="color:gray" class=poZam>(poslanec Parlamentu ČR, Nový Jičín)</span></td></tr>
+<tr class=poRow><td class=poJm>Bartoň Pavel, Mgr.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(2887, Zlínský, 5.)</span> <span style="color:gray" class=poZam>(místostarosta města Vsetín, Vsetín)</span></td></tr>
+<tr class=poRow><td class=poJm>Dražilová Lenka, Mgr., MBA</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(2787, Jihomoravský, 5.)</span> <span style="color:gray" class=poZam>(1. místostarostka města Blanska, poslankyně PSP ČR, Blansko)</span></td></tr>
+<tr class=poRow><td class=poJm>Fialová Eva, Ing.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(4054, Ústecký, 5.)</span> <span style="color:gray" class=poZam>(Poslankyně PSP ČR, Ústí nad Labem)</span></td></tr>
+<tr class=poRow><td class=poJm>Babka Ondřej, Ing.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(2024, Jihočeský, 5.)</span> <span style="color:gray" class=poZam>(poslanec PSP ČR, Husinec)</span></td></tr>
+<tr class=poRow><td class=poJm>Blažej Drahomír, Ing., MBA</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(2766, Středočeský, 6.)</span> <span style="color:gray" class=poZam>(dopravní pilot, Čáslav)</span></td></tr>
+<tr class=poRow><td class=poJm>Ožanová Zuzana, Ing.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(4088, Moravskoslezský, 6.)</span> <span style="color:gray" class=poZam>(poslankyně Parlamentu ČR, Ostrava)</span></td></tr>
+<tr class=poRow><td class=poJm>Outrata Pavel, Mgr.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(2192, Jihomoravský, 6.)</span> <span style="color:gray" class=poZam>(podnikatel, zastupitel města Brna, Brno)</span></td></tr>
+<tr class=poRow><td class=poJm>Kohoutek Tomáš, Mgr., MBA</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(2639, Ústecký, 6.)</span> <span style="color:gray" class=poZam>(Poslanec PSP ČR, Děčín)</span></td></tr>
+<tr class=poRow><td class=poJm>Wenzl Lubomír, Mgr. Ing.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(1743, Jihomoravský, 7.)</span> <span style="color:gray" class=poZam>(zastupitel obce Drnovice, poslanec PSP ČR, Drnovice)</span></td></tr>
+<tr class=poRow><td class=poJm>Brázdil Milan, MUDr.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(6669, Olomoucký, 7.)</span> <span style="color:gray" class=poZam>(lékař záchranné služby Olomouckého kraje, poslanec PSP ČR, Olomouc)</span></td></tr>
+<tr class=poRow><td class=poJm>Ratiborský Michal, PhDr.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(2310, Moravskoslezský, 7.)</span> <span style="color:gray" class=poZam>(poslanec Parlamentu ČR, Krnov)</span></td></tr>
+<tr class=poRow><td class=poJm>Petrtýl František, Ing.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(2044, Středočeský, 7.)</span> <span style="color:gray" class=poZam>(poslanec PSP ČR, Mladá Boleslav)</span></td></tr>
+<tr class=poRow><td class=poJm>Fridrich Stanislav, Ing.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(814, Moravskoslezský, 8.)</span> <span style="color:gray" class=poZam>(poslanec Parlamentu ČR, Nižní Lhoty)</span></td></tr>
+<tr class=poRow><td class=poJm>Štolpa David</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(2330, Jihomoravský, 8.)</span> <span style="color:gray" class=poZam>(podnikatel, poslanec PSP ČR, Znojmo)</span></td></tr>
+<tr class=poRow><td class=poJm>Válková Helena, prof. JUDr., CSc.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(10903, Středočeský, 8.)</span> <span style="color:gray" class=poZam>(vysokoškolská profesorka, poslankyně PSP ČR, Praha)</span></td></tr>
+<tr class=poRow><td class=poJm>Janulík Miloslav, MUDr.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(3616, Jihomoravský, 9.)</span> <span style="color:gray" class=poZam>(gynekolog a porodník, poslanec PSP ČR, Valtice)</span></td></tr>
+<tr class=poRow><td class=poJm>Samaš Miroslav</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(1067, Středočeský, 9.)</span> <span style="color:gray" class=poZam>(poslanec PSP ČR, Nový Dům)</span></td></tr>
+<tr class=poRow><td class=poJm>Gajdová Karin, Ing., Ph.D.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(2966, Moravskoslezský, 9.)</span> <span style="color:gray" class=poZam>(vysokoškolský pedagog, předseda představenstva letiště, Ludgeřovice)</span></td></tr>
+<tr class=poRow><td class=poJm>Kolek Vladimír</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(2225, Moravskoslezský, 10.)</span> <span style="color:gray" class=poZam>(náměstek primátora statutárního města Karviná, Karviná)</span></td></tr>
+<tr class=poRow><td class=poJm>Svoboda Jiří, Bc.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(2069, Moravskoslezský, 11.)</span> <span style="color:gray" class=poZam>(podnikatel, radní městského obvodu Ostrava - Poruba, Ostrava)</span></td></tr>
+<tr class=poRow><td class=poJm>Kubis Petr, Mgr.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(3489, Karlovarský, 14.)</span> <span style="color:gray" class=poZam>(starosta města Sokolov, náměstek hejtmanky Karlovarského kraje, Sokolov)</span></td></tr>
+<tr class=poRow><td class=poJm>Zarzycký Roman, Mgr.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(12103, Plzeňský, 19.)</span> <span style="color:gray" class=poZam>(primátor Statutárního města Plzně, Plzeň)</span></td></tr>
+<tr class=poRow><td class=poJm>Farhan Kamal, MUDr.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(10401, Plzeňský, 20.)</span> <span style="color:gray" class=poZam>(hejtman Plzeňského kraje, lékař, Plzeň)</span></td></tr>
+<tr class=poRow><td class=poJm>Okleštěk Ladislav</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(9347, Olomoucký, 23.)</span> <span style="color:gray" class=poZam>(hejtman Olomouckého kraje, Prostějov)</span></td></tr>
+<tr class=poRow><td class=poJm>Brabec Richard, Mgr.</td> <td></td> <td class=poDet>(ANO) <span style="color:gray" class=poStat>(9184, Ústecký, 26.)</span> <span style="color:gray" class=poZam>(Hejtman Ústeckého kraje, Malíč)</span></td></tr>
+
+<tr class=stRow><td colspan=3><br><b>Svoboda a přímá demokracie (SPD)</b></td></tr>
+<tr class=poRow><td class=poJm>Šichtařová Markéta, Ing.</td> <td></td> <td class=poDet>(SPD) <span style="color:gray" class=poStat>(9329, Hl. m. Praha, 1.)</span> <span style="color:gray" class=poZam>(ekonomka, spisovatelka, komentátorka, ředitelka poradenské a investiční společnosti, Praha)</span></td></tr>
+<tr class=poRow><td class=poJm>Okamura Tomio</td> <td></td> <td class=poDet>(SPD) <span style="color:gray" class=poStat>(12333, Středočeský, 1.)</span> <span style="color:gray" class=poZam>(poslanec, předseda hnutí SPD, Praha)</span></td></tr>
+<tr class=poRow><td class=poJm>Rajchl Jindřich, JUDr.</td> <td></td> <td class=poDet>(SPD) <span style="color:gray" class=poStat>(14270, Moravskoslezský, 1.)</span> <span style="color:gray" class=poZam>(předseda strany PRO, advokát, Hradec Králové)</span></td></tr>
+<tr class=poRow><td class=poJm>Majerová Zuzana</td> <td></td> <td class=poDet>(SPD) <span style="color:gray" class=poStat>(3259, Zlínský, 1.)</span> <span style="color:gray" class=poZam>(pedagog, překladatel, předsedkyně strany Trikolora, Bukovany)</span></td></tr>
+<tr class=poRow><td class=poJm>Fiala Radim, Ing.</td> <td></td> <td class=poDet>(SPD) <span style="color:gray" class=poStat>(5094, Olomoucký, 1.)</span> <span style="color:gray" class=poZam>(poslanec, krajský zastupitel, Prostějov)</span></td></tr>
+<tr class=poRow><td class=poJm>Vondráček Libor, Mgr.</td> <td></td> <td class=poDet>(SPD) <span style="color:gray" class=poStat>(5387, Jihočeský, 1.)</span> <span style="color:gray" class=poZam>(předseda strany Svobodní, právník zaměřující se na ústavní a evropské právo, Jindřichův Hradec)</span></td></tr>
+<tr class=poRow><td class=poJm>Pošarová Marie, Ing. Bc.</td> <td></td> <td class=poDet>(SPD) <span style="color:gray" class=poStat>(2316, Plzeňský, 1.)</span> <span style="color:gray" class=poZam>(poslankyně, ekonomka v automobilovém průmyslu, Klatovy)</span></td></tr>
+<tr class=poRow><td class=poJm>Foldyna Jaroslav</td> <td></td> <td class=poDet>(SPD) <span style="color:gray" class=poStat>(7197, Ústecký, 1.)</span> <span style="color:gray" class=poZam>(poslanec, krajský zastupitel, Děčín)</span></td></tr>
+<tr class=poRow><td class=poJm>Hrnčíř Jan, PhDr. Ing. Mgr., MBA, LL.M.</td> <td></td> <td class=poDet>(SPD) <span style="color:gray" class=poStat>(1221, Pardubický, 1.)</span> <span style="color:gray" class=poZam>(ekonom, poslanec, Blansko)</span></td></tr>
+<tr class=poRow><td class=poJm>Koten Radek</td> <td></td> <td class=poDet>(SPD) <span style="color:gray" class=poStat>(1481, Vysočina, 1.)</span> <span style="color:gray" class=poZam>(poslanec, krajský zastupitel, zastupitel městyse Vojnův Městec, Vojnův Městec)</span></td></tr>
+<tr class=poRow><td class=poJm>Ševčík Miroslav, doc. Ing., CSc.</td> <td></td> <td class=poDet>(SPD) <span style="color:gray" class=poStat>(10439, Jihomoravský, 1.)</span> <span style="color:gray" class=poZam>(ekonom, vysokoškolský pedagog, Brno)</span></td></tr>
+<tr class=poRow><td class=poJm>Němcová Irena, Ing.</td> <td></td> <td class=poDet>(SPD) <span style="color:gray" class=poStat>(1280, Královéhradecký, 2.)</span> <span style="color:gray" class=poZam>(ekonomka, středoškolská učitelka, zastupitelka města Hradec Králové, Hradec Králové)</span></td></tr>
+<tr class=poRow><td class=poJm>Šafránková Lucie, Bc.</td> <td></td> <td class=poDet>(SPD) <span style="color:gray" class=poStat>(4556, Jihomoravský, 2.)</span> <span style="color:gray" class=poZam>(poslankyně, Brno)</span></td></tr>
+<tr class=poRow><td class=poJm>Síla Jan, MUDr.</td> <td></td> <td class=poDet>(SPD) <span style="color:gray" class=poStat>(2799, Moravskoslezský, 2.)</span> <span style="color:gray" class=poZam>(poslanec, neurochirurg, krajský zastupitel, Ostrava)</span></td></tr>
+<tr class=poRow><td class=poJm>Doležal Tomáš, Ing. Mgr.</td> <td></td> <td class=poDet>(SPD) <span style="color:gray" class=poStat>(3474, Středočeský, 3.)</span> <span style="color:gray" class=poZam>(ekonom, politolog, krajský zastupitel, odborný mluvčí SPD pro oblast sociální politiky, člen vedení spolku Svatopluk, Kamenice)</span></td></tr>
+
+<tr class=stRow><td colspan=3><br><b>Motoristé sobě</b></td></tr>
+<tr class=poRow><td class=poJm>Šťastný Boris, MUDr., MBA, LL.M.</td> <td></td> <td class=poDet>(AUTO) <span style="color:gray" class=poStat>(4586, Hl. m. Praha, 1.)</span> <span style="color:gray" class=poZam>(lékař, zakladatel největší sítě domovů pečujících o seniory a nemocné s Alzheimerovou chorobou v České republice, Praha)</span></td></tr>
+<tr class=poRow><td class=poJm>Turek Filip, Mgr.</td> <td></td> <td class=poDet>(AUTO) <span style="color:gray" class=poStat>(20232, Středočeský, 1.)</span> <span style="color:gray" class=poZam>(poslanec Evropského parlamentu, Praha)</span></td></tr>
+<tr class=poRow><td class=poJm>Vesecká Renata, JUDr.</td> <td></td> <td class=poDet>(AUTO) <span style="color:gray" class=poStat>(2226, Královéhradecký, 1.)</span> <span style="color:gray" class=poZam>(advokátka, bývalá nejvyšší státní zástupkyně, Brno)</span></td></tr>
+<tr class=poRow><td class=poJm>Krejčí Miroslav, Ing.</td> <td></td> <td class=poDet>(AUTO) <span style="color:gray" class=poStat>(1383, Jihočeský, 1.)</span> <span style="color:gray" class=poZam>(krizový manažer v oblasti školství, Letohrad)</span></td></tr>
+<tr class=poRow><td class=poJm>Klempíř Oto</td> <td></td> <td class=poDet>(AUTO) <span style="color:gray" class=poStat>(1821, Plzeňský, 1.)</span> <span style="color:gray" class=poZam>(marketér, hudebník, politický komentátor, Roztoky)</span></td></tr>
+<tr class=poRow><td class=poJm>Pikora Vladimír, Ing., Ph.D.</td> <td></td> <td class=poDet>(AUTO) <span style="color:gray" class=poStat>(2890, Ústecký, 1.)</span> <span style="color:gray" class=poZam>(ekonom, Praha)</span></td></tr>
+<tr class=poRow><td class=poJm>Gregor Matěj, Bc.</td> <td></td> <td class=poDet>(AUTO) <span style="color:gray" class=poStat>(8340, Moravskoslezský, 1.)</span> <span style="color:gray" class=poZam>(zastupitel Ostrava - Vítkovice, historik, učitel a soukromý lektor, Ostrava)</span></td></tr>
+<tr class=poRow><td class=poJm>Krňanský Vojtěch, Ing.</td> <td></td> <td class=poDet>(AUTO) <span style="color:gray" class=poStat>(2744, Pardubický, 1.)</span> <span style="color:gray" class=poZam>(starosta města Chrast, dobrovolný hasič, Chrast)</span></td></tr>
+<tr class=poRow><td class=poJm>Beran Karel, Ing.</td> <td></td> <td class=poDet>(AUTO) <span style="color:gray" class=poStat>(943, Vysočina, 1.)</span> <span style="color:gray" class=poZam>(diplomat, Brandýsek)</span></td></tr>
+<tr class=poRow><td class=poJm>Macinka Petr, Mgr.</td> <td></td> <td class=poDet>(AUTO) <span style="color:gray" class=poStat>(6483, Jihomoravský, 1.)</span> <span style="color:gray" class=poZam>(předseda politické strany Motoristé sobě, manažer, politolog, Praha)</span></td></tr>
+<tr class=poRow><td class=poJm>Sedláčková Gabriela</td> <td></td> <td class=poDet>(AUTO) <span style="color:gray" class=poStat>(2529, Olomoucký, 1.)</span> <span style="color:gray" class=poZam>(manažerka ve Společnosti pro obranu svobody projevu, publicistka, moderátorka, Praha)</span></td></tr>
+<tr class=poRow><td class=poJm>Barták Jiří, Mgr.</td> <td></td> <td class=poDet>(AUTO) <span style="color:gray" class=poStat>(1048, Zlínský, 1.)</span> <span style="color:gray" class=poZam>(pedagog, Praha)</span></td></tr>
+<tr class=poRow><td class=poJm>Červený Igor, Mgr.</td> <td></td> <td class=poDet>(AUTO) <span style="color:gray" class=poStat>(2654, Středočeský, 2.)</span> <span style="color:gray" class=poZam>(vysokoškolský pedagog, specialista na digitalizaci a transfer, Bobnice)</span></td></tr>
+
+<tr class=stRow><td colspan=3><br><b>SPOLU (ODS, KDU-ČSL, TOP 09)</b></td></tr>
+<tr class=poRow><td class=poJm>Výborný Marek, Mgr.</td> <td></td> <td class=poDet>(KDU-ČSL) <span style="color:gray" class=poStat>(9136, Pardubický, 1.)</span> <span style="color:gray" class=poZam>(ministr zemědělství, Heřmanův Městec)</span></td></tr>
+<tr class=poRow><td class=poJm>Jurečka Marian, Ing.</td> <td></td> <td class=poDet>(KDU-ČSL) <span style="color:gray" class=poStat>(9907, Olomoucký, 1.)</span> <span style="color:gray" class=poZam>(ministr práce a sociálních věcí, zemědělec, Rokytnice)</span></td></tr>
+<tr class=poRow><td class=poJm>Havel Matěj Ondřej, Mgr., Ph.D.</td> <td></td> <td class=poDet>(TOP 09) <span style="color:gray" class=poStat>(8178, Královéhradecký, 1.)</span> <span style="color:gray" class=poZam>(poslanec PČR, bývalý ředitel Gymnázia J. K. Tyla v Hradci Králové, Hradec Králové)</span></td></tr>
+<tr class=poRow><td class=poJm>Decroix Eva, Ph.D., MBA, MPA</td> <td></td> <td class=poDet>(ODS) <span style="color:gray" class=poStat>(11492, Vysočina, 1.)</span> <span style="color:gray" class=poZam>(ministryně, poslankyně PČR, advokátka, zapsaná mediátorka, Jihlava)</span></td></tr>
+<tr class=poRow><td class=poJm>Kučera Michal, Ing.</td> <td></td> <td class=poDet>(TOP 09) <span style="color:gray" class=poStat>(3100, Ústecký, 1.)</span> <span style="color:gray" class=poZam>(poslanec PČR, Louny)</span></td></tr>
+<tr class=poRow><td class=poJm>Bureš Jan, Ing., DBA</td> <td></td> <td class=poDet>(ODS) <span style="color:gray" class=poStat>(1711, Karlovarský, 1.)</span> <span style="color:gray" class=poZam>(poslanec PČR, Ostrov)</span></td></tr>
+<tr class=poRow><td class=poJm>Baxa Martin, Mgr.</td> <td></td> <td class=poDet>(ODS) <span style="color:gray" class=poStat>(6607, Plzeňský, 1.)</span> <span style="color:gray" class=poZam>(ministr kultury, středoškolský učitel, Plzeň)</span></td></tr>
+<tr class=poRow><td class=poJm>Fiala Petr, prof. PhDr., Ph.D., LL.M.</td> <td></td> <td class=poDet>(ODS) <span style="color:gray" class=poStat>(37996, Jihomoravský, 1.)</span> <span style="color:gray" class=poZam>(předseda vlády, univerzitní profesor a emeritní rektor Masarykovy univerzity, Brno)</span></td></tr>
+<tr class=poRow><td class=poJm>Bauer Jan, Ing.</td> <td></td> <td class=poDet>(ODS) <span style="color:gray" class=poStat>(6166, Jihočeský, 1.)</span> <span style="color:gray" class=poZam>(starosta města Prachatice, poslanec PČR, Prachatice)</span></td></tr>
+<tr class=poRow><td class=poJm>Kupka Martin, Mgr.</td> <td></td> <td class=poDet>(ODS) <span style="color:gray" class=poStat>(34141, Středočeský, 1.)</span> <span style="color:gray" class=poZam>(ministr dopravy, Líbeznice)</span></td></tr>
+<tr class=poRow><td class=poJm>Černochová Jana, Mgr.</td> <td></td> <td class=poDet>(ODS) <span style="color:gray" class=poStat>(30220, Hl. m. Praha, 1.)</span> <span style="color:gray" class=poZam>(ministryně obrany České republiky, Praha)</span></td></tr>
+<tr class=poRow><td class=poJm>Ženíšek Marek, PhDr., Ph.D.</td> <td></td> <td class=poDet>(TOP 09) <span style="color:gray" class=poStat>(6333, Plzeňský, 2.)</span> <span style="color:gray" class=poZam>(ministr pro vědu, výzkum a inovace, Plzeň)</span></td></tr>
+<tr class=poRow><td class=poJm>Činčila Benjamin, Bc.</td> <td></td> <td class=poDet>(KDU-ČSL) <span style="color:gray" class=poStat>(7531, Vysočina, 2.)</span> <span style="color:gray" class=poZam>(ekonom, hlavní analytik MPSV a nadšený hokejista, Sedletín)</span></td></tr>
+<tr class=poRow><td class=poJm>Hladík Petr, Mgr.</td> <td></td> <td class=poDet>(KDU-ČSL) <span style="color:gray" class=poStat>(24235, Jihomoravský, 2.)</span> <span style="color:gray" class=poZam>(ministr životního prostředí, Brno)</span></td></tr>
+<tr class=poRow><td class=poJm>Brzesková Monika, Mgr.</td> <td></td> <td class=poDet>(KDU-ČSL) <span style="color:gray" class=poStat>(26499, Moravskoslezský, 2.)</span> <span style="color:gray" class=poZam>(starostka, Kravaře)</span></td></tr>
+<tr class=poRow><td class=poJm>Sokol Petr, PhDr., Ph.D.</td> <td></td> <td class=poDet>(ODS) <span style="color:gray" class=poStat>(7433, Olomoucký, 2.)</span> <span style="color:gray" class=poZam>(vysokoškolský učitel, politický geograf, doktorand na PF Univerzity Palackého v Olomouci, Prostějov)</span></td></tr>
+<tr class=poRow><td class=poJm>Teleky Róbert, MUDr., MBA</td> <td></td> <td class=poDet>(KDU-ČSL) <span style="color:gray" class=poStat>(7918, Zlínský, 2.)</span> <span style="color:gray" class=poZam>(poslanec PČR, lékař chirurg, Vsetín)</span></td></tr>
+<tr class=poRow><td class=poJm>Adamec Ivan, Mgr.</td> <td></td> <td class=poDet>(ODS) <span style="color:gray" class=poStat>(5445, Královéhradecký, 2.)</span> <span style="color:gray" class=poZam>(poslanec a předseda Hospodářského výboru PČR, Trutnov)</span></td></tr>
+<tr class=poRow><td class=poJm>Skopeček Jan, Ing. et Ing., Ph.D.</td> <td></td> <td class=poDet>(ODS) <span style="color:gray" class=poStat>(16289, Středočeský, 2.)</span> <span style="color:gray" class=poZam>(ekonom, místopředseda Poslanecké sněmovny Parlamentu ČR, Hořovice)</span></td></tr>
+<tr class=poRow><td class=poJm>Haas Karel, Mgr.</td> <td></td> <td class=poDet>(ODS) <span style="color:gray" class=poStat>(7418, Pardubický, 2.)</span> <span style="color:gray" class=poZam>(právník, zastupitel města Pardubice, poslanec PČR, celoživotní orientační běžec - sportovec, dobrovolný trenér mládeže a funkcionář, Pardubice)</span></td></tr>
+<tr class=poRow><td class=poJm>Pospíšil Jiří, JUDr.</td> <td></td> <td class=poDet>(TOP 09) <span style="color:gray" class=poStat>(24552, Hl. m. Praha, 2.)</span> <span style="color:gray" class=poZam>(právník, Praha)</span></td></tr>
+<tr class=poRow><td class=poJm>Lipavský Jan</td> <td></td> <td class=poDet>(ODS) <span style="color:gray" class=poStat>(62728, Hl. m. Praha, 3.)</span> <span style="color:gray" class=poZam>(ministr zahraničních věcí České republiky, Praha)</span></td></tr>
+<tr class=poRow><td class=poJm>Němečková Crkvenjaš Zdenka, MUDr., MBA</td> <td></td> <td class=poDet>(ODS) <span style="color:gray" class=poStat>(13822, Moravskoslezský, 3.)</span> <span style="color:gray" class=poZam>(lékařka popáleninového centra FN Ostrava, Ostrava)</span></td></tr>
+<tr class=poRow><td class=poJm>Pláteník Václav, Mgr., M.A., LL.M.</td> <td></td> <td class=poDet>(KDU-ČSL) <span style="color:gray" class=poStat>(7186, Zlínský, 3.)</span> <span style="color:gray" class=poZam>(náměstek ministra zdravotnictví, místopředseda KDU-ČSL, Valašské Meziříčí)</span></td></tr>
+<tr class=poRow><td class=poJm>Bartošek Jan, Ing., MPA</td> <td></td> <td class=poDet>(KDU-ČSL) <span style="color:gray" class=poStat>(6780, Jihočeský, 3.)</span> <span style="color:gray" class=poZam>(poslanec PČR, terapeut, Dačice)</span></td></tr>
+<tr class=poRow><td class=poJm>Válek Vlastimil, prof. MUDr., CSc., MBA, EBIR</td> <td></td> <td class=poDet>(TOP 09) <span style="color:gray" class=poStat>(14192, Jihomoravský, 3.)</span> <span style="color:gray" class=poZam>(ministr zdravotnictví, poslanec PČR, lékař radiolog, Brno)</span></td></tr>
+<tr class=poRow><td class=poJm>Jakob Jan</td> <td></td> <td class=poDet>(TOP 09) <span style="color:gray" class=poStat>(8780, Středočeský, 3.)</span> <span style="color:gray" class=poZam>(předseda poslaneckého klubu TOP 09, člen Výboru pro mediální záležitosti Poslanecké sněmovny Parlamentu ČR, bývalý starosta Roztok, Roztoky)</span></td></tr>
+<tr class=poRow><td class=poJm>Turek Libor, Ing., Ph.D.</td> <td></td> <td class=poDet>(ODS) <span style="color:gray" class=poStat>(3143, Ústecký, 3.)</span> <span style="color:gray" class=poZam>(poslanec PČR, Ústí nad Labem)</span></td></tr>
+<tr class=poRow><td class=poJm>Munzar Vojtěch, Ing.</td> <td></td> <td class=poDet>(ODS) <span style="color:gray" class=poStat>(6928, Středočeský, 4.)</span> <span style="color:gray" class=poZam>(ekonom, poslanec Parlamentu ČR, Kladno)</span></td></tr>
+<tr class=poRow><td class=poJm>Benda Marek</td> <td></td> <td class=poDet>(ODS) <span style="color:gray" class=poStat>(11876, Hl. m. Praha, 4.)</span> <span style="color:gray" class=poZam>(politik, Praha)</span></td></tr>
+<tr class=poRow><td class=poJm>Niemiec Bohuslav, Ing.</td> <td></td> <td class=poDet>(KDU-ČSL) <span style="color:gray" class=poStat>(10779, Moravskoslezský, 4.)</span> <span style="color:gray" class=poZam>(náměstek primátora, středoškolský učitel, Havířov)</span></td></tr>
+<tr class=poRow><td class=poJm>Slovák Štěpán, Mgr.</td> <td></td> <td class=poDet>(ODS) <span style="color:gray" class=poStat>(7284, Zlínský, 4.)</span> <span style="color:gray" class=poZam>(právník, Luhačovice)</span></td></tr>
+<tr class=poRow><td class=poJm>Blišťanová Zdeňka, Mgr. Bc.</td> <td></td> <td class=poDet>(TOP 09) <span style="color:gray" class=poStat>(7612, Olomoucký, 4.)</span> <span style="color:gray" class=poZam>(starostka Jeseníku, krajská zastupitelka, Jeseník)</span></td></tr>
+<tr class=poRow><td class=poJm>Bačíková Jana, Ing., MBA</td> <td></td> <td class=poDet>(ODS) <span style="color:gray" class=poStat>(11109, Jihomoravský, 4.)</span> <span style="color:gray" class=poZam>(poslankyně PČR, starostka obce Vacenovice, Vacenovice)</span></td></tr>
+<tr class=poRow><td class=poJm>Schrek Vítězslav, Mgr.</td> <td></td> <td class=poDet>(ODS) <span style="color:gray" class=poStat>(9239, Vysočina, 4.)</span> <span style="color:gray" class=poZam>(manažer v energetice, pedagog, Jihlava)</span></td></tr>
+<tr class=poRow><td class=poJm>Zuna Michal</td> <td></td> <td class=poDet>(TOP 09) <span style="color:gray" class=poStat>(7653, Hl. m. Praha, 5.)</span> <span style="color:gray" class=poZam>(poslanec PČR, místostarosta MČ Praha 2, Praha)</span></td></tr>
+<tr class=poRow><td class=poJm>Kršková Marie, Ing. Mgr.</td> <td></td> <td class=poDet>(KDU-ČSL) <span style="color:gray" class=poStat>(6543, Pardubický, 5.)</span> <span style="color:gray" class=poZam>(starostka Orlického Podhůří, Orlické Podhůří)</span></td></tr>
+<tr class=poRow><td class=poJm>Havránek Jiří, Ing.</td> <td></td> <td class=poDet>(ODS) <span style="color:gray" class=poStat>(9560, Středočeský, 5.)</span> <span style="color:gray" class=poZam>(ekonom, poslanec Parlamentu ČR, Bratčice)</span></td></tr>
+<tr class=poRow><td class=poJm>Janda Jakub, Mgr.</td> <td></td> <td class=poDet>(ODS) <span style="color:gray" class=poStat>(11350, Moravskoslezský, 5.)</span> <span style="color:gray" class=poZam>(poslanec PČR, bývalý reprezentant ve skocích na lyžích, Frenštát pod Radhoštěm)</span></td></tr>
+<tr class=poRow><td class=poJm>Horák Jiří, PhDr., Ph.D.</td> <td></td> <td class=poDet>(KDU-ČSL) <span style="color:gray" class=poStat>(15196, Jihomoravský, 5.)</span> <span style="color:gray" class=poZam>(poslanec PČR, starosta města Bučovice, Bučovice)</span></td></tr>
+<tr class=poRow><td class=poJm>Bartošová Lucie, Bc.</td> <td></td> <td class=poDet>(ODS) <span style="color:gray" class=poStat>(3638, Liberecký, 5.)</span> <span style="color:gray" class=poZam>(studentka, podnikatelská činnost v oboru marketingu, členka Mladé ODS, Frýdlant)</span></td></tr>
+<tr class=poRow><td class=poJm>Vojáček Jiří, Mgr.</td> <td></td> <td class=poDet>(KDU-ČSL) <span style="color:gray" class=poStat>(5685, Královéhradecký, 5.)</span> <span style="color:gray" class=poZam>(ředitel Biskupského gymnázia Hradec Králové, Hradec Králové)</span></td></tr>
+<tr class=poRow><td class=poJm>Philipp Tom, MUDr., Ph.D., MBA</td> <td></td> <td class=poDet>(KDU-ČSL) <span style="color:gray" class=poStat>(16478, Hl. m. Praha, 6.)</span> <span style="color:gray" class=poZam>(lékař, přednosta Kliniky revmatologie a rehabilitace 3. LF UK a FTN, poslanec PČR, Praha)</span></td></tr>
+<tr class=poRow><td class=poJm>Langšádlová Helena, Mgr.</td> <td></td> <td class=poDet>(TOP 09) <span style="color:gray" class=poStat>(8480, Středočeský, 6.)</span> <span style="color:gray" class=poZam>(poslankyně Parlamentu ČR, bývalá ministryně pro vědu, výzkum a inovace, bývalá starostka Černošic, Černošice)</span></td></tr>
+<tr class=poRow><td class=poJm>Karpíšek Pavel, Ing. Mgr.</td> <td></td> <td class=poDet>(ODS) <span style="color:gray" class=poStat>(5861, Plzeňský, 6.)</span> <span style="color:gray" class=poZam>(učitel, starosta obce Vejprnice, Vejprnice)</span></td></tr>
+<tr class=poRow><td class=poJm>Hoppe Libor, Mgr.</td> <td></td> <td class=poDet>(ODS) <span style="color:gray" class=poStat>(4767, Jihomoravský, 6.)</span> <span style="color:gray" class=poZam>(místostarosta obce Lipůvka, Lipůvka)</span></td></tr>
+<tr class=poRow><td class=poJm>Zajíčková Renáta, Mgr.</td> <td></td> <td class=poDet>(ODS) <span style="color:gray" class=poStat>(9094, Hl. m. Praha, 7.)</span> <span style="color:gray" class=poZam>(pedagog, Praha)</span></td></tr>
+<tr class=poRow><td class=poJm>Filipovičová Jana, Ing.</td> <td></td> <td class=poDet>(KDU-ČSL) <span style="color:gray" class=poStat>(12970, Jihomoravský, 7.)</span> <span style="color:gray" class=poZam>(starostka obce Hrušky, Hrušky)</span></td></tr>
+<tr class=poRow><td class=poJm>Talíř František, Mgr.</td> <td></td> <td class=poDet>(KDU-ČSL) <span style="color:gray" class=poStat>(7579, Jihočeský, 7.)</span> <span style="color:gray" class=poZam>(náměstek ministra a historik, Zubčice)</span></td></tr>
+<tr class=poRow><td class=poJm>Bendl Petr, Ing.</td> <td></td> <td class=poDet>(ODS) <span style="color:gray" class=poStat>(5363, Středočeský, 7.)</span> <span style="color:gray" class=poZam>(chovatel koní, poslanec Parlamentu ČR, bývalý hejtman Středočeského kraje, Bratronice)</span></td></tr>
+<tr class=poRow><td class=poJm>Žáček Pavel, PhDr., Ph.D.</td> <td></td> <td class=poDet>(ODS) <span style="color:gray" class=poStat>(29500, Hl. m. Praha, 8.)</span> <span style="color:gray" class=poZam>(historik, vysokoškolský pedagog, předseda Výboru pro bezpečnost PČR, zakladatel a první ředitel Ústavu pro studium totalitních režimů a Archivu bezpečnostních složek, Praha)</span></td></tr>
+<tr class=poRow><td class=poJm>Okamura Hayato, Mgr.</td> <td></td> <td class=poDet>(KDU-ČSL) <span style="color:gray" class=poStat>(29782, Hl. m. Praha, 13.)</span> <span style="color:gray" class=poZam>(poslanec PČR, Praha)</span></td></tr>
+
+<tr class=stRow><td colspan=3><br><b>STAROSTOVÉ A NEZÁVISLÍ</b></td></tr>
+<tr class=poRow><td class=poJm>Dvořák Karel, Mgr.</td> <td></td> <td class=poDet>(STAN) <span style="color:gray" class=poStat>(7081, Hl. m. Praha, 1.)</span> <span style="color:gray" class=poZam>(náměstek na Ministerstvu spravedlnosti, právník, Praha)</span></td></tr>
+<tr class=poRow><td class=poJm>Sviták Jan, Ing.</td> <td></td> <td class=poDet>(STAN) <span style="color:gray" class=poStat>(2737, Liberecký, 1.)</span> <span style="color:gray" class=poZam>(náměstek hejtmana pro dopravu, starosta Prysku v letech 2002-2020, Prysk)</span></td></tr>
+<tr class=poRow><td class=poJm>Šebelová Michaela, Mgr.</td> <td></td> <td class=poDet>(STAN) <span style="color:gray" class=poStat>(6921, Moravskoslezský, 1.)</span> <span style="color:gray" class=poZam>(poslankyně Parlamentu ČR, fyzioterapeutka, Kunčice pod Ondřejníkem)</span></td></tr>
+<tr class=poRow><td class=poJm>Olšáková Eliška, Mgr.</td> <td></td> <td class=poDet>(STAN) <span style="color:gray" class=poStat>(2831, Zlínský, 1.)</span> <span style="color:gray" class=poZam>(poslankyně Parlamentu ČR, předsedkyně SMS ČR, bývalá starostka Valašských Klobouk, Valašské Klobouky)</span></td></tr>
+<tr class=poRow><td class=poJm>Flek Josef, Mgr.</td> <td></td> <td class=poDet>(STAN) <span style="color:gray" class=poStat>(4692, Jihomoravský, 1.)</span> <span style="color:gray" class=poZam>(poslanec, zdravotník, včelař, Tišnov)</span></td></tr>
+<tr class=poRow><td class=poJm>Vlček Lukáš, Ing.</td> <td></td> <td class=poDet>(STAN) <span style="color:gray" class=poStat>(4102, Vysočina, 1.)</span> <span style="color:gray" class=poZam>(ministr průmyslu a obchodu, poslanec Parlamentu ČR, držitel titulu Nejlepší starosta Kraje Vysočina, Pacov)</span></td></tr>
+<tr class=poRow><td class=poJm>Opltová Michaela, Ing.</td> <td></td> <td class=poDet>(STAN) <span style="color:gray" class=poStat>(2979, Plzeňský, 1.)</span> <span style="color:gray" class=poZam>(poslankyně a starostka obce Kozolupy, Kozolupy)</span></td></tr>
+<tr class=poRow><td class=poJm>Pivoňka Vaňková Pavla, Mgr. Ing.</td> <td></td> <td class=poDet>(STAN) <span style="color:gray" class=poStat>(3621, Jihočeský, 1.)</span> <span style="color:gray" class=poZam>(poslankyně, zastupitelka města Lišov, zakladatelka Iniciativy Pivoňka, Lišov)</span></td></tr>
+<tr class=poRow><td class=poJm>Rakušan Vít, Mgr. Bc.</td> <td></td> <td class=poDet>(STAN) <span style="color:gray" class=poStat>(18400, Středočeský, 1.)</span> <span style="color:gray" class=poZam>(ministr vnitra, poslanec PSP ČR, středoškolský učitel, bývalý starosta města Kolín, Kolín)</span></td></tr>
+<tr class=poRow><td class=poJm>Kovářová Věra, Ing.</td> <td></td> <td class=poDet>(STAN) <span style="color:gray" class=poStat>(6158, Středočeský, 2.)</span> <span style="color:gray" class=poZam>(1. místopředsedkyně Poslanecké sněmovny, poslankyně PSP ČR, ekonomka, lektorka německého jazyka, Chýně)</span></td></tr>
+<tr class=poRow><td class=poJm>Krutáková Jana, Ing.</td> <td></td> <td class=poDet>(STAN) <span style="color:gray" class=poStat>(3263, Jihomoravský, 2.)</span> <span style="color:gray" class=poZam>(poslankyně, poradce v oblasti životního prostředí, Moravská Nová Ves)</span></td></tr>
+<tr class=poRow><td class=poJm>Berki Jan, Mgr., Ph.D.</td> <td></td> <td class=poDet>(STAN) <span style="color:gray" class=poStat>(3001, Liberecký, 2.)</span> <span style="color:gray" class=poZam>(poslanec, vysokoškolský pedagog, Liberec)</span></td></tr>
+<tr class=poRow><td class=poJm>Hlavatý Matěj</td> <td></td> <td class=poDet>(STAN) <span style="color:gray" class=poStat>(3847, Královéhradecký, 3.)</span> <span style="color:gray" class=poZam>(starosta obce Tetín, Tetín)</span></td></tr>
+<tr class=poRow><td class=poJm>Kašparová Zdena, Mgr.</td> <td></td> <td class=poDet>(STAN) <span style="color:gray" class=poStat>(4390, Olomoucký, 3.)</span> <span style="color:gray" class=poZam>(molekulární bioložka, skautská vedoucí, předsedkyně Mladých starostů, Šumperk)</span></td></tr>
+<tr class=poRow><td class=poJm>Krainer Jakub, Bc.</td> <td></td> <td class=poDet>(STAN) <span style="color:gray" class=poStat>(2807, Jihomoravský, 3.)</span> <span style="color:gray" class=poZam>(soukromý zemědělec, krajský tajemník, Znojmo)</span></td></tr>
+<tr class=poRow><td class=poJm>Urbanová Barbora, Ing.</td> <td></td> <td class=poDet>(STAN) <span style="color:gray" class=poStat>(13995, Středočeský, 3.)</span> <span style="color:gray" class=poZam>(poslankyně PSP ČR, zakladatelka iniciativy Pod svícnem, Dolní Břežany)</span></td></tr>
+<tr class=poRow><td class=poJm>Nedomová Anežka, Bc.</td> <td></td> <td class=poDet>(STAN) <span style="color:gray" class=poStat>(3176, Pardubický, 5.)</span> <span style="color:gray" class=poZam>(studentka magisterského oboru, Pardubice)</span></td></tr>
+<tr class=poRow><td class=poJm>Chochelová Adriana, Mgr.</td> <td></td> <td class=poDet>(STAN) <span style="color:gray" class=poStat>(10447, Středočeský, 6.)</span> <span style="color:gray" class=poZam>(právnička iniciativy Pod svícnem, zastupitelka obce Zlatníky-Hodkovice, Zlatníky-Hodkovice)</span></td></tr>
+<tr class=poRow><td class=poJm>Sedmihradská Lucie, doc. Ing., Ph.D.</td> <td></td> <td class=poDet>(STAN) <span style="color:gray" class=poStat>(7959, Hl. m. Praha, 6.)</span> <span style="color:gray" class=poZam>(vysokoškolská pedagožka na VŠE, zastupitelka MČ Praha 10, Praha)</span></td></tr>
+<tr class=poRow><td class=poJm>Smejkalová Julie</td> <td></td> <td class=poDet>(STAN) <span style="color:gray" class=poStat>(10812, Hl. m. Praha, 9.)</span> <span style="color:gray" class=poZam>(studentka Právnické fakulty UK, právní specialistka, předsedkyně mSTAN Praha, Praha)</span></td></tr>
+<tr class=poRow><td class=poJm>Weimerová Ester, Mgr., B.S.</td> <td></td> <td class=poDet>(STAN) <span style="color:gray" class=poStat>(3913, Moravskoslezský, 9.)</span> <span style="color:gray" class=poZam>(psycholog ve zdravotnictví, Dobrá)</span></td></tr>
+<tr class=poRow><td class=poJm>Papajanovský Jan, Mgr.</td> <td></td> <td class=poDet>(STAN) <span style="color:gray" class=poStat>(4292, Ústecký, 26.)</span> <span style="color:gray" class=poZam>(starosta města Česká Kamenice, zastupitel Ústeckého kraje, právník, vysokoškolský pedagog, Česká Kamenice)</span></td></tr>
+
+<tr class=stRow><td colspan=3><br><b>Česká pirátská strana</b></td></tr>
+<tr class=poRow><td class=poJm>Hřib Zdeněk, MUDr.</td> <td></td> <td class=poDet>(Piráti) <span style="color:gray" class=poStat>(21081, Hl. m. Praha, 1.)</span> <span style="color:gray" class=poZam>(autor systému eRecept a odborník na digitalizaci zdravotnictví, sloužící obyvatelům Prahy od roku 2018 a stavějící metro, tramvajové tratě a mosty; hrdý obyvatel sídliště Jižní Město a předseda Pirátů, Praha)</span></td></tr>
+<tr class=poRow><td class=poJm>Pipášová Barbora, Mgr.</td> <td></td> <td class=poDet>(Piráti) <span style="color:gray" class=poStat>(2499, Vysočina, 1.)</span> <span style="color:gray" class=poZam>(terapeutka pro děti, dospívající a dospělé, Moravské Budějovice)</span></td></tr>
+<tr class=poRow><td class=poJm>Bartoš Ivan, PhDr., Ph.D.</td> <td></td> <td class=poDet>(Piráti) <span style="color:gray" class=poStat>(16919, Středočeský, 1.)</span> <span style="color:gray" class=poZam>(specialista na informační technologie, práci s daty a dostupné bydlení, bojovník za lidská práva, hudebník, poslanec PČR, Praha)</span></td></tr>
+<tr class=poRow><td class=poJm>Richterová Olga, PhDr., Ph.D.</td> <td></td> <td class=poDet>(Piráti) <span style="color:gray" class=poStat>(32447, Hl. m. Praha, 2.)</span> <span style="color:gray" class=poZam>(odbornice na sociální a rodinnou politiku, obhájkyně práv dětí a zranitelných, místopředsedkyně Poslanecké sněmovny, cyklistka, Praha)</span></td></tr>
+<tr class=poRow><td class=poJm>Moricová Michaela, Mgr.</td> <td></td> <td class=poDet>(Piráti) <span style="color:gray" class=poStat>(5404, Moravskoslezský, 2.)</span> <span style="color:gray" class=poZam>(spisovatelka, koordinátorka pro zisk prostředků, copywriterka, Frýdek-Místek)</span></td></tr>
+<tr class=poRow><td class=poJm>Ančincová Hana, Bc.</td> <td></td> <td class=poDet>(Piráti) <span style="color:gray" class=poStat>(3562, Zlínský, 2.)</span> <span style="color:gray" class=poZam>(projektová manažerka inovací v sociální oblasti, procesní konzultantka, emeritní statutární náměstkyně Zlínského kraje, Kroměříž)</span></td></tr>
+<tr class=poRow><td class=poJm>Kučerová Šárka, Mgr.</td> <td></td> <td class=poDet>(Piráti) <span style="color:gray" class=poStat>(2933, Olomoucký, 2.)</span> <span style="color:gray" class=poZam>(chemik vývojář, strong woman, chovatelka, Přerov)</span></td></tr>
+<tr class=poRow><td class=poJm>Martínková Španihelová Lenka, Mgr.</td> <td></td> <td class=poDet>(Piráti) <span style="color:gray" class=poStat>(3273, Pardubický, 2.)</span> <span style="color:gray" class=poZam>(sociální pracovnice, zastupitelka obce, Vápenný Podol)</span></td></tr>
+<tr class=poRow><td class=poJm>Šrámková Eva, MUDr.</td> <td></td> <td class=poDet>(Piráti) <span style="color:gray" class=poStat>(3217, Plzeňský, 2.)</span> <span style="color:gray" class=poZam>(lékařka, maminka, manželka, Plzeň)</span></td></tr>
+<tr class=poRow><td class=poJm>Kovářová Veronika, Ing. arch.</td> <td></td> <td class=poDet>(Piráti) <span style="color:gray" class=poStat>(2787, Jihočeský, 2.)</span> <span style="color:gray" class=poZam>(architektka, grafička, lektorka, organizátorka kulturních akcí, Volyně)</span></td></tr>
+<tr class=poRow><td class=poJm>Volpe Samuel</td> <td></td> <td class=poDet>(Piráti) <span style="color:gray" class=poStat>(6633, Středočeský, 2.)</span> <span style="color:gray" class=poZam>(praktikant v advokacii, student práva, sportovec, znalec jazyků a předseda středočeských Pirátů, zastupitel obce, Líbeznice)</span></td></tr>
+<tr class=poRow><td class=poJm>Patková Jana, Mgr., MBA</td> <td></td> <td class=poDet>(Piráti) <span style="color:gray" class=poStat>(2836, Královéhradecký, 3.)</span> <span style="color:gray" class=poZam>(marketingová specialistka hradecké hvězdárny na rodičovské dovolené, Hradec Králové)</span></td></tr>
+<tr class=poRow><td class=poJm>Stojanová Kateřina</td> <td></td> <td class=poDet>(Piráti) <span style="color:gray" class=poStat>(4187, Ústecký, 3.)</span> <span style="color:gray" class=poZam>(studentka práv, Litoměřice)</span></td></tr>
+<tr class=poRow><td class=poJm>Svobodová Vendula, RNDr.</td> <td></td> <td class=poDet>(Piráti) <span style="color:gray" class=poStat>(11416, Jihomoravský, 3.)</span> <span style="color:gray" class=poZam>(geoinformatička, předsedkyně spolku Blechy v kožichu z. s., místopředsedkyně brněnských Pirátů, zastupitelka městské části Brno-Starý Lískovec, Brno)</span></td></tr>
+<tr class=poRow><td class=poJm>Ferčíková Konečná Irena, Mgr., Ph.D.</td> <td></td> <td class=poDet>(Piráti) <span style="color:gray" class=poStat>(7656, Jihomoravský, 7.)</span> <span style="color:gray" class=poZam>(politická konzultantka, evaluátorka a výzkumnice v oblasti evropských politik, lektorka, bývalá ředitelka neziskové organizace, Valtice)</span></td></tr>
+<tr class=poRow><td class=poJm>Demetrashvili Katerina</td> <td></td> <td class=poDet>(Piráti) <span style="color:gray" class=poStat>(13774, Hl. m. Praha, 7.)</span> <span style="color:gray" class=poZam>(studentka práv, místopředsedkyně Mladého Pirátstva, pianistka, Praha)</span></td></tr>
+<tr class=poRow><td class=poJm>Hoffmannová Andrea, Mgr., Ph.D.</td> <td></td> <td class=poDet>(Piráti) <span style="color:gray" class=poStat>(4196, Moravskoslezský, 12.)</span> <span style="color:gray" class=poZam>(náměstkyně primátora Ostravy pro vzdělávání, inovace a digitalizaci, Ostrava)</span></td></tr>
+<tr class=poRow><td class=poJm>Svárovská Gabriela, Mgr., Ph.D.</td> <td></td> <td class=poDet>(Piráti) <span style="color:gray" class=poStat>(17177, Hl. m. Praha, 12.)</span> <span style="color:gray" class=poZam>(odbornice na lidská práva a boj proti oligarchizaci, bývalá česká diplomatka, spolupředsedkyně Zelených, Praha)</span></td></tr>
+
+</table>
+
+<script>
+function poSortTable(order){var po=poSortTable,str=po.cbPoStrany.checked,cmp,d,p,tb=document.querySelector('#poTable');
+ tb=tb&&tb.querySelector('tbody')||tb;
+ if(!tb)return console.error('poTable missing?');
+ switch(po.lastOrd=order=order||po.lastOrd){
+  case 2:cmp=function(a,b){return(a.poJm||'zzz').localeCompare(b.poJm||'zzz')};break; // abecedne
+  case 3:cmp=function(a,b){return(b.poPref-a.poPref)||(a.inpor-b.inpor)};break; // preference
+  default:cmp=function(a,b){return a.inpor-b.inpor} // original
+ }
+ if(str){ // strany zvlast
+  po.stRows.forEach(function(stro){
+   stro.poRows.sort(cmp);
+   stro.poRows.forEach(function(tr){(p=tr.parentNode)&&p.removeChild(tr)});
+   var n=stro.nextSibling||null;
+   stro.poRows.forEach(function(tr){stro.parentNode.insertBefore(tr,n)})
+  });
+  d='table-row'
+ }else{ // vse dohromady
+  po.poRows.sort(cmp);
+  po.poRows.forEach(function(tr){(p=tr.parentNode)&&p.removeChild(tr)});
+  po.poRows.forEach(function(tr){tb.insertBefore(tr,null)});
+  d='none'
+ }
+ po.stRows.forEach(function(tr){tr.style.display=d});
+ for(d=1;d<4;d++)(document.querySelector('#btpo'+d)||{style:{}}).style.fontWeight=(d==order)?'bold':'normal';
+ return!1
+}
+!function(){var po=poSortTable,n=0,jepo=1,jest=0,stro,Rpref=/\x28([0-9]+)/;po.lastOrd=1;
+ ['poRow','stRow'].forEach(function(C){po[C+'s']=[].map.call(document.querySelectorAll('#poTable tr.'+C),function(tr){tr.jepo=jepo;tr.jest=jest;return tr});jepo=0;jest=1});
+ [].map.call(document.querySelectorAll('#poTable tr'),function(tr){tr.inpor=n++;if(tr.jest){(stro=tr).poRows=[]}else{tr.jepo&&stro&&stro.poRows.push(tr);tr.poJm=(tr.querySelector('.poJm')||{}).textContent;tr.poPref=(Rpref.exec((tr.querySelector('.poStat')||{}).textContent)||[])[1]*1||-1}});
+ (po.cbPoStrany=document.getElementById('cbPoStrany')||{}).checked=!0
+}()
+</script>
+
+<br>&nbsp;
+<hr>
+<br id=end>&nbsp;<br>
+
+V případě dotazů mě můžete kontaktovat na
+<script>!function(){var e='semi'+String.fromCharCode(64)+'pialpha'+String.fromCharCode(46)+'cz';dwLink(e,'mailto:'+e,'')}()</script>
+<noscript>emailu, je <a href="/" target=_blank>na hlavní stránce</a> naspodu...</noscript>
+
+<p style="text-align:right">P.A.Semi - <a href="https://pi-alpha.org/">&pi;&alpha;&#xbd;</a> 2025-10-08</p>
+
+
+<!-- Footer -->
+<!-- /Footer -->
+</body>
+</html>

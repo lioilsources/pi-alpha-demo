@@ -1,0 +1,56 @@
+[--22.12.2018--00:45:41:562----cmd.exe------------]
+
+(22.12.2018  0:44:48)
+F:\Doc\Download\Misc\BListy>md5sum for*pir* ozn*eva* > Md5_181221b.log
+
+(22.12.2018  0:45:27)
+F:\Doc\Download\Misc\BListy>md5sum Md5_181221b.log
+64820571b3e0b4ea9af63f78f65ce046
+
+(22.12.2018  0:45:36)
+F:\Doc\Download\Misc\BListy>
+[--22.12.2018--00:49:40:390----cmd.exe------------]
+
+(22.12.2018  0:48:07)
+R:\Graphics\__Foto\F1810-1812>md5sum DSCN78* DSCN79* DSCB8* Md5_Dscn778.log > Md5_Dscn788_181221.log
+
+(22.12.2018  0:49:22)
+R:\Graphics\__Foto\F1810-1812>md5sum Md5_Dscn788_181221.log
+0bc60d7c3a42d9af7426efc66c0181fd
+
+(22.12.2018  0:49:35)
+R:\Graphics\__Foto\F1810-1812>
+[--22.12.2018--00:51:29:359----cmd.exe------------]
+
+(22.12.2018  0:45:59)
+C:\Data\ClipImg>md5sum Clpx479* md5_47_181220_0447.log > md5_479_181221.log
+
+(22.12.2018  0:47:32)
+C:\Data\ClipImg>md5sum.exe md5_479_181221.log
+9ec4eef7f10207b09b09d7b5a1d622fe
+
+(22.12.2018  0:50:44)
+C:\Data\ClipImg>md5sum md5_479_181221.log -sha
+53d44f20e526821c974e05d02dd77d9524fa6e10
+
+(22.12.2018  0:51:25)
+C:\Data\ClipImg>
+[--22.12.2018--00:52:10:031----?------------]
+ce0f8f34e8fce7fd8a41375faf4c9c73
+<!-- -->
+<CheckSum File="ClipText.log" Type="md5" RangeFrom="80574220" RangeTo="82671372" Time="22.12.2018 0:52:10" Value="ce0f8f34e8fce7fd8a41375faf4c9c73"></CheckSum>
+
+[--22.12.2018--00:52:12:578----Clip.exe------------]
+24e44f52310f906817bdd66f3a98e60a42da1e48
+<!-- -->
+<CheckSum File="ClipText.log" Type="sha1" RangeFrom="80574474" RangeTo="82671626" Time="22.12.2018 0:52:12" Value="24e44f52310f906817bdd66f3a98e60a42da1e48"></CheckSum>
+
+[--22.12.2018--00:54:57:875----cmd.exe------------]
+C:\Temp>------------------------------------------------------------------------
+---------------------------------------
+--------------------------------------------------------------------------------
+------------------------------- není názvem vnitrního ani vnejšího príkazu,
+spustitelného programu nebo dávkového souboru.
+
+(22.12.2018  0:54:50)
+C:\Temp>

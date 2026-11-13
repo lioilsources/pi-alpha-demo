@@ -1,0 +1,350 @@
+<html>
+<head>
+<link rel="icon" type="image/png" sizes="32x32" href="/EVb_32ico.png">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf8">
+<title>Keyboard helper</title>
+<style>
+.text,body{font-family:Arial}
+.tms{font-family:"DejaVu Serif","Times New Roman";font-size:125%}
+body{background-color:#e1ebf2}
+h1{text-align:center;font-family:Times New Roman,Arial}
+tr,td{vertical-align:top}
+img{border:none}
+td.tms:hover{background-color:Highlight;color:HighlightText}
+#Preview {background-color:white;padding:0.25em}
+</style>
+<style>
+.article{max-width:960px;margin:auto}
+.topBar{position:fixed;left:0px;right:0px;top:0px;z-index:10101}
+.belowTop{display:block;opacity:0;min-height:1em}
+.topBar,.belowTop{height:1.2em;font-size:4mm;height:5mm}
+.outset{border:1px outset #e1ebf2}
+.topBar{background:#afcce1}
+a.aMnu{text-decoration:none;padding:0px 2px}
+a.aMnu:hover{background:#7ca0ba;border-bottom:1px solid #2591de}
+.rFloat{float:right}
+
+</style>
+</head>
+<body><!-- Header -->
+<div class="topBar outset">
+<a href="/" class=aMnu>&pi;&alpha;&#xbd;</a>
+<a href="https://bible.pi-alpha.org/" target=_blank title="Bible viewer" class=aMnu><b>B</b></a>
+<a href="#" onclick="return ScrollTop()" class="aMnu rFloat">^</a>
+</div>
+<div class=belowTop></div>
+<div style="clear:both"></div>
+<script>
+[].slice.call(document.getElementsByClassName('topBar')).forEach(function(T){
+  [].slice.call(T.getElementsByTagName('a')).forEach(function(A){
+    //var u;if(u=A.getAttribute('href'))if(u.substr(0,1)!='#')
+    if(!A.getAttribute('target'))A.setAttribute('target','_self')
+  })
+})
+function ScrollTop(){window.scroll(0,0);return!1}
+</script>
+<!-- /Header -->
+<div class=article>
+
+<h2 style="float:right;"><a href="https://pi-alpha.org/">&#x03c0;&#x03b1;&#xbd;</a></h2>
+
+<h1>Keyboard helper</h1>
+
+<form name="Form1">
+  <fieldset>
+    <label for="Edit1">Text:&nbsp;&nbsp;&nbsp;</label>
+    <input type=text name="Edit1" class=tms size=88 onkeydown="return EdKeyDown(event,this)"/>
+    <br>
+    
+    <br>
+    
+    Convert:
+    <input type=button name="bt1_he" value="HE" onclick="var Ed=Form1.Edit1;Ed.value=AsciiToHe(Ed.value);Ed.focus();ffam='SBL Hebrew,Times New Roman';return!1"/>
+    <input type=button name="bt1_gr" value="GR" onclick="var Ed=Form1.Edit1;Ed.value=AsciiToGr(Ed.value);Ed.focus();ffam='SBL Greek,Times New Roman';return!1"/>
+    <input type=button name="bt1_ru" value="RU" onclick="var Ed=Form1.Edit1;Ed.value=AsciiToRu(Ed.value);Ed.focus();ffam='Times New Roman'; return!1"/>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    Size: <input type=text name="PSize" size=4 value="64"/>
+    <input type=button value="Render" onclick="RenderPreview()"/>
+    <br>
+    <br>
+    
+    <hr width=100% height=3/>
+    
+    Table:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type=button name="bt2_he" value="HE" onclick="ShowTable(HeChars)"/>
+    <input type=button name="bt2_gr" value="GR" onclick="ShowTable(GrChars)"/>
+    <input type=button name="bt2_ru" value="RU" onclick="ShowTable(RuChars)"/>
+    <br>
+    
+    <br>
+    <div id=CharTable></div>
+    
+  </fieldset>
+  
+  <p>
+  This page can be used to convert english letters to hebrew, greek or russian.<br>
+  Some key mappings are obvious, some are not - see the web-page source near the end
+  for the mapping...<br>
+  If you want another keyboard mapping, save the page as HTML file and edit it,
+  it should be simple enough...
+  </p>
+  
+  <br><br><br><br>
+  <div><span id=Preview></span></div>
+  
+</form>
+
+<script>
+
+function EdKeyDown(E,I){
+  if(E=E||window.event){
+    var K=E.key||E.which||E.keyCode;
+    if(E.altKey)switch(K){
+      case 'R':case 'r':case 0x52:{I.form.bt1_ru.click();return!1}
+      case 'H':case 'h':case 0x48:{I.form.bt1_he.click();return!1}
+      case 'G':case 'g':case 0x47:{I.form.bt1_gr.click();return!1}
+    }else
+    switch(K){
+      case 'Esc':case 'Escape':case 27:{I.value='';return!1}
+    }
+  }
+}
+
+ffam='Times New Roman';
+
+function AsciiToHe(text){
+  return AsciiKb(text,HeChars)
+}
+
+function AsciiToGr(text){
+  return AsciiKb(text,GrChars)
+}
+
+function AsciiToRu(text){
+  return AsciiKb(text,RuChars)
+}
+
+function AsciiKb(text,Enum) {
+  Enum&&Enum(function(fi,re){
+    var t2;
+    while ((t2=text.replace(fi,re))!=text)text=t2;
+  });
+  return text
+}
+
+function ShowTable(Chars) {
+  var tbl="<table border=1 style='border-collapse:collapse;'><tr>";
+  var col=0,prev;
+  Chars(function(fi,re,showit){
+    if(re==prev)return;
+    if(showit===false)return;
+    if(col>=10){
+      tbl+="</tr><tr>";
+      col=0;
+    }
+    tbl+="<td class=tms onclick='tbClick(this)'>&nbsp;"+re+"&nbsp;</td>";
+    col++;
+    prev=re;
+  });
+  tbl+="</tr></table>";
+  document.getElementById('CharTable').innerHTML=tbl
+}
+
+function tbClick(cell) {
+  var edit=Form1.Edit1,S,ar,po;
+  S=cell.innerText;
+  (ar=/\s*\xa0*([^\s\xa0]+)\xa0*\s*/.exec(cell.innerText))&&(S=ar[1]);
+  if(S){
+    po=edit.selectionStart;
+    edit.setRangeText(S);
+    po+=S.length;
+    edit.setSelectionRange(po,po);
+    edit.focus();
+    return!1
+  }
+}
+
+function RenderPreview() {
+  var sz,tx;
+  try{
+    tx=Form1.Edit1.value;
+    sz=Form1.PSize.value;
+  }catch(E){sz=32}
+  
+  var Preview=document.getElementById('Preview');
+  ffam&&(Preview.style.fontFamily=ffam);
+  sz&&(Preview.style.fontSize=sz);
+  Preview.textContent=tx
+}
+
+function HeChars(T) {
+  T('a',"א"); // alef     5D0  1
+  T('b',"ב"); // beth     5D1  2
+  T('g',"ג"); // gimel    5D2  3
+  T('d',"ד"); // dalet    5D3  4
+  T('h',"ה"); // he       5D4  5
+  T('v',"ו"); // waw      5D5  6
+  T('z',"ז"); // zajin    5D6  7
+  T('x',"ח"); // chet     5D7  8
+  T('u',"ט"); // tet      5D8  9
+  T('i',"י"); // iod      5D9  10
+  T('j',"י"); // iod      5D9  10
+  //T('y',"י"); // iod      5D9  10 -- rather will use it for ajin...
+  T('k',"כ"); // kaf      5DB  20
+  T('K',"ך"); // kaf fin  5DA
+  T('l',"ל"); // lamed    5DC  30
+  T('m',"מ"); // mem      5DE  40
+  T('M',"ם"); // mem fin  5DD
+  T('n',"נ"); // nun      5E0  50
+  T('N',"ן"); // nun fin  5DF
+  T('o',"ס"); // samech   5E1  60
+  T('e',"ע"); // ajin     5E2  70
+  T('y',"ע"); // ajin     5E2  70
+  T('p',"פ"); // pe       5E4  80
+  T('f',"פ"); // pe       5E4  80
+  T('P',"ף"); // pe fin   5E3
+  T('F',"ף"); // pe fin   5E3
+  T('c',"צ"); // cade     5E6  90
+  T('C',"ץ"); // cade fin 5E5
+  T('q',"ק"); // qof      5E7  100
+  T('r',"ר"); // resh     5E8  200
+  T('s',"ש"); // shin     5E9  300
+  T('w',"ש"); // shin     5E9  300
+  T('t',"ת"); // taw      5EA  400
+  T("'","׳"); // accent ' 5F3
+  T('"',"״"); // accent " 5F4
+  T('-',"־"); // mark -   5BE
+}
+
+function GrChars(T) {
+  T('a',"α"); // alpha    3B1
+  T('b',"β"); // beta     3B2
+  T('g',"γ"); // gamma    3B3
+  T('d',"δ"); // delta    3B4
+  T('e',"ε"); // epsilon  3B5
+  T('z',"ζ"); // zeta     3B6
+  T('h',"η"); // eta      3B7
+  T('0',"θ"); // theta    3B8
+  T('i',"ι"); // iota     3B9
+  T('k',"κ"); // kappa    3BA
+  T('l',"λ"); // lambda   3BB
+  T('m',"μ"); // mi       3BC
+  T('v',"ν"); // ni       3BD
+  T('n',"ν"); // ni       3BD
+  T('c',"ξ"); // xi       3BE
+  T('o',"ο"); // omicron  3BF
+  T('p',"π"); // pi       3C0
+  T('r',"ρ"); // ro       3C1
+  T('s',"σ"); // sigma    3C3
+  T('S',"ς"); // sigma fin 3C2
+  T('t',"τ"); // tau      3C4
+  T('u',"υ"); // ypsilon  3C5
+  T('f',"φ"); // fi       3C6
+  T('x',"χ"); // chi      3C7
+  //T('h',"χ"); // chi      3C7
+  T('y',"ψ"); // psi      3C8
+  T('7',"ψ"); // psi      3C8
+  T('w',"ω"); // omega    3C9
+}
+
+function RuChars(T) {
+  T('YU',"Ю",!1); // IU       42E
+  T('JU',"Ю",!1); // IU       42E
+  T('YA',"Я",!1); // IA       42F
+  T('JA',"Я",!1); // IA       42F
+  T('yu',"ю",!1); // iu       44e
+  T('ju',"ю",!1); // iu       44e
+  T('ja',"я",!1); // ia       44f
+  T('ya',"я",!1); // ia       44f
+  T('Shch',"Щ",!1); // Shch   429
+  T('Ch',"Ч",!1); // CH Č     427
+  T('Sh',"Ш",!1); // Sh       428
+  T('Zh',"Ж",!1); // Zh       416
+  T('shch',"щ",!1); // shch   449
+  T('ch',"ч",!1); // ch č     447
+  T('sh',"ш",!1); // sh       448
+  T('zh',"ж",!1); // zh       436
+  T('ŠČ',"Щ",!1); // Shch     429
+  T('Šč',"Щ",!1); // Shch     429
+  T('šč',"щ",!1); // shch     449
+  //
+  T('A',"А"); // A        410
+  T('B',"Б"); // B        411
+  T('V',"В"); // V        412
+  T('G',"Г"); // G        413
+  T('D',"Д"); // D        414
+  T('E',"Е"); // E        415
+  T('Q',"Ж"); // Zh       416
+  T('Ž',"Ж"); // Zh       416
+  T('Z',"З"); // Z        417
+  T('I',"И"); // I        418
+  T('J',"Й"); // J        419
+  T('K',"К"); // K        41A
+  T('L',"Л"); // L        41B
+  T('M',"М"); // M        41C
+  T('N',"Н"); // N        41D
+  T('O',"О"); // O        41E
+  T('P',"П"); // P        41F
+  T('R',"Р"); // R        420
+  T('S',"С"); // S        421
+  T('T',"Т"); // T        422
+  T('U',"У"); // U        423
+  T('F',"Ф"); // F        424
+  T('X',"Х"); // Ch       425
+  T('C',"Ц"); // C        426
+  T('$',"Ч"); // Ch Č     427
+  T('Č',"Ч"); // Ch Č     427
+  T('W',"Ш"); // Sh       428
+  T('Š',"Ш"); // Sh       428
+  T('H',"Щ"); // Shch     429
+  T('^',"Ъ"); // tvrdy    42A
+  T('Y',"Ы"); // Y        42B
+  T('%',"Ь"); // mekky    42C
+  T('#',"Э"); // tvrde E  42D
+  T('!',"Ю"); // iu       42E
+  T('(',"Я"); // ia       42F
+  //
+  T('a',"а"); // a        430
+  T('b',"б"); // b        431
+  T('v',"в"); // v        432
+  T('g',"г"); // g        433
+  T('d',"д"); // d        434
+  T('e',"е"); // e        435
+  T('q',"ж"); // zh       436
+  T('ž',"ж"); // zh       436
+  T('z',"з"); // z        437
+  T('i',"и"); // i        438
+  T('j',"й"); // j        439
+  T('k',"к"); // k        43a
+  T('l',"л"); // l        43b
+  T('m',"м"); // m        43c
+  T('n',"н"); // n        43d
+  T('o',"о"); // o        43e
+  T('p',"п"); // p        43f
+  T('r',"р"); // r        440
+  T('s',"с"); // s        441
+  T('t',"т"); // t        442
+  T('u',"у"); // u        443
+  T('f',"ф"); // f        444
+  T('x',"х"); // ch       445
+  T('c',"ц"); // c        446
+  T('4',"ч"); // ch č     447
+  T('č',"ч"); // ch č     447
+  T('w',"ш"); // sh       448
+  T('š',"ш"); // sh       448
+  T('h',"щ"); // shch     449
+  T('6',"ъ"); // tvrdy    44a
+  T('y',"ы"); // y        44b
+  T('5',"ь"); // mekky    44c
+  T('3',"э"); // tvrde e  44d
+  T('1',"ю"); // iu       44e
+  T('9',"я"); // ia       44f
+}
+
+</script>
+</div>
+<!-- Footer -->
+<!-- /Footer -->
+</body>
+</html>

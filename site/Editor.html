@@ -1,0 +1,1219 @@
+<html>
+<head>
+<link rel="icon" type="image/png" sizes="32x32" href="/EVb_32ico.png">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Editor</title>
+<style>
+.gray{color:gray}
+fieldset{border-radius:4px;background:#eee}
+legend,.legbtn,.tbtn{border-radius:3px;border:1px solid #999;background:#ddd;padding:0px 2px}
+.tbtn{margin-right:2px}
+.legbtn:hover,.tbtn:hover{background:#ccb;cursor:pointer}
+.legbtn.active{border-color:#aa4}
+legend.buttons{border:none;background:none}
+.client{border:1px inset gray;background:white;min-height:1.5em;padding:2px}
+.Editor{overflow-y:auto}
+p{margin:4px 0px}
+.cnt960{width:960px;margin:auto;position:relative}
+.Toolbar{min-height:1em;background:ButtonFace;border:2px outset ButtonFace;margin-bottom:2px;padding:2px}
+.lab8{display:inline-block;width:5em}
+.GTools{float:right}
+.btsp,.btn{border:1px solid gray;background:#ccc;color:#444;padding:0px 2px;border-radius:3px;text-align:center;cursor:pointer}
+.rfloat{float:right}
+.smbt{font-size:80%;padding:0px 1px}
+</style>
+<script src="dynui55.js"></script>
+<style>
+.article{max-width:960px;margin:auto}
+.topBar{position:fixed;left:0px;right:0px;top:0px;z-index:10101}
+.belowTop{display:block;opacity:0;min-height:1em}
+.topBar,.belowTop{height:1.2em;font-size:4mm;height:5mm}
+.outset{border:1px outset #e1ebf2}
+.topBar{background:#afcce1}
+a.aMnu{text-decoration:none;padding:0px 2px}
+a.aMnu:hover{background:#7ca0ba;border-bottom:1px solid #2591de}
+.rFloat{float:right}
+
+</style>
+</head>
+<body><!-- Header -->
+<div class="topBar outset">
+<a href="/" class=aMnu>&pi;&alpha;&#xbd;</a>
+<a href="https://bible.pi-alpha.org/" target=_blank title="Bible viewer" class=aMnu><b>B</b></a>
+<a href="#" onclick="return ScrollTop()" class="aMnu rFloat">^</a>
+</div>
+<div class=belowTop></div>
+<div style="clear:both"></div>
+<script>
+[].slice.call(document.getElementsByClassName('topBar')).forEach(function(T){
+  [].slice.call(T.getElementsByTagName('a')).forEach(function(A){
+    //var u;if(u=A.getAttribute('href'))if(u.substr(0,1)!='#')
+    if(!A.getAttribute('target'))A.setAttribute('target','_self')
+  })
+})
+function ScrollTop(){window.scroll(0,0);return!1}
+</script>
+<!-- /Header -->
+
+
+<div class=GTools>
+ <span class=btsp onclick="return OpenJsCalc(event)">Js</span>
+ <span class=btsp onclick="return AskSave(event)">Save</span>
+ <span><a href="https://pi-alpha.org/Editor.zip" download="Editor.zip">Download</a></span>
+ <br>
+ <input type=checkbox id=cbBr><label for=cbBr>&lt;br&gt;</label>
+</div>
+
+<fieldset class="cnt960 EdGroup">
+ <legend class=buttons><span class=legbtn data-page=EditPage>Editor</span>&nbsp;<span class=legbtn data-page=SrcPage>Source</span></legend>
+ <div class=EditPage>
+   <div class=Toolbar></div>
+   <div class="Editor client" contenteditable=true spellcheck=false></div>
+ </div>
+ <div class=SrcPage style="display:none"><textarea cols=80 rows=10 class=ESource spellcheck=false></textarea></div>
+</fieldset>
+
+<script>
+
+//New230415 patch dynui.js
+// Tx in Firefox < 45
+//function Tx(E,T){if(E)('innerText' in E)?(E.innerText=T||''):(E.textContent=T||'');return E}
+//
+
+(function(){
+function In(O,p){try{if(p=O&&Object.getPrototypeOf(O))p.forEach||(p.forEach=[].forEach)}catch(E){console&&console.error(E)}}
+In(document.querySelectorAll('fieldset'));In(document.getElementsByClassName('EdGroup'))
+})();
+
+//[].slice.call(document.getElementsByClassName('EdGroup')).forEach(InitEditor);
+document.querySelectorAll('.EdGroup').forEach(InitEditor);
+
+function FindEdFrame(E){
+  while(E){if((Ga(E,'class')||'').indexOf('EdGroup')+1)return E;E=E.parentNode}
+  return null
+}
+function FindEditor(C,e){while(C)if(e=C.Editor)return e;else C=C.parentNode;return null}
+
+function rnd(f){return Math.round(f)}
+function Ccb2(V,t){var C=Ccb(V,t),cb=C.cb=gbt(C,'input')[0];return C}
+
+function InitEditor(Fr){
+  var Ed=Fr.Editor=Fr.Editor||Fr.querySelector('.Editor'),pgEd,edWi,edHe,tbHe,cbBr,bnBr,
+      ESrc=Fr.ESource=Fr.ESource||Fr.querySelector('.ESource'),pgSrc,
+      Tb=Fr.Toolbar=Fr.Toolbar||Fr.querySelector('.Toolbar')||{},n=null,Fin,FileName;
+  var CHa={},AHa={},NHa={},fnEdFocus;
+  Ed.parentNode.DefFocus=fnEdFocus=function(){
+    if(!bnBr){
+      var p=Ed&&Ed.firstElementChild;
+      if(p&&(p.tagName.toLowerCase()=='p'))return p;
+    }
+    return Ed
+  };
+  ESrc.parentNode.DefFocus=ESrc;
+  window.Editor||(window.Editor=Ed); // first Editor for js.
+  
+  Fr.firstElementChild.getElementsByClassName('legbtn').forEach(function(lb){
+    lb.onclick=function(){Fr.SwitchToPage('.'+Ga(this,'data-page'))};
+    var P;
+    if(P=Fr.querySelector('.'+Ga(lb,'data-page')))P.lb=lb;
+  });
+  //
+  function ApplySrc(src){
+    Ed.innerHTML=src
+  }
+  if(pgEd=Ed.parentNode){
+    pgEd.OnTabLeave=function(){
+      edWi=Ed.offsetWidth;
+      edHe=Ed.offsetHeight;
+      tbHe=Tb.offsetHeight;
+    };
+  }
+  if(pgSrc=ESrc.parentNode){
+    pgSrc.OnTabEnter=function(){
+      ESrc.value=Ed.innerHTML;
+      ESrc.Modified=!1;
+      var w=edWi,h=edHe+tbHe;
+      if(w&&h){ESrc.style.width=w+'px';ESrc.style.height=h+'px'}
+      //
+      ESrc.Tools||Apc(ESrc.parentNode,ESrc.Tools=Ce('div','position:absolute;right:3em;top:-1.33em;background:#eee;padding:0px 2px;border:1px solid gray;border-radius:3px;color:gray',
+                        ESrc.cbApply=Ccb2({Label:'Apply'}),
+                        ESrc.cbAutoApply=Ccb2({Label:'auto if modified',checked:!0}),
+                        Ce('span','rfloat',Ce('input','smbt',{type:'button',value:"fix \u21a9",onclick:fixSrcNl}))
+                        ));
+      if(ESrc.cbApply)ESrc.cbApply.cb.checked=!1;
+    };
+    pgSrc.OnTabLeave=function(a){
+      if(ESrc.Modified)if(!(a=ESrc.cbApply.cb)||a.checked){ApplySrc(ESrc.value);ESrc.Modified=!1}
+    };
+  }
+  ESrc.onchange=ESrc.oninput=function(a){
+    this.Modified=!0;
+    if(a=ESrc.cbAutoApply)if(a=a.cb)if(a.checked)if(a=ESrc.cbApply)if(a=a.cb)a.checked=!0
+  };
+  function fixSrcNl(e){ESrc.value=fixHtmlNl(ESrc.value),ESrc.Modified=!0,DEvent(ESrc,'input')}
+  function fixHtmlNl(html){
+   return(''+html).replace(/<br\/>/g,'<br>').replace(/(<br><\/p>|<br>|<\/p>|<\/div>|<\/blockquote>|<\/h[0-9]>)\s*(\r\n|\n|)/g,"$1\n")
+  }
+  
+  function Invoke(F,ev){try{F&&F(ev)}catch(E){console&&console.error(E)}return!1}
+  
+  Tb.addHandler=function(key,txt,img,func){
+    // add key-handler and toolbar button:
+    var A=(key||(key='')).split('+'),S=(A[0]||'').toUpperCase(),K=A[1];
+    var L=(S.indexOf('C')+1)?CHa:(S.indexOf('A')+1)?AHa:NHa,B;
+    if(K)L[key.toLowerCase()]=func;
+    if(txt||img){
+      B=Ce('span','tbtn');
+      if(img){
+        //!!!todo
+      }else{
+        Tx(B,txt);
+      }
+      B.title=(S.replace('C','Ctrl ').replace('S','Shift ').replace('A','Alt ')+' + '+K).replace('  ',' ')+' - '+txt;
+      //B.onclick=func;
+      B.onclick=(function(fu){return function(ev){Invoke(fu,ev)}})(func);
+      B.onmousedown=function(ev){Cancel(ev);fnEdFocus().focus()};
+      Apc(this,B);
+    }
+  };
+  AEvent(Ed,'keydown',function(ev){
+    var K=Eke(ev=ev||window.event||{})||'',S=EShift(ev)||'',L=ev.ctrlKey?CHa:ev.altKey?AHa:NHa,F=L[(S+'+'+K).toLowerCase()];
+    if(IsFunc(F)){
+      Cancel(ev);
+      return Invoke(F,ev)
+    }
+    if(((K=='F5')||(K==116))&&!S){return Cancel(ev)}
+  },!0);
+  //
+  //InitSelApi(Ed);
+  try{InitSelApi(Ed);InitAuxTools(Ed)}catch(ex){console&&console.error(ex)}
+  //
+  // cannot use EditRestoreSel in onfocus in Firefox ?!
+  //Ed.onfocus=function(){var S=Ed.SavSel;if(S){EditRestoreSel(S,Ed);Ed.SavSel=null}TryExec('insertBrOnReturn');TryExec('enableObjectResizing')};
+  //Ed.onblur=function(){var S=Ed.SavSel=EditSaveSel(Ed);delete S.Editor}
+  
+  Fr.SwitchToPage=function(cls){
+    var Page=Fr.querySelector(cls);
+    if(!Page)return!1;
+    var Pgs=[],E=Fr.firstChild,i,Prev;
+    while(E){if(E.nodeType==1)if((Ga(E,'class')||'').indexOf('Page')+1){Pgs.push(E)}E=E.nextSibling}
+    if(Pgs.indexOf(Page)+1){
+      if(Prev=Fr.ActivePage){if(Prev==Page)return!0;if(Prev.OnTabLeave)Prev.OnTabLeave()}
+      Fr.querySelectorAll('.legbtn').forEach(function(lb){RemClass(lb,'active')});
+      //
+      for(i=0;i<Pgs.length;i++){E=Pgs[i];E.style.display=(E==Page)?'block':'none'}
+      Fr.ActivePage=Page;
+      if(Page.lb)AddClass(Page.lb,'active');
+      if(Page.OnTabEnter)Page.OnTabEnter();
+      if(E=Page.DefFocus){
+        if(typeof E=='function')E=E();
+        if(E)E.focus();
+      }
+      return!0
+    }else return!1
+  };
+  function Exec(C){Ed.focus();return document.execCommand(C)}
+  function Exec2(C,P){Ed.focus();return document.execCommand(C,!1,P)}
+  function TryExec(C){try{Exec(C)}catch(E){CLog(C,E.message)}}
+  function TryExec2(C,P){try{Exec2(C,P)}catch(E){CLog(C,P,E.message)}}
+  Ed.Exec=Exec;Ed.Exec2=Exec2;
+  
+  Tb.addHandler('C+B','Bold',n,function(){Exec('Bold')});
+  Tb.addHandler('C+I','Italic',n,function(){Exec('Italic')});
+  Tb.addHandler('C+U','Underline',n,function(){Exec('Underline')});
+  Tb.addHandler('CS+G','Gray',n,function(){Exec2('foreColor','gray')});
+  Tb.addHandler('CS+C','Color',n,function(){AskColor(!0)});
+  Tb.addHandler('CS+B','Background',n,function(){AskColor(!1)});
+  Tb.addHandler('CS+U','Url',n,function(){EditUrlClick(null,Ed)});
+  Tb.addHandler('CS+I','Image',n,function(){AskInsertImageFile(Ed)});
+  Tb.addHandler('CSA+I','Img Url',n,function(){AskInsertImageUrl(Ed)});
+  Tb.addHandler('C+H','Header',n,function(){AskHeaderLevel(null,Ed)});
+  Tb.addHandler('CS+L','List',n,function(){Ed.focus();EdInsertList(Ed)});
+  Tb.addHandler('CS+Q','Quote',n,function(){Ed.focus();EdInsertBQuote(Ed)});
+  Tb.addHandler('CS+Minus','--',n,function(){Exec('insertHorizontalRule')});
+  Tb.addHandler('CS+X','Unformat',n,function(){Exec('removeFormat')});
+  Tb.addHandler('CS+E','E->C',n,function(){En2Cz()});
+  Tb.addHandler('C+O','Load Html',n,function(){
+    // ask to open html from file...
+    Fin||Apc(Fr,Fin=Ce('input','type=file','accept=text/html','width:1px;height:1px;overflow:hidden;position:absolute;right:1px;top:1em;opacity:0.01'));
+    Fin.onchange=function(){
+      var L=Fin.files,R,F,S;
+      if(L&&L.length&&(F=L[0])){
+        FileName=F.name;
+        R=new FileReader();
+        R.onload=function(){
+          try{Ed.innerHTML=S=R.result}catch(E){R.innerText=S}
+          R=F=S=null
+        };
+        R.readAsText(F)
+      }
+      //if(S=Fin.parentNode)S.removeChild(Fin);Fin=null
+    };
+    Fin.click()
+  });
+  Tb.addHandler('C+S','Save Html',n,function(){
+    var S=Ed.innerHTML||'';
+    if(S.indexOf('charset=')<0)S='<meta charset=utf-8>\n'+S;
+    var U='data:text/html;base64,'+utoa(S),A=Ce('a','position:absolute;right:1px;top:1em;width:1px;height:1px;opacity:0.01');
+    S='';
+    A.href=U;
+    Apc(Fr,A);
+    A.download=FileName||'text.html';
+    A.click(); // we don't get saved filename this way...
+    Fr.removeChild(A);
+    A=U=null
+  });
+  
+  AEvent(window,'resize',WResize);
+  WResize();
+  function WResize(){
+    var H=rnd((window.innerHeight||0)*0.8);
+    if(H>360)Ed.style.maxHeight=H;
+  }
+  
+  function AskColor(bnF){
+    AskEditColor(Ed,bnF);
+  }
+  
+  function InitSelApi(Ed){
+    // dispatch 'selchange' event soon after selection changes... event.detail is SimpleSel object...
+    var LastSel,bnSelEr,nextNdId=1;
+    //
+    Ed.getNodeId=function(Nd){
+      var nid;
+      if(!Nd)return null;
+      if(nid=Nd.ndId)return nid+((Nd.nodeType==1)?(':'+Nd.tagName):0);
+      // refill all missing node-ids:
+      //!!!
+      // or set just this one:
+      return Nd.ndId||(Nd.ndId=nextNdId++);
+    };
+    Ed.findByNodeId=function(nid){
+      var F;
+      if(typeof nid!='number')nid=parseInt((''+nid).split(':')[0])||null;
+      if(!nid)return null;
+      function Fi(W,_1){
+        F=null;
+        while(W){
+          if(W.ndId==nid)return F=W;
+          if(Fi(W.firstChild))return F;
+          if(_1)break;
+          W=W.nextSibling;
+        }
+        return!1
+      }
+      Fi(Ed,!1);
+      return F
+    };
+    Ed.SimpleSel=function(bnNodes){
+      var elt;
+      function Tr(N,o){
+        if(!N)return etr=null;
+        if(N.nodeType==1){
+          N=N.firstChild;
+          while(N&&o-->0)N=N.nextSibling;
+          elt=N;
+          return{St:Ed.getNodeId(N),isSame:function(oth){return oth?(oth.St==this.St):!1}}
+        }
+        elt=N;
+        var P=N.parentNode,E=P?P.firstChild:null,idx=E?0:null;
+        while(E&&(E!=N)){E=E.nextSibling;idx++}
+        return{Par:Ed.getNodeId(P),idx:idx,cp:o,isSame:function(oth){return oth?(oth.Par==this.Par)&&(oth.idx==this.idx)&&(oth.cp==this.cp):!1}}
+      }
+      var Se=window.getSelection(),N1=Se.anchorNode,o1=Se.anchorOffset,N2=Se.focusNode,o2=Se.focusOffset;
+      var str,Si={St:str=Tr(N1,o1)},s_e=elt;
+      Si.En=(N1==N2)&&(o1==o2)?str:Tr(N2,o2);
+      if(bnNodes){Si.StNode=s_e;Si.EnNode=elt}
+      Si.isEmpty=!Si.St||Si.St.isSame(Si.En);
+      if(Si.isEmpty)if(s_e&&s_e.nodeType==1){Si.tag1=s_e.tagName;Si.isEmpty=!1}
+      Si.isSame=function(oth){
+        if(!oth)return!1;
+        if(this.tag1!==oth.tag1)return!1;
+        if(this.St){if(!this.St.isSame(oth.St))return!1}else if(oth.St)return!1;
+        if(this.En){if(!this.En.isSame(oth.En))return!1}else if(oth.En)return!1;
+        return!0
+      };
+      return Si
+    };
+    Ed.getSelImage=function(si){
+      if(si=Ed.SimpleSel(!0))if(si.StNode){
+        if(IsTag(si.StNode,'img'))return si.StNode;
+        var L=gbt(si.StNode,'img');if(L&&L.length==1)return L[0]
+      }
+      return null
+    };
+    function Check_SelChange(){
+      try{
+        function Disp(Si){
+          var e=document.createEvent('Event');
+          e.initEvent('selchange',!0,!1);// bubbles,not cancelable
+          e.detail=Si;
+          Ed.dispatchEvent(e)
+        }
+        var Si=Ed.SimpleSel();
+        if(Si&&(!LastSel||!Si.isSame(LastSel))){
+          LastSel=Si;
+          if(!Si.isEmpty){
+            Disp(Si);
+          }
+        }else
+        if(!Si&&LastSel){
+          Disp(LastSel=null)
+        }
+      }catch(ex){
+        bnSelEr||(bnSelEr=console&&console.error(ex)||!0)
+      }
+    }
+    Ed.checkSelChange=Check_SelChange;
+    //
+    var tmSelWatch;
+    AEvent(Ed,'focus',function(){window.Editor=Ed;tmSelWatch||(tmSelWatch=setInterval(Check_SelChange,250))});
+    AEvent(Ed,'blur',Ed.stopSelWatch=function(h){if(h=tmSelWatch){tmSelWatch=0;clearInterval(h)}});
+  }
+  var ImgInfo;
+  function InitAuxTools(Ed){
+    AEvent(Ed,'selchange',function(ev){
+      // if image is selected, popup image info tool:
+      var si=ev&&ev.detail;
+      if(si&&!si.isSame)si=0;
+      si||(si=Ed.SimpleSel());
+      if(si&&(si.tag1=='img')){
+        // open image info tool:
+        ImgInfo=AutoOpenImageInfo(Ed,Ed.getSelImage(si));
+      }else{
+        // close image info tool if opened and not focused:
+        //!!!todo focused?
+        if(ImgInfo){
+          if(ImgInfo.Close)ImgInfo.Close();
+          if(ImgInfo.parentNode)ImgInfo.parentNode.removeChild(ImgInfo);
+          ImgInfo=null
+        }
+      }
+    });
+  }
+  
+  if(cbBr=document.getElementById('cbBr')){
+    cbBr.onclick=function(){
+      var bn=bnBr=this.checked;
+      [].slice.call(document.querySelectorAll('.EdGroup .Editor')).forEach(function(Ed){
+        Ed.focus();
+        try{
+          document.execCommand('insertBrOnReturn',bn?'1':'0');
+          if(!bn)document.execCommand('defaultParagraphSeparator',!1,'p');
+        }catch(E){}
+      });
+      this.focus();
+    };
+  }
+  
+  Fr.SwitchToPage('.EditPage');
+  Ed.focus();
+  
+  TryExec2('enableObjectResizing',!0);
+  
+  if(cbBr){
+    var p;
+    if((bnBr=document.queryCommandValue('insertBrOnReturn'))!=='')cbBr.checked=!!bnBr;
+    if(!bnBr&&!Ed.firstElementChild){
+      Apc(Ed,p=document.createElement('p'));
+      Apc(p,document.createTextNode(' '));
+      Apc(p,document.createElement('br'));
+      p.focus()
+    }
+  }
+}
+
+function EditSaveSel(Editor){
+  // returns SavedSel object:
+  var Sel=window.getSelection();
+  var Sav={Editor:Editor,SelStart:{Node:Sel.anchorNode,Offs:Sel.anchorOffset},SelEnd:Sel.isCollapsed?null:{Node:Sel.focusNode,Offs:Sel.focusOffset},Text:Sel.toString()};
+  return Sav
+}
+function EditRestoreSel(SavedSel,Editor){
+  var Sav=SavedSel||{};
+  //
+  var Ed=Editor||Sav.Editor;
+  if(Ed&&Ed.focus)Ed.focus();
+  //
+  var Sel=window.getSelection(),Rng;
+  if(Sav.SelStart){
+    var St=Sav.SelStart,En=Sav.SelEnd||St;
+    if(St.Node){
+      Sel.removeAllRanges();
+      Rng=document.createRange();
+      Rng.setStart(St.Node,St.Offs||0);
+      Rng.setEnd(St.Node,St.Offs||0);
+      Sel.addRange(Rng);
+      try{En.Node&&Sel.extend(En.Node,En.Offs||0)}catch(Ex){console&&console.error(Ex);return!1}
+      return!0
+    }
+  }
+}
+
+function EdInsertList(Editor){
+  var Sel=window.getSelection(),Rng=Sel.getRangeAt(0);
+  var Frag=(!Rng||Sel.isCollapsed)?null:Rng.extractContents();
+  var Ul=Ce('ul'),Li=Ce('li'),El;
+  Apc(Ul,Li);
+  if(Frag)Apc(Li,Frag);
+  if(Rng){
+    Rng.insertNode(Ul);
+    if((Frag||Apc(Li,Txn(' ')))&&(El=Li.firstChild))Rng.selectNodeContents(Li);
+  }
+  return Li
+}
+
+function EdInsertBQuote(Editor){
+  var Sel=window.getSelection(),Rng=Sel.getRangeAt(0);
+  var Frag=(!Rng||Sel.isCollapsed)?null:Rng.extractContents();
+  var Bq=Ce('blockquote'),P=Ce('p'),El;
+  Apc(Bq,P);
+  if(Frag)Apc(P,Frag);
+  if(Rng){
+    Rng.insertNode(Bq);
+    if((Frag||Apc(P,Txn(' ')))&&(El=P.firstChild)){
+      P.focus();
+      Rng.selectNodeContents(P)
+    }
+  }
+  return P
+}
+
+function EdInsertImage1(Editor,Url){
+  Editor.focus();
+  var Img=Ce('img','APicture');
+  Img.src=Url;
+  var Sel=window.getSelection(),Rng=Sel.getRangeAt(0);
+  if(Rng){Rng.insertNode(Img);Rng.selectNodeContents(Img)}
+  return Img
+}
+
+function EnumColorList(F){
+  // call F(C) for each selected color: F('#000'); F('#811'); ...
+  var n=0,ColorList="\
+ffdfdf ffe7df ffefdf fff7df ffffdf f7ffdf efffdf e7ffdf dfffdf dfffe7 dfffef dffff7 dfffff dff7ff dfefff dfe7ff dfdfff e7dfff efdfff f7dfff ffdfff ffdff7 ffdfef ffdfe7 ffffff \
+ffbfbf ffcfbf ffdfbf ffefbf ffffbf efffbf dfffbf cfffbf bfffbf bfffcf bfffdf bfffef bfffff bfefff bfdfff bfcfff bfbfff cfbfff dfbfff efbfff ffbfff ffbfef ffbfdf ffbfcf ebebeb \
+ff9f9f ffb79f ffcf9f ffe79f ffff9f e7ff9f cfff9f b7ff9f 9fff9f 9fffb7 9fffcf 9fffe7 9fffff 9fe7ff 9fcfff 9fb7ff 9f9fff b79fff cf9fff e79fff ff9fff ff9fe7 ff9fcf ff9fb7 d7d7d7 \
+ff7f7f ff9f7f ffbf7f ffdf7f ffff7f dfff7f bfff7f 9fff7f 7fff7f 7fff9f 7fffbf 7fffdf 7fffff 7fdfff 7fbfff 7f9fff 7f7fff 9f7fff bf7fff df7fff ff7fff ff7fdf ff7fbf ff7f9f c4c4c4 \
+ff5f5f ff875f ffaf5f ffd75f ffff5f d7ff5f afff5f 87ff5f 5fff5f 5fff87 5fffaf 5fffd7 5fffff 5fd7ff 5fafff 5f87ff 5f5fff 875fff af5fff d75fff ff5fff ff5fd7 ff5faf ff5f87 b0b0b0 \
+ff3f3f ff6f3f ff9f3f ffcf3f ffff3f cfff3f 9fff3f 6fff3f 3fff3f 3fff6f 3fff9f 3fffcf 3fffff 3fcfff 3f9fff 3f6fff 3f3fff 6f3fff 9f3fff cf3fff ff3fff ff3fcf ff3f9f ff3f6f 9c9c9c \
+ff1f1f ff571f ff8f1f ffc71f ffff1f c7ff1f 8fff1f 57ff1f 1fff1f 1fff57 1fff8f 1fffc7 1fffff 1fc7ff 1f8fff 1f57ff 1f1fff 571fff 8f1fff c71fff ff1fff ff1fc7 ff1f8f ff1f57 898989 \
+ff0000 ff3f00 ff7f00 ffbf00 ffff00 bfff00 7fff00 3fff00 00ff00 00ff3f 00ff7f 00ffbf 00ffff 00bfff 007fff 003fff 0000ff 3f00ff 7f00ff bf00ff ff00ff ff00bf ff007f ff003f 757575 \
+df0000 df3700 df6f00 dfa700 dfdf00 a7df00 6fdf00 37df00 00df00 00df37 00df6f 00dfa7 00dfdf 00a7df 006fdf 0037df 0000df 3700df 6f00df a700df df00df df00a7 df006f df0037 626262 \
+bf0000 bf2f00 bf5f00 bf8f00 bfbf00 8fbf00 5fbf00 2fbf00 00bf00 00bf2f 00bf5f 00bf8f 00bfbf 008fbf 005fbf 002fbf 0000bf 2f00bf 5f00bf 8f00bf bf00bf bf008f bf005f bf002f 4e4e4e \
+9f0000 9f2700 9f4f00 9f7700 9f9f00 779f00 4f9f00 279f00 009f00 009f27 009f4f 009f77 009f9f 00779f 004f9f 00279f 00009f 27009f 4f009f 77009f 9f009f 9f0077 9f004f 9f0027 3a3a3a \
+7f0000 7f1f00 7f3f00 7f5f00 7f7f00 5f7f00 3f7f00 1f7f00 007f00 007f1f 007f3f 007f5f 007f7f 005f7f 003f7f 001f7f 00007f 1f007f 3f007f 5f007f 7f007f 7f005f 7f003f 7f001f 272727 \
+5f0000 5f1700 5f2f00 5f4700 5f5f00 475f00 2f5f00 175f00 005f00 005f17 005f2f 005f47 005f5f 00475f 002f5f 00175f 00005f 17005f 2f005f 47005f 5f005f 5f0047 5f002f 5f0017 131313 \
+3f0000 3f0f00 3f1f00 3f2f00 3f3f00 2f3f00 1f3f00 0f3f00 003f00 003f0f 003f1f 003f2f 003f3f 002f3f 001f3f 000f3f 00003f 0f003f 1f003f 2f003f 3f003f 3f002f 3f001f 3f000f 000000 \
+    ";
+  ColorList.replace(/([0-9a-f]+)/g,function(M,C){C&&F('#'+C,n++);return ''});
+  return n
+}
+
+var topZi=1000;
+
+function Movable(Elem){
+  var Leg;
+  function getLeg(){return Leg||((Leg=Elem.firstElementChild)&&IsTag(Leg,'legend'))?Leg:(Leg=null)}
+  function MvMouseDown(ev){
+    if(!(ev||(ev=window.event)))return;
+    var zi=Elem.style.zIndex=topZi+=4;
+    Leg||getLeg();
+    if((ev.target!=Elem)&&(!Leg||(ev.target!=Leg)))return;
+    var mx,my,minit=!0,M=Elem,S=M.style,ex=M.offsetLeft,ey=M.offsetTop,
+        Handler=Ce('span','position:fixed;left:0px;top:0px;right:0px;bottom:0px;opacity:0.01;cursor:move;z-index:'+(zi+1e6),
+          {onmousedown:CancelMove,onmouseup:CancelMove,onmousemove:ApplyMove});
+    Cancel(ev);
+    Sv(S,{left:ex+'px',top:ey+'px',right:'',bottom:''});
+    function CancelMove(ev){
+      var H=Handler,P=H&&H.parentNode;P&&P.removeChild(H);
+      Handler=null;
+      return!1
+    }
+    function ApplyMove(ev){
+      var x=ev.screenX,y=ev.screenY,dx=x-mx,dy=y-my;
+      mx=x;my=y;
+      if(minit){minit=!1;return}
+      Sv(S,{left:(ex+=dx)+'px',top:(ey+=dy)+'px'});
+    }
+    Apc(document.body,Handler);
+    return!1
+  }
+  if(Elem){
+    AEvent(Elem,'mousedown',MvMouseDown);
+    getLeg();
+  }
+  return Elem
+}
+
+function CreateDlg(Legend,id){
+  var Dlg=Ce('fieldset','Dlg','display:inline-block;position:fixed;background-color:ButtonFace;padding:2px;z-index:'+(++topZi));
+  if(id)Dlg.id=id;
+  if(Legend)Apc(Dlg,Tx(Ce('legend'),Legend));
+  Movable(Dlg);
+  return Dlg
+}
+function TopDlg(D){D.style.zIndex=++topZi;return D}
+
+function CenterDlg(Dlg){
+  if(!Dlg||Dlg.NoCenter)return Dlg;
+  var S=Dlg.style,vis=S.visibility;
+  S.visibility='hidden';S.display='inline-block';S.position='fixed';
+  var w=Dlg.offsetWidth,ww=window.innerWidth;
+  if(w&&ww)S.left=rnd((ww-w)/2)+'px';
+  var h=Dlg.offsetHeight,wh=window.innerHeight;
+  if(h&&wh)S.top=rnd((wh-h)/2)+'px';
+  S.visibility=vis;
+  return Dlg
+}
+function CenterOver(Dlg,Ctl){
+  if(!Ctl||!Ctl.getBoundingClientRect)return CenterDlg(Dlg);
+  var S=Dlg.style,vis=S.visibility;
+  S.visibility='hidden';S.display='inline-block';S.position='fixed';
+  var dw=Dlg.offsetWidth||0,dh=Dlg.offsetHeight||0;
+  var R=Ctl.getBoundingClientRect(),X=(R.left+R.right-dw)/2,Y=(R.top+R.bottom-dh)/2;
+  var ww=window.innerWidth,wh=window.innerHeight;
+  if(ww&&(X+dw>ww))X=ww-dw;
+  if(wh&&(Y+dh>wh))Y=wh-dh;
+  if(X<0)X=0;if(Y<0)Y=0;
+  S.left=rnd(X)+'px';
+  S.top=rnd(Y)+'px';
+  S.visibility=vis;
+  return Dlg
+}
+
+function MakeCloseBtn(click){
+  return Sy(Cinp({type:'button',value:'X',onclick:click}),'position:absolute;right:-8px;top:-8px;background:#C03010;color:white;font-size:10px;padding:0px;z-index:'+(++topZi)+';width:18px;height:18px')
+}
+
+function Popup(Init,AfterClose){
+  var Pup={
+      Shade:Ce('div','position:fixed;left:0px;top:0px;right:0px;bottom:0px;background:black;opacity:0.25;z-index:'+(++topZi)),
+      Popup:CreateDlg(),
+      PInner:Ce('div'),
+      AfterClose:AfterClose
+      },C,Oc;
+  Pup.Popup.PopInfo=Pup.Shade.PopInfo=Pup.PInner.PopInfo=Pup;
+  //
+  Ce(Pup.Popup,C=Pup.btClose=MakeCloseBtn(ClosePopup),
+     Pup.Title=Ce('span'),Ce('div','clear:both'),Pup.PInner);
+  //
+  AEvent(Pup.Popup,'keydown',function(E){
+    switch(Eke(E)){case 'Escape':case 'Esc':case 27:{ClosePopup(E,this);return!1}}
+  });
+  AEvent(Pup.Shade,'mousedown',EClosePopup);
+  AEvent(Pup.Shade,'click',EClosePopup);
+  //
+  Hid(Pup.Popup);
+  //
+  Ce(document.body,Pup.Shade,Pup.Popup);
+  if(Init&&(Init(Pup.PInner)===!1)){ClosePopup(null,Pup);return !1}
+  //
+  var Dlg=Pup.Popup;
+  (Oc=Dlg.OnCenter||Pup.OnCenter)?(Dlg.OnCenter=Oc,Dlg.OnCenter(Dlg)):CenterDlg(Dlg);
+  Dlg.OnCenter=Pup.OnCenter=null; // used once...
+  //
+  Vis(Pup.Popup);
+  //
+  (C=Pup.PInner.ActiveControl||C)&&C.focus&&C.focus();
+  return Pup;
+}
+function LPopup(Init,AfterClose){
+  return Popup(function(P){
+      var S=P.PopInfo.Shade.style;
+      S.background='none';S.opacity=0;
+      return Init(P)
+    },AfterClose);
+}
+function FindPopup(E){var P;while(E&&!(P=E.PopInfo))E=E.parentNode;return P?P.Popup:null}
+function EClosePopup(E,t){t=this;t._Close=ClosePopup;t._Close(E||window.event);t._Close=null}
+function ClosePopup(E,Pup){
+  E&&Cancel(E);
+  if(!(Pup=(this&&this.PopInfo)||Pup||FindPopup(E&&E.target)||FindPopup(this)))return !1;
+  if(Pup.PopInfo)Pup=Pup.PopInfo;
+  function Hide(C,p){(p=C&&(C.style.display='none',C.parentNode))&&p.removeChild(C)}
+  Hide(Pup.Shade);
+  Hide(Pup.Popup);
+  try{
+    Pup.AfterClose&&Pup.AfterClose(Pup)
+  }finally{
+    function Un(p,C){if(C=Pup[p])C.PopInfo=null;Pup[p]=null}
+    Un('Shade');Un('Popup');Un('PInner');
+  }
+  return!E
+}
+
+function GetSelPosRect(){
+  var Sel=window.getSelection(),Rng=Sel&&Sel.getRangeAt(0),R;
+  if(Rng&&Rng.getBoundingClientRect){
+    R=Rng.getBoundingClientRect();
+    if(R)return Sv({},R) // clone...
+  }
+  return null
+}
+
+function CenterSelDlg(Dlg,SelRect,Editor){
+  if(!SelRect)return CenterDlg(Dlg);
+  var R=SelRect,dh=Dlg.offsetHeight,nx=R.left,ny=null,b=R.bottom,t=R.top;
+  if(b){
+    if(b+dh<=window.innerHeight){ny=b+3}
+    else if(t>=dh){ny=t-dh}
+  }
+  if(ny===null)return Editor?CenterOver(Dlg,Editor):CenterDlg(Dlg);
+  //
+  var S=Dlg.style,vis=S.visibility;
+  S.visibility='hidden';S.position='fixed';S.display='inline-block';
+  var dw=Dlg.offsetWidth||0,dh=Dlg.offsetHeight||0;
+  var X=(R.left+R.right-dw)/2,Y=ny;
+  var ww=window.innerWidth,wh=window.innerHeight;
+  if(ww&&(X+dw>ww))X=ww-dw;
+  if(wh&&(Y+dh>wh))Y=wh-dh;
+  (X<0)&&(X=0);(Y<0)&&(Y=0);
+  S.left=rnd(X)+'px';
+  S.top=rnd(Y)+'px';
+  S.visibility=vis;
+  return Dlg
+}
+
+function Func_SelCenterDlg(Editor){
+  var SelPos=GetSelPosRect();
+  if(SelPos&&SelPos.bottom){
+    return function __CenterDlgSel(Dlg){
+        Dlg=((this!=window)?this:0)||Dlg;
+        CenterSelDlg(Dlg,SelPos,Editor);
+      };
+  }
+  return function __CenterDlgEditor(Dlg){CenterOver(Dlg||this,Editor)};
+}
+
+function EditUrl(Editor,ANode){
+  var SavSel=EditSaveSel(Editor),EUrl,EText,cbAuto,PInner;
+  var OnCenter=Editor?Func_SelCenterDlg(Editor):null;
+  
+  LPopup(function(P){
+      // make dialog:
+      PInner=P;
+      var Text,Url,bnAuto,Pup=P.PopInfo;
+      if(OnCenter)Pup.OnCenter=Pup.Popup.OnCenter=OnCenter;
+      if(IsTag(ANode,'a')){
+        // edit existing:
+        Text=ANode.innerText;
+        Url=ANode.href;
+        bnAuto=(Text==AutoText(Url))
+      }else{
+        // insert new:
+        ANode=null;
+        Url='';
+        Text=SavSel.Text||'';
+        bnAuto=!Text.trim()
+      }
+      Pup.bnApply=!0;
+      Ce(P,Ce('div',CLab('URL:'),EUrl=P.ActiveControl=Cinp({type:'text',size:48,value:Url})),
+           Ce('div',CLab('Text:'),EText=Cinp({type:'text',size:24,value:Text}),cbAuto=Sy(Ccb({Label:'Auto',checked:bnAuto}),'margin-left:1em')),
+           Ce('div','display:inline-block;float:right',Cinp({type:'button',value:'OK',onclick:ApplyDlg}),Cinp({type:'button',value:'Cancel',onclick:CancelDlg}))
+        );
+      if(cbAuto=gbt(cbAuto,'input')[0])AEvent(EText,'input',function(E){cbAuto.checked=!1});
+      AEvent(P,'keydown',function(E){switch(Eke(E||window.event)){case 'Enter':case 13:return ApplyDlg(E);case 'Escape':case 'Esc':case 27:return CancelDlg(E)}},!0);
+      function Apply2(E,bn){
+        Cancel(E||window.event);
+        var Pup=PInner.PopInfo;
+        Pup.bnApply=bn;
+        ClosePopup(null,Pup);
+        return!1
+      }
+      function ApplyDlg(E){return Apply2(E,!0)}
+      function CancelDlg(E){return Apply2(E,!1)}
+      EUrl.setSelectionRange(0,EUrl.value.length,'forward')
+    },function(Pup){
+      // apply:
+      EditRestoreSel(SavSel,Editor);
+      if(!Pup.bnApply)return;
+      var bnAuto=cbAuto?cbAuto.checked:!1;
+      var A,Url=EUrl.value,Text=bnAuto?AutoText(Url):EText.value;
+      var Sel=window.getSelection(),Rng=Sel.getRangeAt(0);
+      if(Url&&(Url.indexOf(':')<0)&&(Url.indexOf('//')<0)&&(Url.substring(0,1)!='#'))Url='http://'+Url;
+      if(A=ANode){
+        // update existing:
+        if(Url){
+          Tx(A,Text||AutoText(Url)).href=Url
+        }else{
+          Rng.deleteContents();
+          Text&&Rng.insertNode(A=Txn(EText.value))
+        }
+      }else{
+        // insert new:
+        if(Url){
+          A=Tx(Ce('a',{href:Url}),Text||AutoText(Url));
+          Rng.deleteContents();
+          Rng.insertNode(A);
+          if(!A.nextSibling||A.nextSibling.nodeType!=3)A.parentNode&&Apc(A.parentNode,Txn(' '),A.nextSibling||null)
+        }
+      }
+      A&&Rng.selectNode(A)
+    });
+  function AutoText(U){return MaxStr(StripUrlPrefix(U),48)}
+  function StripUrlPrefix(U){return (U||'').replace(/^https?:\x2f\x2f/i,'')}
+  function MaxStr(S,n){return((n>3)&&((S||'').length>n))?(S.substring(0,n-3)+'\u2026'):S}
+}
+function GetSelElem(){
+  var Sel=window.getSelection();
+  var Nd=Sel.anchorNode,offs=Sel.anchorOffset,Ne=Sel.focusNode,No=Sel.focusOffset,S,Nx;
+  if(Nd){
+    if(Ne&&(Nd!=Ne))if(Nd.compareDocumentPosition(Ne)&2){S=Nd;Nd=Ne;Ne=S;S=offs;offs=No;No=S}
+    if(Nd.nodeType>1){
+      if((S=Nd.nodeValue)&&(offs==S.length))if(Nx=Nd.nextSibling)Nd=Nx,offs=0;
+      if(Nd.nodeType>1)Nd=Nd.parentNode;
+    }else{
+      Nx=Nd.firstChild;
+      while(offs-->0&&Nx)Nx=Nx.nextSibling;
+      Nd=Nx||Nd
+    }
+  }
+  return Nd
+}
+function EventEditor(E,ths){
+  var Ed,El=(E&&E.target)?E.target:(ths&&(ths!=window))?ths:document.activeElement;
+  while(El&&!(Ed=El.Editor))El=El.parentNode;
+  return Ed
+}
+function EditUrlClick(E,Editor){
+  Cancel(E||(E=window.event));
+  EditUrl(Editor||EventEditor(E,this),GetSelElem());
+  return!1
+}
+
+function AskHeaderLevel(E,Editor){
+  Cancel(E||(E=window.event));
+  var SavSel=EditSaveSel(Editor),PInner,OnCenter=Editor?Func_SelCenterDlg(Editor):null;
+  var HNode=GetSelElem(),EText,ELevel;
+  
+  LPopup(function(P){
+    // make dialog:
+    PInner=P;
+    var Pup=P.PopInfo,Text,A,Level;
+    if(OnCenter)Pup.OnCenter=Pup.Popup.OnCenter=OnCenter;
+    if(HNode&&(A=/H([1-6])/i.exec(HNode.tagName))){
+      // edit existing:
+      Level=parseInt(A[1]);
+      Text=HNode.innerText;
+    }else{
+      // insert new:
+      HNode=null;
+      Text=SavSel.Text||'';
+      Level=((A=document.body.getElementsByTagName('h1'))&&A.length)?2:1;
+    }
+    Pup.bnApply=!0;
+    Ce(P,Ce('div',CLab('Text:'),EText=P.ActiveControl=Cinp({type:'text',size:48,value:Text})),
+         Ce('div',CLab('Level:'),ELevel=Cinp({type:'text',Size:3,value:Level})),
+         Ce('div','display:inline-block;float:right',Cinp({type:'button',value:'OK',onclick:ApplyDlg}),Cinp({type:'button',value:'Cancel',onclick:CancelDlg}))
+    );
+    AEvent(P,'keydown',function(E){switch(Eke(E||window.event)){case 'Enter':case 13:return ApplyDlg(E);case 'Escape':case 'Esc':case 27:return CancelDlg(E)}},!0);
+    function Apply2(E,bn){
+      Cancel(E||window.event);
+      var Pup=PInner.PopInfo;
+      Pup.bnApply=bn;
+      ClosePopup(null,Pup);
+      return!1
+    }
+    function ApplyDlg(E){return Apply2(E,!0)}
+    function CancelDlg(E){return Apply2(E,!1)}
+    EText.setSelectionRange(0,EText.value.length,'forward');
+  },function(Pup){
+    // apply:
+    EditRestoreSel(SavSel,Editor);
+    if(!Pup.bnApply)return;
+    var E,Text=EText.value,Level=parseInt(ELevel.value);
+    var Sel=window.getSelection(),Rng=Sel.getRangeAt(0);
+    if(!Level){
+      Rng.deleteContents();
+      Text&&Rng.insertNode(E=Txn(Text))
+    }else
+    if((E=HNode)&&(E.tagName.toLowerCase()=='h'+Level)){
+      // update existing:
+      Tx(H,Text);
+    }else{
+      E=Tx(Ce('h'+Level),Text);
+      Rng.deleteContents();
+      Rng.insertNode(E);
+    }
+    E&&Rng.selectNode(E)
+  })
+}
+
+function InputQuery(Title,Value,OnApply,OnCancel,OnInit){
+  var Pup;
+  Popup(
+    function(P){// init...
+      Pup=P.PopInfo;
+      Ce(P,Ce('div',P.Lab=CLab(''),P.Edit=P.ActiveControl=Cinp({type:'text',name:'Edit',size:40,value:Value||'',onkeydown:InpKeyDown})),
+           Ce('div',Ce('span','float:right',Cinp({type:'button',value:'OK',onclick:OkClick}),Txn(' '),Cinp({type:'button',value:'Cancel',onclick:CancelClick})))
+        );
+      OnInit&&OnInit(P);
+    },
+    function(P){// close...
+      var P=Pup.PInner||{},par=P.Edit.value;
+      P._Cbk=Pup.bnApply?OnApply:(par=null,OnCancel);
+      OnApply=OnCancel=null;
+      if(P._Cbk)P._Cbk(par);
+      Pup=null
+    }
+  );
+  function OkClick(){Pup.bnApply=!0;ClosePopup(null,Pup)}
+  function CancelClick(){Pup.bnApply=!1;ClosePopup(null,Pup)}
+}
+
+var bnBgRound=1;
+
+function ApplyEditColor(Editor,Color,bnF){
+  if(Editor.Exec2){
+    Editor.Exec2(bnF?'foreColor':'backColor',Color);
+    if(!bnF){
+      var N=GetSelElem();
+      if(N)N.style.borderRadius=(bnBgRound?3:0)+'px';
+      // get rid of weird rgb() syntax in Firefox for background:
+      var S=Ga(N,'style')||'',S2;
+      if(S.indexOf('rgb')>0){
+        S2=S.replace(/rgb\(([0-9.]+)\s*,?\s*([0-9.]+)\s*,?\s*([0-9.]+)\s*[0-9,]*\)/g,function(M,r,g,b){return '#'+Hex2(r)+Hex2(g)+Hex2(b)});
+        if(S2&&(S2!=S))Sa(N,'style',S2);
+      }
+    }
+  }else if(IsTag(Editor,'input'))Editor.value=Color
+}
+
+function AskEditColor(Editor,bnF){
+  // must preserve selection during popup dialog...
+  var SavSel=EditSaveSel(Editor);
+  ColorPopup(Editor,function __Apply(Color,Edit){
+      EditRestoreSel(SavSel,Editor);
+      Editor.focus();
+      Color&&ApplyEditColor(Editor,Color,bnF);
+    },function __Cancel(){
+      EditRestoreSel(SavSel,Editor);
+    },bnF);
+}
+function FromRgb(C,a){
+  if((C=(''+C).trim()).substr(0,1)=='#')return C;
+  switch(C.length){
+    case 3:case 6:return '#'+C;
+    default:{
+      if(C.substr(0,3)=='rgb'){
+        if(a=/rgba?\(([0-9.]+)\s*,?\s*([0-9.]+)\s*,?\s*([0-9.]+)\s*[0-9,]*\)/.exec(C))return '#'+Hex2(a[1])+Hex2(a[2])+Hex2(a[3]);
+      }else
+        if(a=/^([0-9]+)$/.exec(C))return '#'+Hex2((a>>>16)&255)+Hex2((a>>>8)&255)+Hex2(a&255);
+    }
+  }
+  return C
+}
+
+function EdInsertImage(Editor,Url,Styl){
+  Editor.focus();
+  var Img=Ce('img','APicture');
+  Img.src=Url;
+  if(Styl)Sy(Img,Styl);
+  var Sel=window.getSelection(),Rng=Sel.getRangeAt(0);
+  if(Rng){Rng.insertNode(Img);Rng.selectNodeContents(Img)}
+  return Img
+}
+// from Discuss.js
+    function MvUpAfter(E){var P,P2,N;E&&(P=E.parentNode)&&(N=P.nextSibling,P2=P.parentNode)&&(P.removeChild(E),Apc(P2,E,N||null));return E}
+    function EdInsertImageElem(Editor,Img){
+      Editor.focus();
+      var Sel=window.getSelection(),Rng=Sel.getRangeAt(0);
+      if(Rng){Rng.collapse(!1);Rng.insertNode(Img);IsTag(Img.parentNode,'img')&&MvUpAfter(Img);Img.parentNode&&Apc(Img.parentNode,Ce('br'),Img.nextSibling);Rng.selectNodeContents(Img)}
+      return Img
+    }
+    function ImgSetSize(Img,maxWidth){
+      Sy(Img,'max-width:95%');
+      var w=Img.naturalWidth;
+      (w&&(maxWidth<w))&&Sa(Img,'width',maxWidth);
+      return Img
+    }
+
+function InputPopup(Init,OnApply,OnCancel){
+  // popup simple input field...
+  var Pin;
+  LPopup(function(P){
+      (Pin=P).Apply=function(){ApplyDlg(Pin)};
+      Apc(P,P.Input=P.PopInfo.Input=P.ActiveControl=Cinp({type:'text',size:20}));
+      //P.PopInfo.btClose.style.display='none';
+      AEvent(P,'keydown',function(E){var K=EKey(E||(E=window.event)),S=EShift(E);switch(K){case 13:return Cancel(E)||ApplyDlg(E.target)}},!0);
+      return Init(P)
+    },function(Pup){if(Pin)Pin.Apply=OnApply=null;IsFunc(OnCancel)&&OnCancel(Pin);Pin=OnCancel=null});
+  function ApplyDlg(C){
+    var P=Pin||{},Pup=P.PopInfo,Fu=OnApply;
+    OnApply=OnCancel=P.Apply=Pin=null;
+    try{IsFunc(Fu)&&Fu(P)}finally{Pup&&ClosePopup(null,Pup)}
+  }
+}
+
+var LastImgStyle;
+
+function AskInsertImageUrl(Editor){
+  var Pin,SavSel=EditSaveSel(Editor);
+  InputPopup(
+    function __Init(P){
+      var wh,r2,S,Pw;
+      Pin=P;
+      P.Input.size=40;
+      Apc(wh=P.Input.parentNode,Ce('span','"Image Url:"',Ce('br')),P.Input);
+      Apc(wh,r2=Ce('div',Ce('span','"Style:"'),Ce('br'),P.EStyle=Cinp({type:'text',size:40,value:LastImgStyle||''})),P.Input.nextSibling||null);
+      Apc(wh,Ce('div',Ce('span','float:right',Sy(Cinp({type:'button',value:'OK',onclick:OkClick}),'margin:2px'))),r2.nextSibling||null);
+      P.parentNode.OnCenter=Func_SelCenterDlg(Editor);
+      if(S=P.PopInfo.Shade)S.parentNode&&S.parentNode.removeChild(S);
+      if(Pw=P.PopInfo.Popup)Apc(Pw,Ce('legend','"Insert image"'),Pw.firstChild)
+    },
+    function __Apply(P){
+      EditRestoreSel(SavSel,Editor);
+      var U=P.Input.value;
+      if(U)EdInsertImage(Editor,U,P.EStyle.value||null);
+      Pin=SavSel=null;
+    },
+    function __Cancel(){
+      EditRestoreSel(SavSel,Editor)
+      Pin=SavSel=null;
+    });
+  function OkClick(ev){Pin&&Pin.Apply()}
+}
+function AskInsertImageFile(Editor){
+//!!!TODO - check!
+  var SavSel=EditSaveSel(Editor);
+  Editor.fInput||(Editor.fInput=Sy(Cinp({type:'file',multiple:'multiple',accept:'.jpg,.jpeg,.png,.svg,.gif,image/*'}),'opacity:0.1;width:1px;height:1px;overflow:hidden;float:right'));
+  if(!Editor.fInput.parentNode){
+    var El=Editor,Bef;while(El&&!El.IsRepUi)El=(Bef=El).parentNode;
+    El&&Apc(El,Editor.fInput,Bef?Bef.nextSibling:null)
+  }
+  Editor.fInput.onchange=function(E){
+      var fInput=this;
+      var ldOp={
+            files:fInput.files,idx:0,
+            loadNext:function(){
+              var Fi=(this.files&&(this.idx<this.files.length))?this.files[this.idx++]:(this.files=null);
+              if(!Fi){return!1}
+              var aImg=Ce('img','position:fixed;visibility:hidden');
+              var R=new FileReader();
+              R.onload=(function(aImg,Editor,ldOp){return function(E){aImg.onload=function(){aImg.onload=null;aImg.parentNode&&aImg.parentNode.removeChild(aImg);aImg.style.position='relative';ImgSetSize(Vis(aImg),Editor.clientWidth||Editor.offsetWidth);EdInsertImageElem(Editor,aImg);ldOp.loadNext()};aImg.onerror=function(){ldOp.loadNext()};aImg.src=E.target.result}})(aImg,Editor,this);
+              R.onerror=(function(aImg,Editor,ldOp){return function(E){ldOp.loadNext()}})(aImg,Editor,this);
+              R.readAsDataURL(Fi);
+            },
+          };
+      ldOp.loadNext()
+    };
+  Editor.fInput.click()
+}
+function AutoOpenImageInfo(Editor,Img){
+  //!!!todo
+}
+
+function ColorPopup(Editor,OnApply,OnCancel,bnF){ // OnApply(Color,Editor) , OnCancel(null,Editor)
+  var SavSel=Editor?EditSaveSel(Editor):null;
+  var OnCenter=Editor?Func_SelCenterDlg(Editor):null;
+  var SelColor=null; // updated in CellMouseDown & EColorChange
+  var bnApply,Pup,CSample;
+  var cssCellSize='width:10px;height:10px;',cssGridSize='width:251px;';
+  if(IsTag(Editor,'input'))SelColor=Editor.value;
+  else
+  if(Editor&&(SavSel.SelStart!=SavSel.SelEnd)){
+    function GetSelColor(){
+      var Sel=window.getSelection(),Rng=Sel.getRangeAt(0);
+      var E=Rng.startContainer,C,S,idx,so=Rng.startOffset;
+      if(E&&(E.nodeType==3)&&(so>=(E.value||'').length)){E=E.nextSibling||E;so=0}
+      else
+      if(E.nodeType==1){idx=so;C=E.firstChild;while(C&&((idx--)>0))C=C.nextSibling;C&&(E=C)}
+      while(E&&(E.nodeType>1))E=E.parentNode;
+      var p1=bnF?'color':'bgcolor',p2=bnF?p1:'backgroundColor';
+      while(E){if(((C=Ga(E,p1))||((S=E.style)&&(C=S[p2])))&&'default inherit none'.indexOf(C)<0)return C;E=E.parentNode}
+      return null
+    }
+    SelColor=FromRgb(GetSelColor())
+  }
+  
+  LPopup(function __Init(Pin){
+      Pup=Pin.PopInfo;
+      if(OnCenter)Pup.OnCenter=Pup.Popup.OnCenter=OnCenter;
+      OnCenter=null;
+      Tx(Pup.Title,'Select Color');
+      // make color grid:
+      var CGrid=Ce('div','float:left;'+cssGridSize);
+      Apc(Pin,CGrid);
+      EnumColorList(function(C){Apc(CGrid,ColorCell(C))});
+      // make input for hex color edit:
+      var Cri,Ec;
+      Ce(Pin,CRi=Ce('div','float:left;margin-left:0.33em',
+          Ce('span','cselLab','"Color:"','display:inline-block;width:3em'),
+          Pin.ActiveControl=Ec=Cls(Cinp({type:'text',size:8,value:(SelColor||''),oninput:EColorChange,onchange:EColorChange,onfocus:EColorFocus}),'cselEdit'),
+          Ce('br'),CSample=Ce('div','display:inline-block;width:3em;height:1em;margin:2px 0px 0px 3em'),
+          bnF?null:Ce('div',Ccb({Label:'Round',checked:bnBgRound,onclick:RoundClick})),
+          Ce('br'),Sy(Cinp({type:'button',value:'OK',onclick:function(){bnApply=1;ClosePopup(null,Pup)}}),'margin:2px 0px 0px 2em')
+          ),
+        Ce('div','clear:both'));
+      //
+      AEvent(Pin,'keydown',function(E){
+        function Ap(b){bnApply=b;ClosePopup(null,Pup);return Cancel(E)}
+        E||(E=window.event);
+        switch(Eke(E)){
+          case 'Enter':case 13:return Ap(1);
+          case 'Escape':case 'Esc':case 27:return Ap(0)
+        }
+      },!0);
+      cssCellSize=cssGridSize='';
+      SelColor&&Ec.onchange({target:Ec});
+      //
+    },function __Apply(PopInfo){
+      Editor&&EditRestoreSel(SavSel,Editor);
+      // call OnApply or OnCancel once:
+      var Fu=bnApply?OnApply:(SelColor=null,OnCancel);
+      Pup=SavSel=CSample=OnApply=OnCancel=null;
+      Fu&&Fu(SelColor,Editor)
+    });
+  
+  function ColorCell(C){return Ce('span',{title:C,onmousedown:CellMouseDown},'background-color:'+C+';display:inline-block;float:left;'+cssCellSize)}
+  function EColorChange(E){
+    var Ed=(E||(E=window.event)).target||((this!=window)?this:null),S,a;
+    if(!Ed)return;
+    S=Ed.value||'';
+    if(S.substring(0,1)!='#'){
+      if(a=/^\s*#?([0-9a-f][0-9a-f][0-9a-f]|[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f])\s*$/i.exec(S)){
+        S='#'+a[1];
+        a=null;
+      }
+    }
+    CSample&&(CSample.style.backgroundColor=S);
+    SelColor=S
+  }
+  function EColorFocus(E){
+    if(!(E=(E||window.event||{}).target))return;
+    if(!E.selectionStart)E.setSelectionRange(0,(E.value||'').length);
+  }
+  function CellMouseDown(E){
+    // set SelColor, set bnApply, close dialog...
+    var C=(E||(E=window.event)||{}).target;
+    if(!C)return;
+    SelColor=C.title||C.style.backgroundColor||'';
+    if(SelColor.substring(0,3)=='rgb'){
+      var A=/rgba?\(([0-9]+)\s*,?\s*([0-9]+)\s*,?\s*([0-9]+)\s*[0-9,]*\)/.exec(SelColor);
+      if(A){
+        SelColor='#'+Hex2(A[1])+Hex2(A[2])+Hex2(A[3]);
+        A=null;
+      }
+    }
+    bnApply=1;
+    Pup&&ClosePopup(null,Pup);
+    return!1
+  }
+  function RoundClick(){bnBgRound=this.checked}
+}
+function Hex2(n){
+  if(typeof n!='number')n=parseInt(n,10)||0;
+  if((n=n.toString(16)).length==1)n='0'+n;
+  return n
+}
+
+function En2Cz(){
+  var Sel=window.getSelection(),t=Sel?(Sel.toString()||'').trim():null;
+  if(t){
+    AjaxGet('https://bible.pi-alpha.org/dict?dict=EN-CZ&text='+t+'&NoHist=1&plain=1',{responseType:'text'},function(resp,X){
+      if(typeof resp=='string')PopupText(t,resp);
+      else PopupText(t,'Not found...');
+    });
+  }
+}
+
+function PopupText(T,S){
+  var Ta,d,Fs=Movable(Ce('fieldset','position:fixed',Tx(Ce('legend'),T),MakeCloseBtn(Close),Ta=Ce('textarea',{value:S,cols:30,rows:5},'spellcheck=false')));
+  AEvent(Fs,'keydown',function(ev){
+    switch(Eke(ev=ev||window.event)){
+      case 'Escape':case 'Esc':case 27:return Close(ev)
+    }
+  },!0);
+  Hid(Fs);
+  Ce(document.body,Fs);
+  if((d=Ta.scrollHeight-Ta.clientHeight)>0)Ta.style.height=Ta.offsetHeight+d+2+'px';
+  if((d=Ta.scrollWidth-Ta.clientWidth)>0)Ta.style.width=Ta.offsetWidth+d+2+'px';
+  CenterSelDlg(Fs,GetSelPosRect());
+  Vis(Fs);
+  Ta.focus();
+  function Close(ev){
+    Cancel(ev=ev||window.event);
+    Fs.style.display='none';
+    Fs.parentNode.removeChild(Fs);
+    Fs=Ta=null;
+    return!1
+  }
+}
+
+function OpenJsCalc(ev){
+  Cancel(ev||window.event);
+  var Frame,Ed,ERes,Leg,btCol,btX,bnEsc,zi=topZi+=10;
+  function JsExec(){
+    var expr=Ed.value,res,bn;
+    try{
+      res=eval(expr);
+      bn=!0
+    }catch(Ex){
+      res=Ex.message;bn=!1
+    }
+    ERes.value=res;
+    return bn
+  }
+  function btExecClick(){JsExec();return!1}
+  function CloseClick(){Frame.parentNode.removeChild(Frame);Frame=Ed=ERes=Leg=btCol=btX=null;return!1}
+  function Collapse(){Sv(Frame.style,{maxHeight:'2em',overflow:'hidden'});Sv(Tx(btCol,'\u02c5'),{onclick:Expand});btCol.style.marginTop=btX.style.marginTop='0px';return!1}
+  function Expand(){Sv(Frame.style,{maxHeight:'none',overflow:'visible'});Sv(Tx(btCol,'\u02c4'),{onclick:Collapse});btCol.style.marginTop=btX.style.marginTop='-24px';return!1}
+  function EJsKeyDown(ev){
+    var K=Eke(ev||(ev=window.event)),S=EShift(ev),bnWasEsc=bnEsc;
+    bnEsc=!1;
+    switch(S){
+      case '': {
+        switch(K){
+          case 'F9':case 120:{JsExec();return!1}
+          case 'Escape': case 'Esc': case 27: {
+            if(bnWasEsc){CloseClick();return!1} // double-escape closes calc...
+            bnEsc=!0;
+            return;
+          }
+        }
+        break;
+      }
+    }
+  }
+  Apc(document.body,
+    Movable(App(
+      Frame=Ce('fieldset','jscalc','position:fixed;right:1em;top:10em;z-index:'+zi),
+      Leg=Ce('legend','"Js Calc"'),
+      btX=Ce('span','"X"','position:absolute;right:2px;margin-top:-24px;cursor:pointer','btn',{onclick:CloseClick}),
+      btCol=Ce('span','"\u02c4"','position:absolute;right:20px;margin-top:-24px;cursor:pointer','btn',{title:'Collapse',onclick:Collapse}),
+      Ed=Ce('textarea',{cols:64,rows:5,onkeydown:EJsKeyDown},'spellcheck=false'),Ce('br'),
+      Cinp({type:'button',value:'Exec',onclick:btExecClick}),Ce('br'),
+      ERes=Ce('textarea',{cols:64,rows:3},'spellcheck=false'))
+    ));
+  Ed.focus();
+  //
+  return!1
+}
+
+function AskSave(E){
+  // save including editor ui:
+  Cancel(E||window.event);
+  var B=document.body,P;
+  E=((this!=window)&&this)||(E&&E.target)||B;
+  while(E&&(P=E.parentNode)&&(P.nodeType==1))E=P;
+  var H=E.outerHTML
+  var D="data:text/html;base64,"+btoa(unescape(encodeURIComponent(H)));
+  var en=encodeURI(D),A=document.createElement('a');
+  D='';
+  A.setAttribute('href',en);
+  A.setAttribute('download','file.html');
+  B.appendChild(A);
+  A.click();
+  B.removeChild(A);
+  return!1
+}
+
+</script>
+
+
+<!-- Footer -->
+<!-- /Footer -->
+</body>
+</html>

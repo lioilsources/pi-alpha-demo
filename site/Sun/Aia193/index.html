@@ -1,0 +1,256 @@
+<html>
+<head>
+<link rel="icon" type="image/png" sizes="32x32" href="/EVb_32ico.png">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>SDO/AIA 193 image processing</title>
+<style>
+.gray {color:gray}
+img {border:none}
+code { margin-left: 2em; border: 1px solid gray; background: #fbedac; padding: 2px; display:inline-block; white-space:nowrap; }
+code,.code { font-family: Courier New, fixed; }
+body {background-color: #fffcef}
+@media print {
+ code,body {background: transparent}
+}
+</style>
+<style>
+.article{max-width:960px;margin:auto}
+.topBar{position:fixed;left:0px;right:0px;top:0px;z-index:10101}
+.belowTop{display:block;opacity:0;min-height:1em}
+.topBar,.belowTop{height:1.2em;font-size:4mm;height:5mm}
+.outset{border:1px outset #e1ebf2}
+.topBar{background:#afcce1}
+a.aMnu{text-decoration:none;padding:0px 2px}
+a.aMnu:hover{background:#7ca0ba;border-bottom:1px solid #2591de}
+.rFloat{float:right}
+
+</style>
+</head>
+<body><!-- Header -->
+<div class="topBar outset">
+<a href="/" class=aMnu>&pi;&alpha;&#xbd;</a>
+<a href="https://bible.pi-alpha.org/" target=_blank title="Bible viewer" class=aMnu><b>B</b></a>
+<a href="#" onclick="return ScrollTop()" class="aMnu rFloat">^</a>
+</div>
+<div class=belowTop></div>
+<div style="clear:both"></div>
+<script>
+[].slice.call(document.getElementsByClassName('topBar')).forEach(function(T){
+  [].slice.call(T.getElementsByTagName('a')).forEach(function(A){
+    //var u;if(u=A.getAttribute('href'))if(u.substr(0,1)!='#')
+    if(!A.getAttribute('target'))A.setAttribute('target','_self')
+  })
+})
+function ScrollTop(){window.scroll(0,0);return!1}
+</script>
+<!-- /Header -->
+
+
+<h1>Image processing of SDO/AIA 193 images</h1>
+
+Original Jpeg files from NASA SDO and from NOAA GOES satelites are using the same palette,
+which is better balanced to show both darker and lighter areas on the Sun,
+but middle-tone shadows are poorly resolved...<br>
+<a href="20210415_055829_2048_0193.jpg"><img src="Ico/20210415_055829_2048_0193_ico.jpg" width=128 height=128 /></a><br>
+<br>
+While comparing this with FITS files, I detected the following transfer functions:<br>
+
+<img src="Color195Orig_rgb_v3.png" width=640 height=256/><br>
+<span class=gray>On X axis is value 0..1280 with grid by 100, on Y axis is color component 0..255 with grid by 16, low values at bottom...</span><br>
+<br>
+I failed to guess the original transfer functions,
+but somehow I simulated them using following expressions for R,G,B components,
+differing significantly rather only in low parts:<br>
+
+<code><pre>function fR(x) {
+  return SClip( (x&gt;=91) ? (Power(Max(0,Log((x-64)/20,10)),1.01) *100 +20) : Power((x/28),3) );
+}
+
+function fG(x) {
+  return SClip( (x&gt;80) ? (Power(Log(x/12,10),1.7) *58 -36) : (Power((x/20),2) / 3) );
+}
+
+function fB(x) {
+  return SClip( (x&lt;1800) ? ( (x&gt;300) ? Power(Max(log(x/100,90)-0.08,-10),1.08)*190-10 : Power((x/118),3) ) : Power((x/41.5),1.2) );
+}
+
+function SClip(x) {
+  var C=240, W=40, S=0.27,
+      M=1/(1+exp(0-(x-C)/W/S)); <span class=gray>// sigmoid 0 before C-W, 1 after C+w</span>
+  return Min(x-x*M+255*M,255); <span class=gray>// smooth clip to 255 with linear start...</span>
+}</pre></code><br>
+<br>
+Which produces following transfer functions:<br>
+<img src="Scale193_O_chart.png" width=640 height=258 /><br>
+And the color palette:<br>
+<img src="Scale193_O.png" width=512 height=96 /><br>
+XML file with the ColorScale <a href="Scale193_O.xml.txt">Scale193_O.xml</a>,
+which has been manually edited to remove duplicities,
+contains both the code and the color-value pairs...<br>
+<span class=gray>(In this text, "ColorScale" is a mapping from Floating-point values to RGB Colors and/or back...)</span><br>
+<br>
+
+For the purpose of examining "shadows" <span class=gray>(weak Coronal Holes)</span> in this channel,
+I apply <span class=code>Contrast(222,41)</span> and <span class=code>Gamma(-133)</span>
+<span class=gray>(implementation see below)</span>,
+which produces following image,
+and for the purpose of printing, the black border is replaced with white
+by putting intensity into alpha channel while preserving the solar disk,
+and copying that onto white background...
+The third one is same image converted from 1024x1024 FITS file using this ColorScale
+and copied onto white background:<br>
+<a href="20210415_055829_2048_0193_HC.jpg"><img src="Ico/20210415_055829_2048_0193_HC_ico.jpg" width=128 height=128 /></a>&nbsp;
+<a href="20210415_055829_2048_0193_HCw.jpg"><img src="Ico/20210415_055829_2048_0193_HCw_ico.jpg" width=128 height=128 /></a>&nbsp;
+<a href="AIA20210415_0600_0193.jpg"><img src="Ico/AIA20210415_0600_0193_ico.jpg" width=128 height=128 /></a><br>
+<br>
+Function for copying onto white background:<br>
+<code><pre>  <span class=gray>...</span>
+  var Alpha;
+  if (WBg) {
+    <span class=gray>// Make alpha from intensity, preserve inner circle:</span>
+    var FMask:=FMap.Clone().Scale(1/255).Clip(0,1);
+    FMask.MaskRange(72/255,1).FillEmpty(0).Power(3);
+    Rep(10,FMask.BoxCar(5)); <span class=gray>// blur</span>
+    var BMask:=NBm().Assign(FMask); <span class=gray>// convert to New Bitmap image...</span>
+    delete FMask;
+    BMask.Circle(FMap.Info.Center,FMap.Info.Radius+5*(FMap.Width/1024),'#ffffff');
+    Alpha:=(new ByteMap(Bmp.Width,Bmp.Height)).Assign(BMask);
+    delete BMask;
+    <span class=gray>//</span>
+    var B2:=NBm(Bmp.Width,Bmp.Height);
+    B2.Clear(0xffffffff);
+    Bmp.WriteChannel(3,Alpha);
+    Bmp.DrawMode:=dmBlend;
+    B2.Draw(0,0,Bmp);
+    Bmp:=B2;
+  }
+</pre></code><br>
+<br>
+When processing numeric FITS files, values must be multiplied by a time-dependent coefficient
+to use a same ColorScale for older and newer files,
+since the SDO/AIA 193 channel is more and more darker...<br>
+The table I determined is in <a href="http://semi.gurroa.cz/AltUtil/Eval.zip">Eval.zip</a>
+in file <span class=code>Sample/FlowLib.lib</span> in function <span class=code>SDO_response_193()</span>...<br>
+Presently <span class=gray>(year 2020 and 2021)</span> the multiplier is <span class=code>2.1113 =~= 1/0.4736 == 1290/611</span> 
+to match values from start of year 2015, as determined by comparing average limb brightness...<br>
+<br>
+It is possible to apply <b>Histogram Equalization</b> function
+for even better examining the "shadows" <span class=gray>(mildly darker areas)</span>.
+The first image is processed from 2048x2048 Jpeg from NASA, the second image is processed from 1024x1024 FITS file from JSOC.
+They differ slightly in level of details due to different image resolution...<br>
+<a href="20210415_055829_2048_0193_HEq_HCw.jpg"><img src="Ico/20210415_055829_2048_0193_HEq_HCw_ico.jpg" width=128 height=128 /></a>&nbsp;
+<a href="AIA20210415_0600_0193_heq.jpg"><img src="Ico/AIA20210415_0600_0193_heq_ico.jpg" width=128 height=128 /></a><br>
+<br>
+For this, the input Jpeg image is first converted into numeric form using the above mentioned ColorScale,
+then after the processing, it is converted to image using a ColorScale,
+where the Contrast and Gamma have already been applied...
+When compared with previous ColorScale code, at start of SClip function before clipping values to range 0 .. 255 it adds this code:<br>
+<code><pre>  x:=Max(IntGamma(Contrast(Max(x,0),222,41),-133),0);
+
+  function IntGamma(x,G) {
+    G:=(256-G)/256;
+    return 255*Power((x/255),G);
+  }
+  function Contrast(x,Amount,Center) {
+    return (x-Center)*Amount/255+x;
+  }
+</pre></code><br>
+<br>
+This ColorScale has following transfer functions:<br>
+<img src="Scale193_Ow_chart.png" width=640 height=256 /><br>
+and the palette looks thus:<br>
+<img src="Scale193_Ow.png" width=512 height=96 /><br>
+<br>
+XML file with the ColorScale <a href="Scale193_Ow.xml.txt">Scale193_Ow.xml</a>,
+which has been manually edited to remove duplicities,
+contains both the code and the color-value pairs...<br>
+<br>
+The Local Histogram Equalization on 128x128 neighbourhood uses this code:<br>
+<code><pre>
+    var F1:=FMap.Clone(), F2:=FMap.Clone();
+    F1.HistEqualize(F2,{Min:0,Max:512,Step:2,Local:128});
+    F1.WeightMix(F2,0.2);
+    Bmp.Assign(F1,Scale);
+</pre></code><br>
+It differs, when input image is 2048x2048 or 1024x1024 but local neighbourhood is always 128 pixels wide...
+The difference is not significant much...<br>
+<span class=gray>(But when applying the same onto 4096x4096 FITS file, it needs local neighbourhood size 256
+for reasonable results... Since the complexity of Histogram Equalization is O(2N) and not O(N<sup>2</sup>), it does not take much more processing time...
+To make a Local 128x128 or 256x256 histogram around pixel, the function takes previous pixel histogram,
+adds one more column and subtracts one first column to histogram bins, then relative position
+of pixel value in Histogram CDF is taken as a coefficient between Min and Max...
+The function <span class=code>Target.WeightMix(Source,Weight)</span> combines Source map y with Target map x
+as <span class=code>x := (1-Weight)*x + Weight*y</span>,
+where using <span class=code>Weight = 0.2</span> seems optimal...)</span><br>
+<br>
+<hr width=200 height=3 align=left />
+The following texts may be read on this image: <b>sue Infinite D&lt;&gt;C Pit of USA</b>...<br>
+<a href="20210415_055829_2048_0193_HEq_HCw_marked.jpg"><img src="Ico/20210415_055829_2048_0193_HEq_HCw_marked_small4.jpg" width=512 height=512 /></a><br>
+<br>
+The square of Washington DC has darker spot on White House, Capitol Hill, Pentagon, DIA and CIA
+and probably on Freemasonic temple in Alexandria <span class=gray>(or something else across the river from there?)</span>
+and it shows Potomac, Anacostia and Rock Creek rivers...<br>
+The word <a href="https://bible.pi-alpha.org/b?Rev9">Pit</a> refers to "bottomless pit" of Revelation 9 and 12,
+which is a Pit of Communist Tyranny,
+into which the USA is falling now under the fraudulent usurper "ABaddon" <span class=gray>(Biden)</span>,
+and which is about last time to avert...<br>
+<br>
+See schematic map:
+<a href="WDC_HD23_v8o2_3mpx_LinesV12roR_8bit2_R.png"><img src="Ico/WDC_HD23_v8o2_3mpx_LinesV12roR_8bit2_R_ico.jpg" width=128 height=128 /></a>
+or rotated with Capitol upward:
+<a href="WDC_HD23_v8o2_3mpx_LinesV12roR_8bit2.png"><img src="Ico/WDC_HD23_v8o2_3mpx_LinesV12roR_8bit2_ico.jpg" width=128 height=128 /></a><br>
+<br>
+<span class=gray>(There are much more meaningful texts in that image than what is marked...)</span><br>
+<hr width=200 height=3 align=left />
+For comparision, same image from NOAA GOES 16, 195 A:<br>
+<a href="or_suvi-l2-ci195_g16_s20210415T060000Z_e20210415T060400Z_v1-0-0.png"><img src="Ico/or_suvi-l2-ci195_g16_s20210415T060000Z_e20210415T060400Z_v1-0-0_ico.jpg" width=128 height=128 /></a><br>
+<br>
+For verification, it can be compared with SDO/AIA 171 A image.<br>
+First image is NASA Jpeg, second image is made from 1024x1024 FITS file from JSOC using
+similar <a href="Scale171N.xml.txt">ColorScale</a>,
+third image is from this FITS file using special <a href="http://sun.smilingtree.cz/techdesc">sharpening</a> method,
+and fourth is for verification of these from Belgian SWAP telescope:<br>
+<a href="20210415_060658_2048_0171.jpg"><img src="Ico/20210415_060658_2048_0171_ico.jpg" width=128 height=128 /></a>&nbsp;
+<a href="AIA20210415_0600_0171.jpg"><img src="Ico/AIA20210415_0600_0171_ico.jpg" width=128 height=128 /></a>&nbsp;
+<a href="AIA20210415_0600_0171_sharp.jpg"><img src="Ico/AIA20210415_0600_0171_sharp_ico.jpg" width=128 height=128 /></a>&nbsp;
+<a href="swap_lv1_20210415_055942.jpg"><img src="Ico/swap_lv1_20210415_055942_ico.jpg" width=128 height=128 /></a><br>
+<br>
+HMI Magnetogram and Intensitygram from same time, combined in mix, and combined with AIA171 for verification of magnetograms:<br>
+<a href="20210415_060000_2048_HMIBC.jpg"><img src="Ico/20210415_060000_2048_HMIBC_ico.jpg" width=128 height=128 /></a>&nbsp;
+<a href="20210415_060000_2048_HMIIF.jpg"><img src="Ico/20210415_060000_2048_HMIIF_ico.jpg" width=128 height=128 /></a>&nbsp;
+<a href="20210415_060000_2048_HMI_BIF_mix.jpg"><img src="Ico/20210415_060000_2048_HMI_BIF_mix_ico.jpg" width=128 height=128 /></a>&nbsp;
+<a href="20210415_060000_Hmib171.jpg"><img src="Ico/20210415_060000_Hmib171_ico.jpg" width=128 height=128 /></a><br>
+The blue line shows Solar equator with uncertainty 0.12&deg; approximately as the width of that blue line...<br>
+When comparing Magnetograms and AIA images,
+the AIA image must be scaled by <span class=code>1.199/1.008</span>
+or the magnetogram scaled by <span class=code>1.008/1.199</span>,
+which is ratio of their CDELT1 values,
+and possibly multiplied by 2 or 4 if image size 1024,2048,4096 differs...<br>
+<br>
+<br>
+<hr width=100% height=3 />
+By <a href="https://pi-alpha.org/">P.A.Semi</a> 2021-05-05 ...
+<br><br>
+Download all images in <a href="Imgs_210415_0600.zip" rel=nofollow>ZIP</a> format...<br>
+
+<script>
+  (function(){
+    // All links open in new window:
+    var L=document.getElementsByTagName('a'), C=L&&L.length,i,A,U,Ri=/\.j?pn?g$/;
+    for(i=0;i<C;i++) {
+      if (!(A=L[i]).getAttribute('target') && (U=A.getAttribute('href')) && (U.substring(0,1)!='#') && !A.onclick) A.setAttribute('target','_BLANK');
+      if (U && Ri.test(U) && !A.getAttribute('class')) A.setAttribute('class','imglink');
+    }
+  })();
+</script>
+
+<script type="text/javascript" src="http://sun.smilingtree.cz/img/gallery.js" comment="Image viewer..."></script>
+
+
+<!-- Footer -->
+<!-- /Footer -->
+</body>
+</html>
+
+

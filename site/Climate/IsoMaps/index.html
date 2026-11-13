@@ -1,0 +1,255 @@
+<html>
+<head>
+<link rel="icon" type="image/png" sizes="32x32" href="/EVb_32ico.png">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Iso maps - Pi Alpha</title>
+<style>
+.text,body{font-family:Arial}
+.code{font-family:Monospace,Courier New;color: navy}
+body{background-color:#e1ebf2}
+h1{text-align:center;font-family:Times New Roman,Arial}
+.abl{text-decoration:none;color:#501860}
+.ablg{text-decoration:none;color:#686080}
+.abl:hover,.ablg:hover{text-decoration:underline}
+tr,td{vertical-align:top}
+small{font-size:75%}
+.gray{color:gray}
+img{border:none}
+</style>
+<style>
+.article{max-width:960px;margin:auto}
+.topBar{position:fixed;left:0px;right:0px;top:0px;z-index:10101}
+.belowTop{display:block;opacity:0;min-height:1em}
+.topBar,.belowTop{height:1.2em;font-size:4mm;height:5mm}
+.outset{border:1px outset #e1ebf2}
+.topBar{background:#afcce1}
+a.aMnu{text-decoration:none;padding:0px 2px}
+a.aMnu:hover{background:#7ca0ba;border-bottom:1px solid #2591de}
+.rFloat{float:right}
+
+</style>
+</head>
+<body><!-- Header -->
+<div class="topBar outset">
+<a href="/" class=aMnu>&pi;&alpha;&#xbd;</a>
+<a href="https://bible.pi-alpha.org/" target=_blank title="Bible viewer" class=aMnu><b>B</b></a>
+<a href="#" onclick="return ScrollTop()" class="aMnu rFloat">^</a>
+</div>
+<div class=belowTop></div>
+<div style="clear:both"></div>
+<script>
+[].slice.call(document.getElementsByClassName('topBar')).forEach(function(T){
+  [].slice.call(T.getElementsByTagName('a')).forEach(function(A){
+    //var u;if(u=A.getAttribute('href'))if(u.substr(0,1)!='#')
+    if(!A.getAttribute('target'))A.setAttribute('target','_self')
+  })
+})
+function ScrollTop(){window.scroll(0,0);return!1}
+</script>
+<!-- /Header -->
+
+
+<script>
+function Dw(t){return(document.readyState=='loading')?document.write(t):t}
+function Lnk(u,t,d){return Dw('<a href="'+u+'" '+(d?('download="'+(d===!0?u:d)+'"'):'target=_blank')+'>'+t+'</a>')}
+function Dwgr(t){return Dw('<span class=gray>'+t+'</span>')}
+</script>
+
+<h1><a href="https://pi-alpha.org/" class="abl" style="float:right;">&#x03c0;&#x03b1;&#xbd;</a></h1>
+
+<h1>Iso (contour) maps</h1>
+
+<div style="float:right;">[ <script>Lnk('IsoMaps.zip','ZIP',!0);Dwgr(' (74Mb)');</script> ]</div>
+(If you want to download most or all of these maps, use <b>ZIP</b> link on right...)<br>
+<br>
+<br>
+
+Sometimes I need land contour map in rectangular projection to draw over
+maps produced from other data...<br>
+In order, that the lines are not too thin when downscaling too much,
+best seems 1440x720 pixel resolution... Other resolutions are also available:<br>
+
+<a href="etopo1_ice_IsoMap_0_1440_neg.png" target=_blank><img src="Thumbs/etopo1_ice_IsoMap_0_1440_neg.jpg"></a><br>
+<script>
+  Lnk('etopo1_ice_IsoMap_0_1440_neg.png','1440x720',!0);
+  Dwgr(' (22kb), ');
+  Lnk('etopo1_ice_IsoMap_0_2880_neg.png','2880x720',!0);
+  Dwgr(' (58kb), ');
+  Lnk('etopo1_ice_IsoMap_0_5760_neg.png','5760x2880',!0);
+  Dwgr(' (152kb), ');
+  Lnk('etopo1_ice_IsoMap_0_360_neg.png','380x180',!0);
+  Dwgr(' (3.2kb), ');
+  Lnk('etopo1_ice_IsoMap_0_144x73_neg.png','144x73',!0);
+  Dwgr(' (4.6kb), ');
+  Lnk('etopo1_ice_IsoMap_192x94_neg.png','192x94',!0);
+  Dwgr(' (11.7kb)<br>');
+</script>
+
+<br>
+Map with lines (90° east-west, 30° north-south):<br>
+<a href="etopo1_ice_IsoMap_0_1440_neg_lin.png" target=_blank><img src="Thumbs/etopo1_ice_IsoMap_0_1440_neg_lin.jpg"></a><br>
+<script>
+  Lnk('etopo1_ice_IsoMap_0_1440_neg_lin.png','1440x720',!0);
+  Dwgr(' (23kb)<br>');
+</script>
+
+<br>
+Map with each 1000 m iso contours:<br>
+<script>
+  Lnk('etopo1_ice_IsoMap_1000_neg_5k.png','<img src="Thumbs/etopo1_ice_IsoMap_1000_neg_5k.jpg">');
+  Dw('<br>');Lnk('etopo1_ice_IsoMap_1000_neg_5k.png','5760x2880',!0);Dwgr(' (763kb)');
+</script>
+
+<br>
+Map with only 1000 and 2000 iso contours:<br>
+<script>
+  Lnk('etopo1_ice_IsoMap_1000-2000_1440_neg.png','<img src="Thumbs/etopo1_ice_IsoMap_1000-2000_1440_neg.jpg">');
+  Dw('<br>');
+  Lnk('etopo1_ice_IsoMap_1000-2000_1440_neg.png','1440x720',!0);Dwgr(' (37kb), ');
+  Lnk('etopo1_ice_IsoMap_1000-2000_2880_neg.png','2880x1440',!0);Dwgr(' (107kb)<br>');
+</script>
+
+<br>
+Large map with each 500 m iso contours:<br>
+<script>
+  Lnk('etopo1_ice_IsoMap_500_neg.png','11520x5760',!0);Dwgr(' (2.15Mb)<br>');
+  Dw('Sample:<br>');
+  Lnk('etopo1_ice_IsoMap_500_neg.png','<img src="Samples/etopo1_ice_IsoMap_500_neg_crop1.png">',!0);
+  Dw('<br>');
+</script>
+<br>
+
+Map in Mollweide projection with two polar circles in Lambert Azimutal projection:<br>
+<a href="etopo1_ice_IsoMap_Moll2Pol_720px.png" target=_blank><img src="etopo1_ice_IsoMap_Moll2Pol_720px.png"></a><br>
+<script>
+  Lnk('etopo1_ice_IsoMap_Moll2Pol_720px.png','720x720',!0);Dwgr(' (74kb), ');
+  Lnk('etopo1_ice_IsoMap_Moll2Pol_1024px.png','1024x1024',!0);Dwgr(' (136kb), ');
+  Lnk('etopo1_ice_IsoMap_Moll2Pol_1280px.png','1280x1280',!0);Dwgr(' (199kb)<br>');
+</script>
+These maps were produced by <a href="/Util/Eval.zip">Eval</a> script:<br>
+<pre class=code>#include MapUtil
+var Out:='etopo1_ice_IsoMap_Moll2Pol_1024px.png';
+
+var F:=NFm(2048,1024); <span class=gray>// new FloatMap</span>
+F.Fill(1);
+
+var Clr:=new DataScale();
+Clr.AddRange(0,'#000000');
+Clr.AddRange(1,'#ffffff');
+
+HmrToMoll2Pol({Source:F,Target:Out,DataScale:Clr,MollSize:Point(1024,512)});
+</pre>
+<br>
+<h2>Bathymetry maps</h2>
+These maps are large and contain sea depth lines also:<br>
+
+<script>
+  Dw('<div style="float:left;margin-right:1em">');
+  Lnk('etopo1_ice_IsoMap_1000_sea.png','<img src="Thumbs/etopo1_ice_IsoMap_1000_sea.jpg">',!0);Dw('<br>');
+  Lnk('etopo1_ice_IsoMap_1000_sea.png','11520x5760',!0);Dwgr(' (3.94Mb)<br>');
+  Dw('</div>');
+  Dw('<div style="float:left">');
+  Dw('Sample:<br>');
+  Lnk('etopo1_ice_IsoMap_1000_sea.png','<img src="Samples/etopo1_ice_IsoMap_1000_sea_crop1.png">',!0);
+  Dw('</div>');
+  Dw('<div style="clear:both"></div>')
+</script>
+
+<br>
+Colored, transparent white background:<br>
+<script>
+  Dw('<div style="float:left;margin-right:1em">');
+  Lnk('etopo1_ice_IsoMap_1000_sea_Colored_500.png','<img src="Thumbs/etopo1_ice_IsoMap_1000_sea_Colored_500.jpg">',!0);Dw('<br>');
+  Lnk('etopo1_ice_IsoMap_1000_sea_Colored_500.png','11520x5760',!0);Dwgr(' (6.5Mb)<br>');
+  Dw('</div>');
+  Dw('<div style="float:left">');
+  Dw('Sample:<br>');
+  Lnk('etopo1_ice_IsoMap_1000_sea_Colored_500.png','<img src="Samples/etopo1_ice_IsoMap_1000_sea_Colored_500_crop1.png">',!0);
+  Dw('</div>');
+  Dw('<div style="clear:both"></div>')
+</script>
+
+<br>
+Colored, land contours are black with green smudge, iso contour 500 yellow and each 1000 in orange, sea contours by 1000 m:<br>
+<script>
+  Dw('<div style="float:left;margin-right:1em">');
+  Lnk('etopo1_ice_IsoMap_1000_sea_Colored_500g.png','<img src="Thumbs/etopo1_ice_IsoMap_1000_sea_Colored_500g.jpg">',!0);Dw('<br>');
+  Lnk('etopo1_ice_IsoMap_1000_sea_Colored_500g.png','11520x5760',!0);Dwgr(' (14Mb)<br>');
+  Dw('</div>');
+  Dw('<div style="float:left;margin-right:1em">');
+  Dw('Sample:<br>');
+  Lnk('etopo1_ice_IsoMap_1000_sea_Colored_500g.png','<img src="Samples/etopo1_ice_IsoMap_1000_sea_Colored_500g_crop1.png">',!0);
+  Dw('</div>');
+  Dw('<div style="float:left;margin-right:1em">Small 1280x640:<br>');
+  Dw('<img src="etopo1_ice_IsoMap_1000_sea_Colored_500g_1280px.jpg"><br>');
+  Lnk('etopo1_ice_IsoMap_1000_sea_Colored_500g_1280px.jpg','Jpg 1280x640',!0);Dwgr(' (429kb), ');
+  Lnk('etopo1_ice_IsoMap_1000_sea_Colored_500g_small2.jpg','Jpg 5400x2700',!0);Dwgr(' (7.18Mb)<br>');
+  Dw('</div>');
+  Dw('<div style="clear:both"></div>');
+  Dw('<div style="float:left;margin-right:1em"><br>Crop with Europe and nearby Atlantic:<br>');
+  Lnk('etopo1_ice_IsoMap_1000_sea_Colored_500g_crop_Eu.png','<img src="Thumbs/etopo1_ice_IsoMap_1000_sea_Colored_500g_crop_Eu.jpg">');Dw('<br>')
+  Lnk('etopo1_ice_IsoMap_1000_sea_Colored_500g_crop_Eu.png','2880x2160',!0);Dwgr(' (1.6Mb)<br>');
+  Dw('</div>');
+  Dw('<div style="float:left"><br>Sample:<br>');
+  Lnk('etopo1_ice_IsoMap_1000_sea_Colored_500g_crop_Eu.png','<img src="Samples/etopo1_ice_IsoMap_1000_sea_Colored_500g_crop_Eu_crop1.png">',!0);
+  Dw('</div>');
+  Dw('<div style="clear:both"></div>')
+</script>
+
+<br>
+Colored, with sea filled: Sea shallow above 1 km depth is light blue,
+sea above 3 depth km is middle blue, sea below 3 km depth is darker blue...<br>
+<script>
+  Dw('<div style="float:left;margin-right:1em"><br>');
+  Lnk('etopo1_ice_IsoMap_1000_sea_Colored_500g_w1k.png','<img src="Thumbs/etopo1_ice_IsoMap_1000_sea_Colored_500g_w1k.jpg">',!0);Dw('<br>');
+  Lnk('etopo1_ice_IsoMap_1000_sea_Colored_500g_w1k.png','10800x5400',!0);Dwgr(' (20.2Mb)<br>');
+  Dw('</div>');
+  Dw('<div style="float:left;margin-right:1em">Sample:<br>');
+  Lnk('etopo1_ice_IsoMap_1000_sea_Colored_500g_w1k.png','<img src="Samples/etopo1_ice_IsoMap_1000_sea_Colored_500g_w1k_crop1.png">',!0);Dw('<br>');
+  Dw('</div>');
+  Dw('<div style="float:left;margin-right:1em">Crop with Europe:<br>');
+  Lnk('etopo1_ice_IsoMap_1000_sea_Colored_500g_w1k_crop_EU.png','<img src="Thumbs/etopo1_ice_IsoMap_1000_sea_Colored_500g_w1k_crop_EU.jpg">');Dw('<br>');
+  Lnk('etopo1_ice_IsoMap_1000_sea_Colored_500g_w1k_crop_EU.png','2880x2160',!0);Dwgr(' (2.13Mb)<br>');
+  Dw('</div>');
+  Dw('<div style="clear:both"></div>')
+</script>
+
+<br>
+
+<h2>Depth profile of oceans</h2>
+It's admirable, how precise are oceans filled with water...
+If there was 1 km less water, the life from oceans could not climb to lands,
+and if there was 1 km more water, there would be almost no lands...<br>
+<br>
+On these images, the measure-line on left side shows depth/height of 1 km.<br>
+Ocean level is horizontal blue line...<br>
+Land on left is America, on center and right is Eurasia and Africa...<br>
+Note, that 30°N image has smaller vertical resolution due to Himalayas compressing image height:<br>
+
+<script>
+function ProfLine(N,P,ps,J,js,J2,j2s){
+  Dw('<br>')
+  Dw('<div style="float:left;margin-right:1em;width:4em">');Dw(N+': ');Dw('</div>');
+  Dw('<div style="float:left;margin-right:1em">');
+  Lnk(P,'<img src="'+J+'" width=1080 height=149 style="margin-right:1em">',!0);
+  Dw('</div>');
+  Dw('<div style="float:left;margin-right:1em">');
+  Lnk(J,'Jpg 1080x149',!0);Dwgr(' ('+js+')<br>');
+  Lnk(J2,'Jpg 2160x298',!0);Dwgr(' ('+j2s+')<br>');
+  Lnk(P,'Png 21601x2983',!0);Dwgr(' '+ps+'<br>');
+  Dw('</div>');
+  Dw('<div style="clear:both"></div>');
+}
+
+ProfLine('50°N','etopo1_ice_g_line_Lat_50N.png','280kb','etopo1_ice_g_line_Lat_50N_1080px.jpg','17kb','etopo1_ice_g_line_Lat_50N_2160px.jpg','34kb');
+ProfLine('30°N','etopo1_ice_g_line_Lat_30N.png','382kb','etopo1_ice_g_line_Lat_30N_1080px.jpg','20kb','etopo1_ice_g_line_Lat_30N_2160px.jpg','42kb');
+ProfLine('15°N','etopo1_ice_g_line_Lat_15N.png','296kb','etopo1_ice_g_line_Lat_15N_1080px.jpg','21kb','etopo1_ice_g_line_Lat_15N_2160px.jpg','43kb');
+ProfLine('Equator','etopo1_ice_g_line_Equator.png','303kb','etopo1_ice_g_line_Equator_1080px.jpg','20kb','etopo1_ice_g_line_Equator_2160px.jpg','41kb');
+</script>
+
+
+<!-- Footer -->
+<!-- /Footer -->
+</body>
+</html>

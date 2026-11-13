@@ -1,0 +1,140 @@
+<DataScale Name="SDO171b">
+<!--
+Code:
+//zmena210310: Gamma=-60, RedGamma=-7, GreenGamma=14 to match NASA SdoBrowse jpegs...
+//zmena210304: blue channel little boosted...
+
+#dll EvalG32
+#include MapUtil
+
+var Rg:=GCombine(-60,-7), Gg:=GCombine(-60,14), Bg:=-60;
+  function GCombine(G1,G2) { return 256-256*( (256-G1)/256 * (256-G2)/256 ) }
+L('# Gamma: %.1f, %.1f, %.1f',Rg,Gg,Bg);
+
+var Scale:=MakeScale171n();
+L(Scale.SaveToString());
+
+var B:=NBm(512,48);
+B.Clear(0x808080);
+DrawDataScale(B,Scale,{Bottom:8,Height:16,Width:500, MinValue:0,MaxValue:2500, FrameColor:$FF040404,Alpha:0,
+                Left: 4,
+                Ticks:500, TickLegend:true
+               });
+ViewBitmap(B);
+
+function MakeScale171n() { //New160320
+  // Scale for *_0171.fits, as downloaded from http://jsoc.stanford.edu/data/aia/synoptic/2010/05/13/H0000/AIA20100513_0000_0304.fits
+  // typical value range 0..1300, maximum arround 6052, average 218 ...
+  var D:=new DataScale;
+  D.Name:='SDO171';
+  D.Interpolate:=True;
+  D.AddNullRange('#808080');
+  D.AddRange(-10,'#08000A');
+  D.AddRange(0,'#000000');
+  var F:=1.27;
+  while (F<=4096) {
+    D.AddRange(F,Fmt('#%.2x%.2x%.2x',R(F),G(F),B(F)));
+    F:=F*1.125; //F:=F*1.25;
+  }
+  D.AddRange(10000,'#FFFFFF');
+  D.AddRange(-10000,'#000000');
+  return D;
+  
+  function R(x) {
+    return Bounds(IntGamma(Sqrt(x)*227/32,Rg),0,255);
+  }
+  function G(x) {
+    return Bounds(IntGamma(Sqrt(x)*157/32,Gg),0,255);
+  }
+  function B(x) {
+    //return Bounds(Sqrt(x)/3,0,255);
+    //x210304: return Bounds(Sqrt(x),0,255);
+    //??? return Bounds(x^(2/3),0,255);
+    //??? return Bounds((x<1500)?sqrt(x):(exp(x/1024)*9-1),0,255);
+    //??? return Bounds((x/4096)^4*255,0,255);
+    //??? return Bounds( (x/4096)^3*320, 0,255);
+    //??? Clip( (x/4096)^3*256 * (1+Exp(-x/256)) ,0,255)
+    //??? return Bounds( Min( (x/4096)^4*256, 2*(250-125*(1+Exp(-x/4096))) ) , 0,255);
+    //return Bounds( Min( (x/4096)^3*512, 3.14*(250-125*(1+Exp(-x/4096))) ) , 0,255);
+    return Bounds( IntGamma( Max(Sqrt(x)*0.25, Min( (x/4096)^3*512, 3.14*(250-125*(1+Exp(-x/4096))) )) ,Bg) , 0,255 );
+  }
+}
+
+// duplicate values removed manually...
+
+   
+
+// ------------------------------------------------------------ -->
+  <Option Interpolate="1"/>
+  <Range Color="#808080" Value="null"/>
+  <Range Color="#08000A" Value="-10"/>
+  <Range Color="#000000" Value="0"/>
+  <Range Color="#030200" Value="1.27"/>
+  <Range Color="#030300" Value="1.6073"/>
+  <Range Color="#040300" Value="2.0343"/>
+  <Range Color="#040400" Value="2.2886"/>
+  <Range Color="#050400" Value="2.8965"/>
+  <Range Color="#050500" Value="3.2585"/>
+  <Range Color="#060500" Value="3.6659"/>
+  <Range Color="#060500" Value="4.1241"/>
+  <Range Color="#070600" Value="4.6396"/>
+  <Range Color="#070600" Value="5.2196"/>
+  <Range Color="#080700" Value="5.872"/>
+  <Range Color="#080700" Value="6.606"/>
+  <Range Color="#090800" Value="7.4318"/>
+  <Range Color="#0A0800" Value="8.3607"/>
+  <Range Color="#0B0900" Value="9.4058"/>
+  <Range Color="#0C0A00" Value="10.582"/>
+  <Range Color="#0D0A00" Value="11.904"/>
+  <Range Color="#0E0B00" Value="13.392"/>
+  <Range Color="#0F0C00" Value="15.066"/>
+  <Range Color="#100D01" Value="16.95"/>
+  <Range Color="#110E01" Value="19.068"/>
+  <Range Color="#120F01" Value="21.452"/>
+  <Range Color="#141001" Value="24.133"/>
+  <Range Color="#161101" Value="27.15"/>
+  <Range Color="#171201" Value="30.544"/>
+  <Range Color="#191301" Value="34.362"/>
+  <Range Color="#1B1501" Value="38.657"/>
+  <Range Color="#1D1601" Value="43.489"/>
+  <Range Color="#1F1801" Value="48.925"/>
+  <Range Color="#221A01" Value="55.041"/>
+  <Range Color="#251C01" Value="61.921"/>
+  <Range Color="#281E02" Value="69.661"/>
+  <Range Color="#2B2002" Value="78.369"/>
+  <Range Color="#2E2202" Value="88.165"/>
+  <Range Color="#322502" Value="99.185"/>
+  <Range Color="#352702" Value="111.58"/>
+  <Range Color="#3A2A02" Value="125.53"/>
+  <Range Color="#3E2D02" Value="141.22"/>
+  <Range Color="#433003" Value="158.88"/>
+  <Range Color="#483403" Value="178.74"/>
+  <Range Color="#4E3803" Value="201.08"/>
+  <Range Color="#543B03" Value="226.21"/>
+  <Range Color="#5B4003" Value="254.49"/>
+  <Range Color="#624404" Value="286.3"/>
+  <Range Color="#694904" Value="322.09"/>
+  <Range Color="#714E04" Value="362.35"/>
+  <Range Color="#7A5405" Value="407.64"/>
+  <Range Color="#845A05" Value="458.6"/>
+  <Range Color="#8E6105" Value="515.92"/>
+  <Range Color="#996706" Value="580.41"/>
+  <Range Color="#A56F06" Value="652.96"/>
+  <Range Color="#B27706" Value="734.58"/>
+  <Range Color="#C07F07" Value="826.4"/>
+  <Range Color="#CE8807" Value="929.7"/>
+  <Range Color="#DF9208" Value="1045.9"/>
+  <Range Color="#F09D0C" Value="1176.7"/>
+  <Range Color="#FFA811" Value="1323.7"/>
+  <Range Color="#FFB418" Value="1489.2"/>
+  <Range Color="#FFC023" Value="1675.4"/>
+  <Range Color="#FFCE31" Value="1884.8"/>
+  <Range Color="#FFDD47" Value="2120.4"/>
+  <Range Color="#FFED65" Value="2385.4"/>
+  <Range Color="#FFFE8F" Value="2683.6"/>
+  <Range Color="#FFFFCC" Value="3019"/>
+  <Range Color="#FFFFDD" Value="3396.4"/>
+  <Range Color="#FFFFEE" Value="3821"/>
+  <Range Color="#FFFFFF" Value="10000"/>
+  <Range Color="#000000" Value="-10000"/>
+</DataScale>

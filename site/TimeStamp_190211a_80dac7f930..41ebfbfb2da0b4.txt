@@ -1,0 +1,32 @@
+[--12.02.2019--04:20:37:046----cmd.exe------------]
+C:\Doc>signdoc TimeStamp_Extended_190211a.txt
+8ba3e3e5adeb73326d99ad07a6a00b91
+df07fa9c2633917713cff1b9db1d0b48cb588994
+12.02.2019  04:20             9 573 TimeStamp_Extended_190211a.txt
+(12.02.2019  4:20:29)
+C:\Doc>
+
+[pialpha.cz]
+<CheckSum File="Covington_Catholics.pdf" Type="md5" RangeFrom="0" RangeTo="13572522" Time="12.02.2019 3:31:56" Value="d048a25a4ddf22034b017bd96a03dbc6"></CheckSum>
+<CheckSum File="Dalsi_List_ver11c_180906.pdf" Type="md5" RangeFrom="0" RangeTo="42694191" Time="12.02.2019 3:31:58" Value="0d15367353941904e6cb5e09073c6c31"></CheckSum>
+<CheckSum File="Dalsi_List_ver12a_180928.pdf" Type="md5" RangeFrom="0" RangeTo="42896073" Time="12.02.2019 3:31:59" Value="afaf871e5b36bc5beedee03c3fe6ae23"></CheckSum>
+<CheckSum File="DavidStars_en_ver03g_180907.pdf" Type="md5" RangeFrom="0" RangeTo="942399" Time="12.02.2019 3:31:59" Value="c7669e1dab91e98bad31882944f2b93f"></CheckSum>
+<CheckSum File="Evangnet_Talk1809.html" Type="md5" RangeFrom="0" RangeTo="495984" Time="12.02.2019 3:31:59" Value="e1642f348e7728a2bd0a91090450b61a"></CheckSum>
+<CheckSum File="HateSpeech_v_Krestanske_Kulture.pdf" Type="md5" RangeFrom="0" RangeTo="256965" Time="12.02.2019 3:32:01" Value="8129da49fcccc313b0b7476c27b89926"></CheckSum>
+<CheckSum File="Inequal_v5g.jpg" Type="md5" RangeFrom="0" RangeTo="3956237" Time="12.02.2019 3:32:01" Value="86c879e045b0b574c30c231ebdaed838"></CheckSum>
+<CheckSum File="Inequal_v5c_Commented3b_small.jpg" Type="md5" RangeFrom="0" RangeTo="1322533" Time="12.02.2019 3:32:01" Value="607b68f0c4286d589b6c276ccafc287b"></CheckSum>
+<CheckSum File="MaC_1812-1901_Eng_Abstract.pdf" Type="md5" RangeFrom="0" RangeTo="4802256" Time="12.02.2019 3:32:01" Value="ba40449b35ce67befcd9365c2e9e76f0"></CheckSum>
+<CheckSum File="Musing_and_Comments_P.A.Semi_1812-1901_Eng_Abstract.pdf" Type="md5" RangeFrom="0" RangeTo="4802256" Time="12.02.2019 3:32:02" Value="ba40449b35ce67befcd9365c2e9e76f0"></CheckSum>
+<CheckSum File="nu10ps107.pdf" Type="md5" RangeFrom="0" RangeTo="1541888" Time="12.02.2019 3:32:03" Value="ebd8065786865b01c4f6f02672e73915"></CheckSum>
+<CheckSum File="Shmitah_Tarot_Dt15_1280px.jpg" Type="md5" RangeFrom="0" RangeTo="2478565" Time="12.02.2019 3:32:05" Value="6dc344215f125f3eb940aaeedb0b8066"></CheckSum>
+<CheckSum File="Shmitah_Tarot_Dt15_dressed_1280px.jpg" Type="md5" RangeFrom="0" RangeTo="2471163" Time="12.02.2019 3:32:05" Value="f06733be58d7b990b85a21b586ff2c37"></CheckSum>
+<CheckSum File="Topology_en_v09e_ver180903.pdf" Type="md5" RangeFrom="0" RangeTo="907463" Time="12.02.2019 3:32:05" Value="8fb28219d73af7d1fe5a39cb4715a2ef"></CheckSum>
+<CheckSum File="Uvahy_a_komentare__P.A.Semi__Forum_1812-1901.pdf" Type="md5" RangeFrom="0" RangeTo="3348248" Time="12.02.2019 3:32:05" Value="0061477a0287f38e381959090ba9187d"></CheckSum>
+<CheckSum File="Uvahy_a_komentare__P.A.Semi__Forum_Piratske_strany_1812-1901.pdf" Type="md5" RangeFrom="0" RangeTo="3348248" Time="12.02.2019 3:32:05" Value="0061477a0287f38e381959090ba9187d"></CheckSum>
+<CheckSum File="Uvahy_a_komentare__P.A.Semi__Forum_Piratske_strany_1812-1901.html" Type="md5" RangeFrom="0" RangeTo="2000543" Time="12.02.2019 3:32:05" Value="8eecc8778e5d7de0cd79d189a19cd3ea"></CheckSum>
+<CheckSum File="vaccines.html" Type="md5" RangeFrom="0" RangeTo="21039" Time="12.02.2019 3:32:06" Value="b4beb8f1123cb491dcffb9ed32786d3e"></CheckSum>
+<CheckSum File="Vyznam_vyznamenani_161105g_Short.html" Type="md5" RangeFrom="0" RangeTo="11812" Time="12.02.2019 3:32:06" Value="066794e08e30a01bea1171c8911543d4"></CheckSum>
+<CheckSum File="Vyznam_vyznamenani_2016.html" Type="md5" RangeFrom="0" RangeTo="54007" Time="12.02.2019 3:32:06" Value="b03dc9168f1fc613821a39a15dd8e326"></CheckSum>
+<CheckSum File="Covington\index.html" Type="md5" RangeFrom="0" RangeTo="124464" Time="12.02.2019 3:32:06" Value="681de45f9d9c1ab50a8d6cafddf836f4"></CheckSum>
+
+Tue, 12 Feb 2019 04:21:27 +0200
