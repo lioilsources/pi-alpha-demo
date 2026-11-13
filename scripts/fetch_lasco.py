@@ -17,6 +17,7 @@ import datetime as dt
 import io
 import json
 import re
+import shutil
 import sys
 import time
 import urllib.request
@@ -62,6 +63,7 @@ def main() -> int:
     ap.add_argument("--sizes", default="160,512,1024")
     ap.add_argument("--slots", default="00:30,03:30,06:30,09:30,12:30,15:30,18:30,21:30")
     ap.add_argument("--tolerance", type=int, default=30, help="minutes")
+    ap.add_argument("--prune", action="store_true", help="delete OUT/YYYY/MM/DD days older than the --days window")
     a = ap.parse_args()
 
     sizes = sorted(int(s) for s in a.sizes.split(","))
@@ -100,7 +102,23 @@ def main() -> int:
             print(f"  + {stem}")
             time.sleep(0.5)
     print(f"nových snímků: {new}, dní bez dat: {missing_days}")
+    if a.prune:
+        print(f"smazáno starších dní: {prune(a.out, end - dt.timedelta(days=a.days - 1))}")
     return 0
+
+
+def prune(out: Path, first: dt.date) -> int:
+    """Removes day directories YYYY/MM/DD before `first` (rolling window for the Pages demo)."""
+    n = 0
+    for d in sorted(out.glob("[0-9][0-9][0-9][0-9]/[0-9][0-9]/[0-9][0-9]")):
+        y, m, dd = (int(x) for x in d.relative_to(out).parts)
+        if dt.date(y, m, dd) < first:
+            shutil.rmtree(d)
+            n += 1
+    for d in sorted(out.glob("[0-9]*/[0-9]*"), reverse=True) + sorted(out.glob("[0-9]*")):
+        if d.is_dir() and not any(d.iterdir()):
+            d.rmdir()
+    return n
 
 
 if __name__ == "__main__":

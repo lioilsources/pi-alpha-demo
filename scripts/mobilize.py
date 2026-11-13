@@ -11,6 +11,7 @@ What it does to each HTML page:
   - <video> without autoplay: preload="none",
   - <a> to a PDF/ZIP/video ≥ 5 MB (sizes from --file-sizes): data-mob-size="PDF, 12 MB", shown by mobile.css,
   - layout tables (all first-row cells have width in %) → data-mob-stack (stacked on mobile).
+Pages with <meta name="mobile-layer" content="off"> (own mobile layout) get only the PWA tags.
 Everything added is marked (data-mob / data-mob-add); `--undo` removes it and restores the page to its original state.
 Page content and texts are not changed. File encoding is preserved.
 
@@ -40,6 +41,7 @@ BIG_FILE = 5 * 1024 * 1024
 SIZE_EXT = {".pdf", ".zip", ".7z", ".rar", ".gz", ".mp4", ".webm", ".mov", ".avi", ".mkv", ".mp3", ".wav",
             ".tif", ".tiff", ".ods", ".xlsx", ".docx", ".pptx", ".iso"}
 TABLE = re.compile(r"<table\b[^>]*>", re.IGNORECASE)
+LAYER_OFF = re.compile(r"""<meta\s+name=["']?mobile-layer["']?\s+content=["']?off""", re.IGNORECASE)
 HEAD_END = re.compile(r"</head\s*>", re.IGNORECASE)
 HEAD_START = re.compile(r"<head\b[^>]*>", re.IGNORECASE)
 MARK_TAG = re.compile(r"[ \t]*<(?:meta|link|script)\b[^>]*\bdata-mob\b[^>]*>(?:</script>)?\n?", re.IGNORECASE)
@@ -175,7 +177,8 @@ class Mobilizer:
             self.stats["viewport"] += 1
         if self.a.assets.startswith(("https://", "http://")) and f'href="{self.a.assets}"' not in text:
             head_add.append(f'<link rel="preconnect" href="{self.a.assets}" crossorigin data-mob>')
-        if self.a.css not in text:
+        off = bool(LAYER_OFF.search(text))      # page has its own mobile layout (heliograf viewer): PWA only
+        if self.a.css not in text and not off:
             head_add.append(f'<link rel="stylesheet" href="{self.a.css}" data-mob>')
             self.stats["css"] += 1
         if self.pwa and 'rel="manifest"' not in text:
@@ -195,6 +198,8 @@ class Mobilizer:
             else:
                 text = block + text
 
+        if off:
+            return text
         n = [0]
 
         def img_sub(m):

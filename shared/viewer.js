@@ -204,10 +204,13 @@
       t0 = null;
     });
     root.tabIndex = 0;
-    root.addEventListener('keydown', function (e) {
+    // on the whole document: the viewer is the page, arrows must work without clicking into it first
+    D.addEventListener('keydown', function (e) {
       var k = { ArrowLeft: function () { step(-1); }, ArrowRight: function () { step(1); },
         ArrowUp: function () { jumpBy(DAY); }, ArrowDown: function () { jumpBy(-DAY); }, ' ': togglePlay }[e.key];
-      if (k && e.target.tagName !== 'INPUT') { e.preventDefault(); k(); }
+      var tag = e.target.tagName;
+      if (k && !e.altKey && !e.ctrlKey && !e.metaKey && tag !== 'INPUT' && tag !== 'SELECT' && tag !== 'TEXTAREA' &&
+          !(e.key === ' ' && (tag === 'BUTTON' || tag === 'A'))) { e.preventDefault(); k(); }
     });
 
     function renderChannels(list, code) {
