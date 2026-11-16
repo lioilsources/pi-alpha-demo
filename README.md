@@ -5,12 +5,12 @@ originál je na https://pi-alpha.org/. Stránky mají `noindex`, vyhledávače j
 
 - `site/` jsou stránky z pi-alpha.org převedené na UTF-8 a s příponou `.html`; podepsané originály
   zůstávají beze změny v `site/raw/`.
-- Obrázky a soubory, které v repu nejsou, se načítají přímo z pi-alpha.org (`data/assets-map.json`).
+- Obrázky, videa a PDF se načítají z úložiště Cloudflare R2 (`data/assets-map.json`).
 - Mobilní vrstva (`shared/mobile.css`) se přidává až při buildu, `site/` ji neobsahuje.
   Na počítači zůstává vzhled stejný jako originál.
 
-Známá omezení dema: soubory, které skládá JavaScript (např. grafy SVG na `/cz/Volby2025/`), a
-dynamické části (diskuse, `/Hash`, mapy `/Ecmwf`) v demu nefungují. V ostré migraci je řeší
+Známá omezení dema: videa na `/Sc26/Video/` (adresy skládá JavaScript) a dynamické části
+(diskuse, `/Hash`, mapy `/Ecmwf`) v demu nefungují. V ostré migraci je řeší
 plán v repu Sunny.
 
 Build: `scripts/build_site.sh _site` (proměnné repa `DOMAIN`, `MOBILE`, `PREVIEW`).
